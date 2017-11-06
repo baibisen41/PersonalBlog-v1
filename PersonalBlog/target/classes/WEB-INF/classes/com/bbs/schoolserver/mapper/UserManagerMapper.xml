@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bbs.schoolserver.dao.IUserManagerDao">
+    <resultMap id="BaseResultMap" type="com.bbs.schoolserver.model.UserManager">
+        <id column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="forumid" property="forumid" jdbcType="VARCHAR"/>
+        <result column="forumtime" property="forumtime" jdbcType="BIGINT"/>
+        <result column="forumcontent" property="forumcontent" jdbcType="VARCHAR"/>
+        <result column="replyid" property="replyid" jdbcType="VARCHAR"/>
+        <result column="replytime" property="replytime" jdbcType="BIGINT"/>
+        <result column="replycontent" property="replycontent" jdbcType="VARCHAR"/>
+        <result column="tasktime" property="tasktime" jdbcType="BIGINT"/>
+        <result column="taskcontent" property="taskcontent" jdbcType="VARCHAR"/>
+        <result column="taskstatus" property="taskstatus" jdbcType="INTEGER"/>
+        <result column="signcount" property="signcount" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="getAllUserInformation" resultMap="BaseResultMap">
+        SELECT
+            user_table.username,
+            forum_table.forumid,
+            forum_table.forumtime,
+            forum_table.forumcontent,
+            reply_table.replyid,
+            reply_table.replytime,
+            reply_table.replycontent,
+            task_table.tasktime,
+            task_table.taskcontent,
+            task_table.taskstatus,
+            sign_table.signcount
+        FROM
+            user_table,
+            forum_table,
+            reply_table,
+            task_table,
+            sign_table
+        WHERE
+            user_table.userid = #{userid,jdbcType=INTEGER}
+    </select>
+
+</mapper>

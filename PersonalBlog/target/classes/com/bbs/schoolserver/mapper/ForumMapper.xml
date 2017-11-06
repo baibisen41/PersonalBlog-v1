@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.schoolserver.dao.IForumDao">
+
+    <resultMap id="BaseResultMap" type="com.bbs.schoolserver.model.Forum">
+        <id column="forumid" property="forumid" jdbcType="VARCHAR"/>
+        <result column="forumuserid" property="forumuserid" jdbcType="INTEGER"/>
+        <result column="forumusername" property="forumusername" jdbcType="VARCHAR"/>
+        <result column="forumtime" property="forumtime" jdbcType="BIGINT"/>
+        <result column="forumcontent" property="forumcontent" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="DetailResultMap" type="com.bbs.schoolserver.model.ForumDetail">
+        <id column="forumid" property="forumid" jdbcType="VARCHAR"/>
+        <result column="forumcontent" property="forumcontent" jdbcType="VARCHAR"/>
+        <result column="forumuserid" property="forumuserid" jdbcType="INTEGER"/>
+        <result column="forumusername" property="forumusername" jdbcType="VARCHAR"/>
+        <result column="forumtime" property="forumtime" jdbcType="BIGINT"/>
+        <result column="replyid" property="replyid" jdbcType="VARCHAR"/>
+        <result column="replycontent" property="replycontent" jdbcType="VARCHAR"/>
+        <result column="replyuserid" property="replyuserid" jdbcType="INTEGER"/>
+        <result column="replyusername" property="replyusername" jdbcType="VARCHAR"/>
+        <result column="replytime" property="replytime" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        forumid, forumuserid, forumusername, forumtime,forumcontent
+    </sql>
+
+    <select id="getAllForum" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM forum_table
+    </select>
+
+
+    <select id="getForumDetail" resultMap="DetailResultMap">
+        SELECT
+        forum_table.forumid,
+        forum_table.forumcontent,
+        forum_table.forumuserid,
+        forum_table.forumusername,
+        forum_table.forumtime,
+        reply_table.replyid,
+        reply_table.replyforumid,
+        reply_table.replycontent,
+        reply_table.replyuserid,
+        reply_table.replyusername,
+        reply_table.replytime
+        FROM
+        forum_table
+        LEFT JOIN reply_table ON forum_table.forumid = reply_table.replyforumid
+        WHERE
+        forum_table.forumid = #{forumid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="sendForumMessage" parameterType="com.bbs.schoolserver.model.Forum">
+        INSERT INTO forum_table (
+        forum_table.forumid,
+        forum_table.forumuserid,
+        forum_table.forumusername,
+        forum_table.forumtime,
+        forum_table.forumcontent
+        )
+        VALUES(
+        #{forumid,jdbcType=VARCHAR},
+        #{forumuserid,jdbcType=INTEGER},
+        #{forumusername,jdbcType=VARCHAR},
+        #{forumtime,jdbcType=BIGINT},
+        #{forumcontent,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="sendReplyMessage" parameterType="com.bbs.schoolserver.model.Reply">
+        INSERT INTO reply_table (
+        reply_table.replyid,
+        reply_table.replyforumid,
+        reply_table.replyuserid,
+        reply_table.replyusername,
+        reply_table.replytime,
+        reply_table.replycontent
+        )
+        VALUES(
+        #{replyid,jdbcType=VARCHAR},
+        #{replyforumid,jdbcType=VARCHAR},
+        #{replyuserid,jdbcType=INTEGER},
+        #{replyusername,jdbcType=VARCHAR},
+        #{replytime,jdbcType=BIGINT},
+        #{replycontent,jdbcType=VARCHAR}
+        )
+    </insert>
+
+
+</mapper>

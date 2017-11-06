@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bbs.schoolserver.dao.ITaskDao">
+    <resultMap id="BaseResultMap" type="com.bbs.schoolserver.model.Task">
+        <id column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="tasktime" property="tasktime" jdbcType="BIGINT"/>
+        <result column="taskcontent" property="taskcontent" jdbcType="VARCHAR"/>
+        <result column="taskstatus" property="taskstatus" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="TaskResultMap" type="com.bbs.schoolserver.model.Task_Teacher">
+        <id column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="tasktime" property="tasktime" jdbcType="BIGINT"/>
+        <result column="taskcontent" property="taskcontent" jdbcType="VARCHAR"/>
+        <result column="taskstatus" property="taskstatus" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        userid, tasktime, taskcontent, taskstatus
+    </sql>
+
+    <!--拉取全部用户任务信息-->
+    <!--拉取id+name+tasktime+taskcontent-->
+    <select id="getAllTask" resultMap="TaskResultMap">
+        SELECT task_table.userid,task_table.tasktime,task_table.taskcontent,user_table.username
+        FROM task_table,user_table WHERE task_table.userid = user_table.userid
+    </select>
+
+    <!--拉取某个用户任务信息-->
+    <select id="readTask" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM task_table WHERE userid = #{id,jdbcType=INTEGER}
+    </select>
+
+    <!--下达任务-->
+    <update id="writeTask" parameterType="com.bbs.schoolserver.model.Task">
+        UPDATE task_table
+       SET taskcontent = #{taskcontent,jdbcType=VARCHAR},tasktime = #{tasktime,jdbcType=BIGINT}
+        WHERE userid = #{userid,jdbcType=INTEGER}
+    </update>
+
+</mapper>
