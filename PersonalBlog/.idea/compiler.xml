@@ -12,7 +12,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="PersonalBlog" target="1.7" />
-      <module name="SchoolServer" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

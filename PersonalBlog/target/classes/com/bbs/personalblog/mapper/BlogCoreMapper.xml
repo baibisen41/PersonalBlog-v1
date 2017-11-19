@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bbs.personalblog.dao.IBlogCoreDao">
+
+    <resultMap id="ListResultMap" type="com.bbs.personalblog.model.BlogList">
+        <result column="b_show_id" property="blogId" jdbcType="VARCHAR"/>
+        <result column="b_show_title" property="blogTitle" jdbcType="VARCHAR"/>
+        <result column="b_show_label" property="blogLabel" jdbcType="VARCHAR"/>
+        <result column="b_show_time" property="blogTime" jdbcType="VARCHAR"/>
+        <result column="b_simple_content" property="blogSimpleContent" jdbcType="VARCHAR"/>
+        <result column="b_pic_url" property="blogPicUrl" jdbcType="VARCHAR"/>
+        <result column="user_id" property="blogAuthorId" jdbcType="INTEGER"/>
+        <result column="user_name" property="blogAuthorName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="BlogDetailResultMap" type="com.bbs.personalblog.model.BlogDetail">
+        <result column="b_show_id" property="blogId" jdbcType="VARCHAR"/>
+        <result column="b_show_title" property="blogTitle" jdbcType="VARCHAR"/>
+        <result column="b_show_label" property="blogLabel" jdbcType="VARCHAR"/>
+        <result column="b_show_time" property="blogTime" jdbcType="VARCHAR"/>
+        <result column="b_author_id" property="blogAuthorId" jdbcType="INTEGER"/>
+        <result column="user_name" property="blogAuthorName" jdbcType="VARCHAR"/>
+        <result column="b_full_content" property="blogDetailContent" jdbcType="VARCHAR"/>
+        <result column="b_pic_url" property="blogPicUrl" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="ReplyDetailResultMap" type="com.bbs.personalblog.model.ReplyDetail">
+        <result column="r_show_id" property="replyId" jdbcType="VARCHAR"/>
+        <result column="r_show_content" property="replyContent" jdbcType="VARCHAR"/>
+        <result column="r_show_time" property="replyTime" jdbcType="VARCHAR"/>
+        <result column="r_show_ip" property="replyIp" jdbcType="VARCHAR"/>
+        <result column="r_blog_id" property="replyBlogId" jdbcType="VARCHAR"/>
+        <result column="r_author_id" property="replyAuthorId" jdbcType="INTEGER"/>
+        <result column="user_name" property="replyAuthorName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--编辑博客-->
+    <insert id="insertBlogDetail" parameterType="com.bbs.personalblog.model.Blog">
+        INSERT INTO blog_show_table (
+	    b_show_id,
+	    b_show_title,
+	    b_show_label,
+	    b_show_time,
+	    b_simple_content,
+	    b_full_content,
+	    b_send_flag,
+	    b_pic_url,
+	    b_show_ip,
+	    b_author_id)
+        VALUES
+	  (
+		#{blogId,jdbcType=VARCHAR},
+		#{blogTitle,jdbcType=VARCHAR},
+		#{blogLabel,jdbcType=VARCHAR},
+		#{blogTime,jdbcType=VARCHAR},
+		#{blogSimpleContent,jdbcType=VARCHAR},
+		#{blogContent,jdbcType=VARCHAR},
+		#{sendStatus,jdbcType=INTEGER},
+		#{blogPicUrl,jdbcType=VARCHAR},
+		#{ip,jdbcType=VARCHAR},
+		#{blogAuthorId,jdbcType=INTEGER})
+    </insert>
+
+    <!--编辑评论-->
+    <insert id="insertReplyDetail" parameterType="com.bbs.personalblog.model.ReplyDetail">
+        INSERT INTO blog_show_table (
+	    r_show_id,
+	    r_show_content,
+	    r_show_time,
+	    r_show_ip,
+	    r_blog_id,
+	    r_author_id)
+        VALUES(
+		#{replyId,jdbcType=VARCHAR},
+		#{replyContent,jdbcType=VARCHAR},
+		#{replyTime,jdbcType=VARCHAR},
+		#{replyIp,jdbcType=VARCHAR},
+		#{replyAuthorId,jdbcType=INTEGER},
+		#{replyAuthorName,jdbcType=VARCHAR})
+	</insert>
+
+    <!--博客列表-->
+    <select id="showBlogList" resultMap="ListResultMap">
+        SELECT
+    	b.b_show_id,
+	    b.b_show_title,
+	    b.b_show_label,
+	    b.b_show_time,
+	    b.b_simple_content,
+	    b.b_pic_url,
+	    b.b_author_id,
+	    u.user_name
+        FROM
+	    blog_show_table b
+        RIGHT JOIN user_table u ON b.b_author_id = u.user_id
+        WHERE
+	    b.b_send_flag = #{status,jdbcType=INTEGER}
+    </select>
+
+    <!--博客详情-->
+    <select id="showBlogDetail" resultMap="BlogDetailResultMap">
+        SELECT
+	    b.b_show_id,
+	    b.b_show_title,
+        b.b_show_label,
+        b.b_show_time,
+        b.b_full_content,
+        b.b_pic_url,
+        b.b_author_id,
+        u.user_name
+        FROM
+            blog_show_table b
+        RIGHT JOIN user_table u ON b.b_author_id = u.user_id
+        WHERE
+            b.b_show_id = #{blogId,jdbcType=VARCHAR}
+    </select>
+
+    <!--评论详情-->
+    <select id="showReplyDetail" resultMap="ReplyDetailResultMap">
+        SELECT
+        r.r_show_id,
+        r.r_show_content,
+        r.r_show_time,
+        r.r_show_ip,
+        r.r_author_id,
+        u.user_name
+        FROM
+            reply_show_table r
+        RIGHT JOIN user_table u ON r.r_author_id = u.user_id
+        WHERE
+            r.r_blog_id = #{blogId,jdbcType=VARCHAR}
+    </select>
+
+</mapper>
