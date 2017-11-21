@@ -1,9 +1,6 @@
 package com.bbs.personalblog.dao;
 
-import com.bbs.personalblog.model.Blog;
-import com.bbs.personalblog.model.BlogDetail;
-import com.bbs.personalblog.model.BlogList;
-import com.bbs.personalblog.model.ReplyDetail;
+import com.bbs.personalblog.model.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,12 +14,12 @@ public interface IBlogCoreDao {
 
     public abstract int insertBlogDetail(Blog blog);
 
-    public abstract int insertReplyDetail(ReplyDetail reply);
+    public abstract int insertReplyDetail(Reply reply);
 
     public abstract List<BlogList> showBlogList(int status);
 
     public abstract BlogDetail showBlogDetail(String blogId);
 
-    public abstract ReplyDetail showReplyDetail(String blogId);
+    public abstract List<ReplyDetail> showReplyDetail(String blogId);
 
 }

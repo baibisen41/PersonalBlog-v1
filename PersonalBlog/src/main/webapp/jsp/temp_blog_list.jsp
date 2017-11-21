@@ -13,24 +13,27 @@
     <title>博客列表</title>
 </head>
 <body>
+<a href="temp_edit_page.jsp">
+    <input name="insertBtn" type="button" value="编辑博客" width="100" height="50" align="center"/>
+</a>
 <c:forEach var="blog" items="${blogList}">
-    <table border="1" width="400" height="300">
+    <table border="1" width="400">
         <tr>
-            <td align="center" valign="center" width="150">图片</td>
-            <td align="center" valign="center">${blog.blogPicUrl}</td>
+            <td align="center" width="150">图片</td>
+            <td align="center">${blog.blogPicUrl}</td>
         </tr>
         <tr>
-            <td align="center" valign="center" width="150">标题</td>
-            <td align="center" valign="center">
+            <td align="center" width="150">标题</td>
+            <td align="center">
                 <a href="<%=request.getContextPath()%>/showBlogDetail.do?id=${blog.blogId}">${blog.blogTitle}</a></td>
         </tr>
         <tr>
-            <td align="center" valign="center" width="150">内容</td>
-            <td align="center" valign="center">${blog.blogSimpleContent}</td>
+            <td align="center" width="150">内容</td>
+            <td>${blog.blogSimpleContent}</td>
         </tr>
         <tr>
-            <td align="center" valign="center" width="150">${blog.blogTime}</td>
-            <td align="center" valign="center">${blog.blogAuthorName}</td>
+            <td align="center" width="150">${blog.blogTime}</td>
+            <td align="center">${blog.blogAuthorName}</td>
         </tr>
     </table>
     <br>

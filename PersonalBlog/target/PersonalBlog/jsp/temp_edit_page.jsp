@@ -69,7 +69,7 @@
     }
 
     function exitEdit() {
-        window.location.href = "temp_edit_page.jsp";
+        window.location.href = "<%=request.getContextPath()%>/showBlogList.do";
     }
 </script>
 

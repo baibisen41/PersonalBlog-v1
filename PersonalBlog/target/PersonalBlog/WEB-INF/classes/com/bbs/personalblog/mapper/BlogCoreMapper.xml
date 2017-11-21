@@ -62,8 +62,8 @@
     </insert>
 
     <!--编辑评论-->
-    <insert id="insertReplyDetail" parameterType="com.bbs.personalblog.model.ReplyDetail">
-        INSERT INTO blog_show_table (
+    <insert id="insertReplyDetail" parameterType="com.bbs.personalblog.model.Reply">
+        INSERT INTO reply_show_table (
 	    r_show_id,
 	    r_show_content,
 	    r_show_time,
@@ -75,8 +75,8 @@
 		#{replyContent,jdbcType=VARCHAR},
 		#{replyTime,jdbcType=VARCHAR},
 		#{replyIp,jdbcType=VARCHAR},
-		#{replyAuthorId,jdbcType=INTEGER},
-		#{replyAuthorName,jdbcType=VARCHAR})
+		#{replyBlogId,jdbcType=VARCHAR},
+		#{replyAuthorId,jdbcType=INTEGER})
 	</insert>
 
     <!--博客列表-->

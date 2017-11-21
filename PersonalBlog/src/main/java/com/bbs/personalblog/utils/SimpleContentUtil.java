@@ -13,9 +13,9 @@ public class SimpleContentUtil {
 
     public static String getSimpleContent(String content) {
         if (!content.isEmpty()) {
-            if (content.length() > 200) {
-                content = content.substring(0, 200);
-                logger.info("content length=" + content.length() + ";content over 200:" + content);
+            if (content.length() > 50) {
+                content = content.substring(0, 50);
+                logger.info("content length=" + content.length() + ";content over 50:" + content);
                 return content;
             }
             logger.info("content less 200:" + content);

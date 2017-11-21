@@ -1,10 +1,7 @@
 package com.bbs.personalblog.controller;
 
 import com.bbs.personalblog.common.Common;
-import com.bbs.personalblog.model.Blog;
-import com.bbs.personalblog.model.BlogDetail;
-import com.bbs.personalblog.model.BlogList;
-import com.bbs.personalblog.model.ReplyDetail;
+import com.bbs.personalblog.model.*;
 import com.bbs.personalblog.service.IBlogCoreService;
 import com.bbs.personalblog.utils.DateTimeUtil;
 import com.bbs.personalblog.utils.IpUtil;
@@ -62,10 +59,13 @@ public class BlogCoreController {
         ModelAndView modelAndView = new ModelAndView();
         logger.info("选择博客id:" + blogId);
         BlogDetail blogDetail = iBlogCoreService.showBlogDetail(blogId);
-        ReplyDetail replyDetail = iBlogCoreService.showReplyDetail(blogId);
+        List<ReplyDetail> replyDetailList = iBlogCoreService.showReplyDetail(blogId);
+        for (ReplyDetail replyDetail : replyDetailList) {
+            logger.info("回复信息：" + replyDetail.getReplyAuthorName() + ";内容：" + replyDetail.getReplyContent());
+        }
 
         modelAndView.addObject("blogDetail", blogDetail);
-        modelAndView.addObject("replyDetail", replyDetail);
+        modelAndView.addObject("replyDetail", replyDetailList);
         modelAndView.setViewName("temp_blog_detail");
         return modelAndView;
     }
@@ -113,10 +113,22 @@ public class BlogCoreController {
     }
 
     //  评论区
-    @RequestMapping(value = "editReplyDetail.do", method = RequestMethod.POST)
-    public Map editReplyDetail() {
-        Map map = new HashMap();
+    @RequestMapping("/editReplyDetail.do")
+    public String editReplyDetail(HttpServletRequest request, HttpServletResponse response) {
+        String replyContent = request.getParameter("reply_text");
+        String getBlogId = request.getParameter("reply_hidden");
+        System.out.println("发出的评论：" + replyContent);
+        Reply reply = new Reply();
+        reply.setReplyId(KeyIdUtil.getId());
+        reply.setReplyContent(replyContent);
+        reply.setReplyTime(DateTimeUtil.getDateHandler(System.currentTimeMillis()));
+        reply.setReplyIp(IpUtil.getIp(request, response));
+        reply.setReplyAuthorId(2013121112);
+        reply.setReplyBlogId(getBlogId);
 
-        return map;
+        String resultCode = iBlogCoreService.insertReplyDetail(reply).get("resultCode");
+        System.out.println("回复返回码：" + resultCode);
+
+        return "redirect:/showBlogDetail.do?id=" + getBlogId;
     }
 }

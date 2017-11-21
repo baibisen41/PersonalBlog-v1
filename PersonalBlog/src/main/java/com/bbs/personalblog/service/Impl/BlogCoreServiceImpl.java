@@ -1,10 +1,7 @@
 package com.bbs.personalblog.service.Impl;
 
 import com.bbs.personalblog.dao.IBlogCoreDao;
-import com.bbs.personalblog.model.Blog;
-import com.bbs.personalblog.model.BlogDetail;
-import com.bbs.personalblog.model.BlogList;
-import com.bbs.personalblog.model.ReplyDetail;
+import com.bbs.personalblog.model.*;
 import com.bbs.personalblog.service.IBlogCoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +35,7 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
     }
 
     @Override
-    public Map<String, String> insertReplyDetail(ReplyDetail reply) {
+    public Map<String, String> insertReplyDetail(Reply reply) {
         Map<String, String> map = new HashMap<String, String>();
         int resultCode = iBlogCoreDao.insertReplyDetail(reply);
         if (resultCode == 1) {
@@ -68,10 +65,10 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
     }
 
     @Override
-    public ReplyDetail showReplyDetail(String blogId) {
+    public List<ReplyDetail> showReplyDetail(String blogId) {
 
-        ReplyDetail replyDetail = iBlogCoreDao.showReplyDetail(blogId);
+        List<ReplyDetail> replyDetailList = iBlogCoreDao.showReplyDetail(blogId);
 
-        return replyDetail;
+        return replyDetailList;
     }
 }
