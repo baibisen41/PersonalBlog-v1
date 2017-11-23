@@ -14,7 +14,12 @@
         <url-pattern>*.class</url-pattern>
         <url-pattern>*.et</url-pattern>
         <url-pattern>*.vm</url-pattern>
-        <url-pattern>*.html</url-pattern>
+        <url-pattern>*.eot</url-pattern>
+        <url-pattern>*.woff</url-pattern>
+        <url-pattern>*.woff2</url-pattern>
+        <url-pattern>*.svg</url-pattern>
+        <url-pattern>*.ttf</url-pattern>
+        <url-pattern>*.otf</url-pattern>
     </servlet-mapping>
 
     <context-param>
@@ -52,6 +57,10 @@
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
         <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>springmvc</servlet-name>
+        <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
     <listener>

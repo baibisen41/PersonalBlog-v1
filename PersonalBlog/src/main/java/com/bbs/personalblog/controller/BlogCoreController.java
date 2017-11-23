@@ -45,9 +45,9 @@ public class BlogCoreController {
         logger.info("total blogs:" + bloglist.size());
         if (bloglist.size() > 0) {
             modelAndView.addObject("blogList", bloglist);
-            modelAndView.setViewName("temp_blog_list");
+            modelAndView.setViewName("home");
         } else {
-            modelAndView.setViewName("temp_blog_list");
+            modelAndView.setViewName("home");
         }
 
         return modelAndView;
