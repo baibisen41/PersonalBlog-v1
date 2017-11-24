@@ -48,13 +48,13 @@
                         </i> RSS订阅
                     </a></li>
                 </ul>
-                勤记录 懂分享
+                爱学习 爱分享
             </div>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                         data-target="#header-navbar" aria-expanded="false"><span class="sr-only"></span> <span
                         class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
-                <h1 class="logo hvr-bounce-in"><a href="#" title="木庄网络博客"><img src="images/201610171329086541.png"
+                <h1 class="logo hvr-bounce-in"><a href="#" title="木庄网络博客"><img src="images/logo.png"
                                                                                alt="木庄网络博客"></a></h1>
             </div>
             <div class="collapse navbar-collapse" id="header-navbar">
@@ -68,15 +68,14 @@
                 </form>
                 <%-- 改bootstrap.min.css中（.navbar-default .navbar-nav > li > a）中的字体颜色 --%>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-cont="木庄网络博客" title="木庄网络博客" href="index.html">首页</a></li>
-                    <li><a data-cont="列表页" title="列表页" href="list.html">列表页</a></li>
-                    <li><a data-cont="详细页" title="详细页" href="show.html">详细页</a></li>
-                    <li><a data-cont="404" title="404" href="404.html">404</a></li>
-                    <li><a data-cont="MZ-NetBolg主题" title="MZ-NetBolg主题" href="#">MZ-NetBolg主题</a></li>
-                    <li><a data-cont="IT技术笔记" title="IT技术笔记" href="#">IT技术笔记</a></li>
-                    <li><a data-cont="源码分享" title="源码分享" href="#">源码分享</a></li>
-                    <li><a data-cont="靠谱网赚" title="靠谱网赚" href="#">靠谱网赚</a></li>
-                    <li><a data-cont="资讯分享" title="资讯分享" href="#">资讯分享</a></li>
+                    <li><a data-cont="主页" title="主页" href="index.html">主页</a></li>
+                    <li><a data-cont="技术分享页" title="技术分享页" href="list.html">技术分享</a></li>
+                    <li><a data-cont="资讯头条页" title="资讯头条页" href="list.html">资讯头条</a></li>
+                    <li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>
+                    <li><a data-cont="生活点滴页" title="生活点滴页" href="show.html">生活点滴</a></li>
+                    <li><a data-cont="资源共享页" title="资源共享页" href="show.html">资源共享</a></li>
+                    <li><a data-cont="留言板页" title="留言板页" href="show.html">留言板</a></li>
+                    <li><a data-cont="关于我页" title="关于我页" href="show.html">关于我</a></li>
                 </ul>
             </div>
         </div>
