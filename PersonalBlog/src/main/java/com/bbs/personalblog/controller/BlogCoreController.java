@@ -66,7 +66,7 @@ public class BlogCoreController {
 
         modelAndView.addObject("blogDetail", blogDetail);
         modelAndView.addObject("replyDetail", replyDetailList);
-        modelAndView.setViewName("temp_blog_detail");
+        modelAndView.setViewName("show_blog_detail");
         return modelAndView;
     }
 

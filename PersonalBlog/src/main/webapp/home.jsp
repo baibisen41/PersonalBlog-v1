@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 大森
@@ -6,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <!doctype html>
 <html lang="zh-CN">
 <head>
@@ -68,8 +70,9 @@
                 </form>
                 <%-- 改bootstrap.min.css中（.navbar-default .navbar-nav > li > a）中的字体颜色 --%>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-cont="主页" title="主页" href="index.html">主页</a></li>
-                    <li><a data-cont="技术分享页" title="技术分享页" href="list.html">技术分享</a></li>
+                    <li><a data-cont="主页" title="主页" href="#">主页</a></li>
+                    <li><a data-cont="技术分享页" title="技术分享页"
+                           href="<%=request.getContextPath()%>/show_blog_list.jsp">技术分享</a></li>
                     <li><a data-cont="资讯头条页" title="资讯头条页" href="list.html">资讯头条</a></li>
                     <li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>
                     <li><a data-cont="生活点滴页" title="生活点滴页" href="show.html">生活点滴</a></li>
@@ -92,12 +95,12 @@
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
                         <a href="#" target="_blank" title="木庄网络博客源码">
-                            <img src="<%=request.getContextPath()%>/images//201610181557196870.jpg" alt="木庄网络博客源码"
+                            <img src="<%=request.getContextPath()%>/images/201610181557196870.jpg" alt="木庄网络博客源码"
                                  class="img-responsive"></a>
                     </div>
                     <div class="item">
                         <a href="#" target="_blank" title="专业网站建设">
-                            <img src="<%=request.getContextPath()%>/images//201610241227558789.jpg" alt="专业网站建设"
+                            <img src="<%=request.getContextPath()%>/images/201610241227558789.jpg" alt="专业网站建设"
                                  class="img-responsive"></a>
                     </div>
                 </div>
@@ -123,28 +126,31 @@
                     <a href="#" title="资讯分享">资讯分享</a>
                 </div>
             </div>
-            <article class="excerpt excerpt-1" style="">
-                <a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank"><img class="thumb"
-                                                                                              data-original="images/201610181739277776.jpg"
-                                                                                              src="images/201610181739277776.jpg"
-                                                                                              alt="用DTcms做一个独立博客网站（响应式模板）"
-                                                                                              style="display: inline;"></a>
-                <header><a class="cat" href="#" title="MZ-NetBlog主题">MZ-NetBlog主题<i></i></a>
-                    <h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">用DTcms做一个独立博客网站（响应式模板）</a>
-                    </h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 216</span> <a class="comment"
-                                                                                                   href="##comment"
-                                                                                                   title="评论"
-                                                                                                   target="_blank"><i
-                        class="glyphicon glyphicon-comment"></i> 4</a>
-                </p>
-                <p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms
-                    V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
-            </article>
-            <article class="excerpt excerpt-2" style=""><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）"
+            <c:forEach var="blog" items="${blogList}">
+                <article class="excerpt excerpt-1" style="">
+                    <a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank"><img class="thumb"
+                                                                                                  data-original="images/201610181739277776.jpg"
+                                                                                                  src="images/201610181739277776.jpg"
+                                                                                                  alt="用DTcms做一个独立博客网站（响应式模板）"
+                                                                                                  style="display: inline;"></a>
+                    <header><a class="cat" href="#" title="MZ-NetBlog主题">${blog.blogLabel}<i></i></a>
+                        <h2><a href="<%=request.getContextPath()%>/showBlogDetail.do?id=${blog.blogId}"
+                               title="用DTcms做一个独立博客网站（响应式模板）"
+                               target="_blank">${blog.blogTitle}</a>
+                        </h2>
+                    </header>
+                    <p class="meta">
+                        <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
+                        <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 216</span> <a class="comment"
+                                                                                                       href="##comment"
+                                                                                                       title="评论"
+                                                                                                       target="_blank"><i
+                            class="glyphicon glyphicon-comment"></i> 4</a>
+                    </p>
+                    <p class="note">${blog.blogSimpleContent}</p>
+                </article>
+            </c:forEach>
+            <%--<article class="excerpt excerpt-2" style=""><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）"
                                                            target="_blank"><img class="thumb"
                                                                                 data-original="images/201610181739277776.jpg"
                                                                                 src="images/201610181739277776.jpg"
@@ -227,7 +233,7 @@
                 </p>
                 <p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms
                     V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
-            </article>
+            </article>--%>
             <%--这里做成分页形式，后期整合时添加--%>
             <nav class="pagination" style="display: none;">
                 <ul>
@@ -341,14 +347,14 @@
 
             </ul>
         </div>
-        <div class="widget widget_sentence">
-            <a href="#" target="_blank" rel="nofollow" title="专业网站建设">
-                <img style="width: 100%" src="images//201610241224221511.jpg" alt="专业网站建设"></a>
-        </div>
-        <div class="widget widget_sentence">
-            <a href="#" target="_blank" rel="nofollow" title="MZ-NetBlog主题">
-                <img style="width: 100%" src="images/ad.jpg" alt="MZ-NetBlog主题"></a>
-        </div>
+        <%--        <div class="widget widget_sentence">
+                    <a href="#" target="_blank" rel="nofollow" title="专业网站建设">
+                        <img style="width: 100%" src="images/201610241224221511.jpg" alt="专业网站建设"></a>
+                </div>--%>
+        <%--        <div class="widget widget_sentence">
+                    <a href="#" target="_blank" rel="nofollow" title="MZ-NetBlog主题">
+                        <img style="width: 100%" src="images/ad.jpg" alt="MZ-NetBlog主题"></a>
+                </div>--%>
         <div class="widget widget_sentence">
             <h3>友情链接</h3>
             <div class="widget-sentence-link">
