@@ -69,9 +69,9 @@
                 </form>
                 <%-- 改bootstrap.min.css中（.navbar-default .navbar-nav > li > a）中的字体颜色 --%>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-cont="主页" title="主页" href="<%=request.getContextPath()%>/showBlogList.do">主页</a></li>
-                    <li><a data-cont="技术分享页" title="技术分享页"
-                           href="<%=request.getContextPath()%>/show_blog_list.jsp">技术分享</a></li>
+                    <li><a data-cont="主页" title="主页" href="<%=request.getContextPath()%>/home.do">主页</a></li>
+                    <li><a data-cont="技术分享页" title="技术分享页" href="<%=request.getContextPath()%>/showBlogList.do">技术分享</a>
+                    </li>
                     <li><a data-cont="资讯头条页" title="资讯头条页" href="list.html">资讯头条</a></li>
                     <li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>
                     <li><a data-cont="生活点滴页" title="生活点滴页" href="show.html">生活点滴</a></li>

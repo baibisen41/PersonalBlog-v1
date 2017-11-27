@@ -69,8 +69,8 @@
 		</span></div>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-cont="主页" title="主页" href="<%=request.getContextPath()%>/showBlogList.do">主页</a></li>
-                    <li><a data-cont="技术分享页" title="技术分享页" href="<%=request.getContextPath()%>/show_blog_list.jsp">技术分享</a>
+                    <li><a data-cont="主页" title="主页" href="<%=request.getContextPath()%>/home.do">主页</a></li>
+                    <li><a data-cont="技术分享页" title="技术分享页" href="<%=request.getContextPath()%>/showBlogList.do">技术分享</a>
                     </li>
                     <li><a data-cont="资讯头条页" title="资讯头条页" href="list.html">资讯头条</a></li>
                     <li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>
@@ -87,7 +87,7 @@
     <div class="content-wrap">
         <div class="content">
             <div class="title">
-                <h3 style="line-height: 1.3">MZ-NetBlog主题</h3>
+                <h3 style="line-height: 1.3">最新发布</h3>
             </div>
             <c:forEach var="blog" items="${blogList}">
                 <article class="excerpt excerpt-1"><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）"
@@ -95,7 +95,8 @@
                         class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg"
                         alt="用DTcms做一个独立博客网站（响应式模板）" style="display: inline;"></a>
                     <header><a class="cat" href="#" title="MZ-NetBlog主题">${blog.blogLabel}<i></i></a>
-                        <h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">${blog.blogTitle}</a></h2>
+                        <h2><a href="<%=request.getContextPath()%>/showBlogDetail.do?id=${blog.blogId}"
+                               title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">${blog.blogTitle}</a></h2>
                     </header>
                     <p class="meta">
                         <time class="time"><i class="glyphicon glyphicon-time"></i>${blog.blogTime}</time>
@@ -216,7 +217,7 @@
             </div>
         </div>
         <div class="widget widget_hot">
-            <h3>最新评论文章</h3>
+            <h3>精选博文</h3>
             <ul>
 
                 <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#"><span class="thumbnail">

@@ -70,9 +70,9 @@
                 </form>
                 <%-- 改bootstrap.min.css中（.navbar-default .navbar-nav > li > a）中的字体颜色 --%>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-cont="主页" title="主页" href="#">主页</a></li>
-                    <li><a data-cont="技术分享页" title="技术分享页"
-                           href="<%=request.getContextPath()%>/show_blog_list.jsp">技术分享</a></li>
+                    <li><a data-cont="主页" title="主页" href="<%=request.getContextPath()%>/home.do">主页</a></li>
+                    <li><a data-cont="技术分享页" title="技术分享页" href="<%=request.getContextPath()%>/showBlogList.do">技术分享</a>
+                    </li>
                     <li><a data-cont="资讯头条页" title="资讯头条页" href="list.html">资讯头条</a></li>
                     <li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>
                     <li><a data-cont="生活点滴页" title="生活点滴页" href="show.html">生活点滴</a></li>
@@ -110,14 +110,14 @@
                                                            role="button" data-slide="next" rel="nofollow"> <span
                     class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span
                     class="sr-only">下一个</span> </a></div>
-            <article class="excerpt-minic excerpt-minic-index">
+            <%--<article class="excerpt-minic excerpt-minic-index">
                 <h2><span class="red">【推荐】</span><a target="_blank" href="#" title="用DTcms做一个独立博客网站（响应式模板）">用DTcms做一个独立博客网站（响应式模板）</a>
                 </h2>
                 <p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms
                     V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
-            </article>
+            </article>--%>
             <div class="title">
-                <h3>最新发布</h3>
+                <h3>精选博文</h3>
                 <div class="more">
                     <a href="#" title="MZ-NetBlog主题">MZ-NetBlog主题</a>
                     <a href="#" title="IT技术笔记">IT技术笔记</a>
@@ -286,7 +286,7 @@
             </div>
         </div>
         <div class="widget widget_hot">
-            <h3>最新评论文章</h3>
+            <h3>今日资讯</h3>
             <ul>
                 <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#"><span class="thumbnail">
 				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg"

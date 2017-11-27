@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +36,23 @@ public class BlogCoreController {
     @Autowired
     private IBlogCoreService iBlogCoreService;
 
+    @RequestMapping(value = "/home.do", method = RequestMethod.GET)
+    public ModelAndView showHome() {
+        ModelAndView modelAndView = new ModelAndView();
+        //第一部分 最热博文(后期改)
+        List<BlogList> bloglist = iBlogCoreService.showBlogList(Common.sendStatus);
+
+        //第二部分 每日资讯
+
+        //第三部分站长统计
+
+        //第四部分 小功能---前台完成
+
+        modelAndView.addObject("blogList", bloglist);
+        modelAndView.setViewName("home");
+        return modelAndView;
+    }
+
     //博客列表
     @RequestMapping(value = "/showBlogList.do", method = RequestMethod.GET)
     @ResponseBody
@@ -43,17 +61,12 @@ public class BlogCoreController {
         //拉取全部发布的博客 1->发布；2->草稿
         List<BlogList> bloglist = iBlogCoreService.showBlogList(Common.sendStatus);
         logger.info("total blogs:" + bloglist.size());
-        if (bloglist.size() > 0) {
-            modelAndView.addObject("blogList", bloglist);
-            modelAndView.setViewName("home");
-        } else {
-            modelAndView.setViewName("home");
-        }
-
+        modelAndView.addObject("blogList", bloglist);
+        modelAndView.setViewName("show_blog_list");
         return modelAndView;
     }
 
-    //博客详情
+    //详情
     @RequestMapping("/showBlogDetail.do")
     public ModelAndView showBlogDetail(@RequestParam("id") String blogId) {
         ModelAndView modelAndView = new ModelAndView();
