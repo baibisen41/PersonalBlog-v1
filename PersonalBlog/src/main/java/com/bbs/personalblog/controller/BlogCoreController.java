@@ -39,7 +39,7 @@ public class BlogCoreController {
     @RequestMapping(value = "/home.do", method = RequestMethod.GET)
     public ModelAndView showHome(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        String page = request.getParameter("page");
+        String page = request.getParameter("pagenum");
         int nextPage = 0;
         if (StringUtils.isEmpty(page)) {
             nextPage = 1;
@@ -52,8 +52,19 @@ public class BlogCoreController {
         PageHelper.startPage(nextPage, 10);
         List<BlogList> bloglist = iBlogCoreService.showBlogList(Common.sendStatus);
         PageInfo<BlogList> pageInfo = new PageInfo<BlogList>(bloglist);
-        if (pageInfo.getList().size() > 10) {
-            modelAndView.addObject("nextPage", pageInfo.getPageNum());
+        int startPage, endPage;
+
+        if (pageInfo.getPages() < 6) {
+            startPage = 1;
+            endPage = pageInfo.getPages();
+        } else {
+            if (nextPage > 3) {
+                startPage = pageInfo.getPageNum() - 3;
+                endPage = pageInfo.getPageNum() + 3 > pageInfo.getPages() ? pageInfo.getPages() : pageInfo.getPageNum() + 3;
+            } else {
+                startPage = 1;
+                endPage = pageInfo.getPageNum() + 4;
+            }
         }
         //第二部分 每日资讯
 
@@ -61,8 +72,11 @@ public class BlogCoreController {
 
         //第四部分 小功能---前台完成
 
+        modelAndView.addObject("startPage", startPage);
+        modelAndView.addObject("endPage", endPage);
         modelAndView.addObject("blogList", pageInfo.getList());
-        modelAndView.addObject("totalBlog", pageInfo.getPages());
+        modelAndView.addObject("totalPages", pageInfo.getPages());
+        modelAndView.addObject("nextPages", pageInfo.getPageNum());
         modelAndView.setViewName("home");
         return modelAndView;
     }

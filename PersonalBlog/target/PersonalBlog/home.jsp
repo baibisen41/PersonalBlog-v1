@@ -156,100 +156,43 @@
                     <p class="note">${blog.blogSimpleContent}</p>
                 </article>
             </c:forEach>
-            <%--<article class="excerpt excerpt-2" style=""><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）"
-                                                           target="_blank"><img class="thumb"
-                                                                                data-original="images/201610181739277776.jpg"
-                                                                                src="images/201610181739277776.jpg"
-                                                                                alt="用DTcms做一个独立博客网站（响应式模板）"
-                                                                                style="display: inline;"></a>
-                <header><a class="cat" href="#" title="MZ-NetBlog主题">MZ-NetBlog主题<i></i></a>
-                    <h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">用DTcms做一个独立博客网站（响应式模板）</a>
-                    </h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i>216</span> <a class="comment"
-                                                                                                  href="##comment"
-                                                                                                  title="评论"
-                                                                                                  target="_blank"><i
-                        class="glyphicon glyphicon-comment"></i>4</a>
-                </p>
-                <p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms
-                    V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
-            </article>
-            <article class="excerpt excerpt-3" style=""><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）"
-                                                           target="_blank"><img class="thumb"
-                                                                                data-original="images/201610181739277776.jpg"
-                                                                                src="images/201610181739277776.jpg"
-                                                                                alt="用DTcms做一个独立博客网站（响应式模板）"
-                                                                                style="display: inline;"></a>
-                <header><a class="cat" href="#" title="MZ-NetBlog主题">MZ-NetBlog主题<i></i></a>
-                    <h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">用DTcms做一个独立博客网站（响应式模板）</a>
-                    </h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 216</span> <a class="comment"
-                                                                                                   href="##comment"
-                                                                                                   title="评论"
-                                                                                                   target="_blank"><i
-                        class="glyphicon glyphicon-comment"></i> 4</a>
-                </p>
-                <p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms
-                    V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
-            </article>
-            <article class="excerpt excerpt-4" style=""><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）"
-                                                           target="_blank"><img class="thumb"
-                                                                                data-original="images/201610181739277776.jpg"
-                                                                                src="images/201610181739277776.jpg"
-                                                                                alt="用DTcms做一个独立博客网站（响应式模板）"
-                                                                                style="display: inline;"></a>
-                <header><a class="cat" href="#" title="MZ-NetBlog主题">MZ-NetBlog主题<i></i></a>
-                    <h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">用DTcms做一个独立博客网站（响应式模板）</a>
-                    </h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 216</span> <a class="comment"
-                                                                                                   href="##comment"
-                                                                                                   title="评论"
-                                                                                                   target="_blank"><i
-                        class="glyphicon glyphicon-comment"></i> 4</a>
-                </p>
-                <p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms
-                    V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
-            </article>
-            <article class="excerpt excerpt-5" style=""><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）"
-                                                           target="_blank"><img class="thumb"
-                                                                                data-original="images/201610181739277776.jpg"
-                                                                                src="images/201610181739277776.jpg"
-                                                                                alt="用DTcms做一个独立博客网站（响应式模板）"
-                                                                                style="display: inline;"></a>
-                <header><a class="cat" href="#" title="MZ-NetBlog主题">MZ-NetBlog主题<i></i></a>
-                    <h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">用DTcms做一个独立博客网站（响应式模板）</a>
-                    </h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 216</span> <a class="comment"
-                                                                                                   href="##comment"
-                                                                                                   title="评论"
-                                                                                                   target="_blank"><i
-                        class="glyphicon glyphicon-comment"></i> 4</a>
-                </p>
-                <p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms
-                    V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
-            </article>--%>
-            <%--这里做成分页形式，后期整合时添加--%>
-            <nav class="pagination" style="display: none;">
-                <ul>
-                    <li class="prev-page"></li>
-                    <li class="active"><span>1</span></li>
-                    <li><a href="<%=request.getContextPath()%>/home.do?page=2">2</a></li>
-                    <li class="next-page"><a href="<%=request.getContextPath()%>/home.do?page=${nextPage}">下一页</a></li>
-                    <li><span>共 ${totalBlog} 页</span></li>
-                </ul>
-            </nav>
+            <%--  分页  --%>
+            <c:if test="${totalPages > 1}">
+                <div class="pagination" style="background: transparent">
+                    <ul>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/home.do?pagenum=1">首页</a>
+                        </li>
+                        <li class="prev-page"><a
+                                href="${pageContext.request.contextPath}/home.do?pagenum=${nextPages - 1}">上一页</a>
+                        </li>
+                        <c:forEach var="pageIndex" begin="${startPage}" end="${endPage}">
+                            <c:choose>
+                                <c:when test="${pageIndex == nextPages}">
+                                    <li class="active"><span> ${pageIndex} </span></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/home.do?pagenum=${pageIndex}">${pageIndex}</a>
+                                    </li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+
+                        <c:if test="${nextPages != totalPages}">
+                            <li class="next-page"><a
+                                    href="${pageContext.request.contextPath}/home.do?pagenum=${nextPages+1}">下一页</a>
+                            </li>
+                        </c:if>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/home.do?pagenum=${endPage}">末页</a>
+                        </li>
+                        <li>
+                            <a>共${totalPages}页</a>
+                        </li>
+                    </ul>
+                </div>
+            </c:if>
         </div>
     </div>
     <aside class="sidebar">
@@ -379,7 +322,7 @@
     <div id="gotop"><a class="gotop"></a></div>
 </footer>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/jquery.ias.js"></script>
+<%--<script src="<%=request.getContextPath()%>/js/jquery.ias.js"></script>--%>
 <script src="<%=request.getContextPath()%>/js/scripts.js"></script>
 </body>
 </html>
