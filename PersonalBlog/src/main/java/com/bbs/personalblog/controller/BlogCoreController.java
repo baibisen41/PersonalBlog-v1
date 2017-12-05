@@ -7,11 +7,14 @@ import com.bbs.personalblog.utils.DateTimeUtil;
 import com.bbs.personalblog.utils.IpUtil;
 import com.bbs.personalblog.utils.KeyIdUtil;
 import com.bbs.personalblog.utils.SimpleContentUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,10 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by 大森 on 2017/11/6.
@@ -37,18 +37,32 @@ public class BlogCoreController {
     private IBlogCoreService iBlogCoreService;
 
     @RequestMapping(value = "/home.do", method = RequestMethod.GET)
-    public ModelAndView showHome() {
+    public ModelAndView showHome(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        //第一部分 最热博文(后期改)
-        List<BlogList> bloglist = iBlogCoreService.showBlogList(Common.sendStatus);
+        String page = request.getParameter("page");
+        int nextPage = 0;
+        if (StringUtils.isEmpty(page)) {
+            nextPage = 1;
+        } else {
+            nextPage = Integer.parseInt(page);
+        }
+        logger.info("翻到第" + nextPage + "页");
 
+        //第一部分 最热博文(后期改)
+        PageHelper.startPage(nextPage, 10);
+        List<BlogList> bloglist = iBlogCoreService.showBlogList(Common.sendStatus);
+        PageInfo<BlogList> pageInfo = new PageInfo<BlogList>(bloglist);
+        if (pageInfo.getList().size() > 10) {
+            modelAndView.addObject("nextPage", pageInfo.getPageNum());
+        }
         //第二部分 每日资讯
 
         //第三部分站长统计
 
         //第四部分 小功能---前台完成
 
-        modelAndView.addObject("blogList", bloglist);
+        modelAndView.addObject("blogList", pageInfo.getList());
+        modelAndView.addObject("totalBlog", pageInfo.getPages());
         modelAndView.setViewName("home");
         return modelAndView;
     }
@@ -60,8 +74,17 @@ public class BlogCoreController {
         ModelAndView modelAndView = new ModelAndView();
         //拉取全部发布的博客 1->发布；2->草稿
         List<BlogList> bloglist = iBlogCoreService.showBlogList(Common.sendStatus);
+        logger.info("获取到的标签有：" + bloglist.size());
+
+        Set labelSet = new HashSet();//去除标签中的重复
+        for (int i = 0; i < bloglist.size(); i++) {
+            String label = bloglist.get(i).getBlogLabel();
+            labelSet.add(label);
+        }
+
         logger.info("total blogs:" + bloglist.size());
         modelAndView.addObject("blogList", bloglist);
+        modelAndView.addObject("labelList", labelSet);
         modelAndView.setViewName("show_blog_list");
         return modelAndView;
     }

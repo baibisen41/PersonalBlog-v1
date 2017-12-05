@@ -91,16 +91,22 @@
                 <ol class="carousel-indicators">
                     <li data-target="#focusslide" data-slide-to="0" class="active"></li>
                     <li data-target="#focusslide" data-slide-to="1"></li>
+                    <li data-target="#focusslide" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
                         <a href="#" target="_blank" title="木庄网络博客源码">
-                            <img src="<%=request.getContextPath()%>/images/201610181557196870.jpg" alt="木庄网络博客源码"
+                            <img src="<%=request.getContextPath()%>/images/home_page1.jpg" alt="木庄网络博客源码"
                                  class="img-responsive"></a>
                     </div>
                     <div class="item">
                         <a href="#" target="_blank" title="专业网站建设">
-                            <img src="<%=request.getContextPath()%>/images/201610241227558789.jpg" alt="专业网站建设"
+                            <img src="<%=request.getContextPath()%>/images/home_page2.jpg" alt="专业网站建设"
+                                 class="img-responsive"></a>
+                    </div>
+                    <div class="item">
+                        <a href="#" target="_blank" title="专业网站建设">
+                            <img src="<%=request.getContextPath()%>/images/home_page3.jpg" alt="专业网站建设"
                                  class="img-responsive"></a>
                     </div>
                 </div>
@@ -129,8 +135,8 @@
             <c:forEach var="blog" items="${blogList}">
                 <article class="excerpt excerpt-1" style="">
                     <a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank"><img class="thumb"
-                                                                                                  data-original="images/201610181739277776.jpg"
-                                                                                                  src="images/201610181739277776.jpg"
+                                                                                                  data-original="images/message_pic.jpg"
+                                                                                                  src="images/message_pic.jpg"
                                                                                                   alt="用DTcms做一个独立博客网站（响应式模板）"
                                                                                                   style="display: inline;"></a>
                     <header><a class="cat" href="#" title="MZ-NetBlog主题">${blog.blogLabel}<i></i></a>
@@ -239,9 +245,9 @@
                 <ul>
                     <li class="prev-page"></li>
                     <li class="active"><span>1</span></li>
-                    <li><a href="?page=2">2</a></li>
-                    <li class="next-page"><a href="?page=2">下一页</a></li>
-                    <li><span>共 2 页</span></li>
+                    <li><a href="<%=request.getContextPath()%>/home.do?page=2">2</a></li>
+                    <li class="next-page"><a href="<%=request.getContextPath()%>/home.do?page=${nextPage}">下一页</a></li>
+                    <li><span>共 ${totalBlog} 页</span></li>
                 </ul>
             </nav>
         </div>
@@ -257,11 +263,13 @@
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane contact active" id="notice">
-                        <h2>日志总数:
-                            888篇
+                        <h2>
+                            <iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=2&num=2" width="330"
+                                    height="70" frameborder="0" marginwidth="0" marginheight="0"
+                                    scrolling="no"></iframe>
                         </h2>
-                        <h2>网站运行:
-                            <span id="sitetime">88天 </span></h2>
+                        <%--<h2>网站运行:
+                            <span id="sitetime">88天 </span></h2>--%>
                     </div>
                     <div role="tabpanel" class="tab-pane contact" id="contact">
                         <h2>QQ:

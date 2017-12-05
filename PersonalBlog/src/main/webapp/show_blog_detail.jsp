@@ -94,8 +94,9 @@
 	  </span> <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title=""
                     data-original-title="来源：木庄网络博客"><i class="glyphicon glyphicon-globe"></i> NoException</span> <span
                         class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title=""
-                        data-original-title="MZ-NetBlog主题"><i class="glyphicon glyphicon-list"></i> <a href="#"
-                                                                                                       title="MZ-NetBlog主题">${blogDetail.blogLabel}</a></span>
+                        data-original-title="MZ-NetBlog主题"><i class="glyphicon glyphicon-list"></i> <a
+                        href="<%=request.getContextPath()%>/home.do"
+                        title="MZ-NetBlog主题">${blogDetail.blogLabel}</a></span>
                     <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title=""
                           data-original-title="浏览量：219"><i class="glyphicon glyphicon-eye-open"></i> 219</span> <span
                             class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title=""

@@ -95,6 +95,10 @@
         RIGHT JOIN user_table u ON b.b_author_id = u.user_id
         WHERE
 	    b.b_send_flag = #{status,jdbcType=INTEGER}
+	    ORDER BY
+	    b.b_show_time
+	    DESC
+
     </select>
 
     <!--博客详情-->

@@ -56,7 +56,7 @@
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                         data-target="#header-navbar" aria-expanded="false"><span class="sr-only"></span> <span
                         class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
-                <h1 class="logo hvr-bounce-in"><a href="#" title="木庄网络博客"><img src="images/201610171329086541.png"
+                <h1 class="logo hvr-bounce-in"><a href="#" title="木庄网络博客"><img src="images/logo.png"
                                                                                alt="木庄网络博客"></a></h1>
             </div>
             <div class="collapse navbar-collapse" id="header-navbar">
@@ -92,7 +92,7 @@
             <c:forEach var="blog" items="${blogList}">
                 <article class="excerpt excerpt-1"><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）"
                                                       target="_blank"><img
-                        class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg"
+                        class="thumb" data-original="images/message_pic.jpg" src="images/message_pic.jpg"
                         alt="用DTcms做一个独立博客网站（响应式模板）" style="display: inline;"></a>
                     <header><a class="cat" href="#" title="MZ-NetBlog主题">${blog.blogLabel}<i></i></a>
                         <h2><a href="<%=request.getContextPath()%>/showBlogDetail.do?id=${blog.blogId}"
@@ -199,7 +199,12 @@
                 <h3>标签云</h3>
                 <div class="widget-sentence-content">
                     <ul class="plinks ptags">
-                        <li><a href="#list/67/" title="移动统计" draggable="false">移动统计 <span class="badge">1</span></a>
+                        <c:forEach var="label" items="${labelList}">
+                            <li><a href="#" title="移动统计" draggable="false">${label} <span class="badge">1</span></a>
+                            </li>
+                        </c:forEach>
+
+<%--                    <li><a href="#list/67/" title="移动统计" draggable="false">移动统计 <span class="badge">1</span></a>
                         </li>
                         <li><a href="#list/256/" title="404" draggable="false">404 <span class="badge">1</span></a></li>
                         <li><a href="#list/252/" title="VS2010" draggable="false">VS2010 <span
@@ -211,13 +216,13 @@
                         <li><a href="#list/49/" title="循环" draggable="false">循环 <span class="badge">2</span></a></li>
                         <li><a href="#list/22/" title="百度统计" draggable="false">百度统计 <span class="badge">2</span></a>
                         </li>
-                        <li><a href="#list/132/" title="sql" draggable="false">sql <span class="badge">6</span></a></li>
+                        <li><a href="#list/132/" title="sql" draggable="false">sql <span class="badge">6</span></a></li>--%>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="widget widget_hot">
-            <h3>精选博文</h3>
+            <h3>精选文章</h3>
             <ul>
 
                 <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#"><span class="thumbnail">
