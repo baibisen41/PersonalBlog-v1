@@ -20,7 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
@@ -36,11 +39,15 @@ public class BlogCoreController {
     @Autowired
     private IBlogCoreService iBlogCoreService;
 
+    @Resource
+    private JedisPool jedisPool;
+
     @RequestMapping(value = "/home.do", method = RequestMethod.GET)
     public ModelAndView showHome(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         String page = request.getParameter("pagenum");
-        int nextPage = 0;
+        int nextPage, startPage, endPage;
+
         if (StringUtils.isEmpty(page)) {
             nextPage = 1;
         } else {
@@ -48,11 +55,8 @@ public class BlogCoreController {
         }
         logger.info("翻到第" + nextPage + "页");
 
-        //第一部分 最热博文(后期改)
-        PageHelper.startPage(nextPage, 10);
-        List<BlogList> bloglist = iBlogCoreService.showBlogList(Common.sendStatus);
-        PageInfo<BlogList> pageInfo = new PageInfo<BlogList>(bloglist);
-        int startPage, endPage;
+        //第一部分 最热博文(后期改)  分页操作放在业务层处理
+        PageInfo<BlogList> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.sendStatus);
 
         if (pageInfo.getPages() < 6) {
             startPage = 1;
@@ -66,6 +70,7 @@ public class BlogCoreController {
                 endPage = pageInfo.getPageNum() + 4;
             }
         }
+
         //第二部分 每日资讯
 
         //第三部分站长统计
@@ -84,21 +89,48 @@ public class BlogCoreController {
     //博客列表
     @RequestMapping(value = "/showBlogList.do", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView showBlogList() {
+    public ModelAndView showBlogList(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        //拉取全部发布的博客 1->发布；2->草稿
-        List<BlogList> bloglist = iBlogCoreService.showBlogList(Common.sendStatus);
-        logger.info("获取到的标签有：" + bloglist.size());
+        String page = request.getParameter("pagenum");
+        int nextPage, startPage, endPage;
 
-        Set labelSet = new HashSet();//去除标签中的重复
-        for (int i = 0; i < bloglist.size(); i++) {
-            String label = bloglist.get(i).getBlogLabel();
-            labelSet.add(label);
+        if (StringUtils.isEmpty(page)) {
+            nextPage = 1;
+        } else {
+            nextPage = Integer.parseInt(page);
+        }
+        logger.info("翻到第" + nextPage + "页");
+
+        //拉取全部发布的博客 1->发布；2->草稿
+        PageInfo<BlogList> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.sendStatus);
+
+        if (pageInfo.getPages() < 6) {
+            startPage = 1;
+            endPage = pageInfo.getPages();
+        } else {
+            if (nextPage > 3) {
+                startPage = pageInfo.getPageNum() - 3;
+                endPage = pageInfo.getPageNum() + 3 > pageInfo.getPages() ? pageInfo.getPages() : pageInfo.getPageNum() + 3;
+            } else {
+                startPage = 1;
+                endPage = pageInfo.getPageNum() + 4;
+            }
         }
 
-        logger.info("total blogs:" + bloglist.size());
-        modelAndView.addObject("blogList", bloglist);
-        modelAndView.addObject("labelList", labelSet);
+        //标签云后期实现
+//        Set labelSet = new HashSet();//去除标签中的重复
+//        for (int i = 0; i < bloglist.size(); i++) {
+//            String label = bloglist.get(i).getBlogLabel();
+//            labelSet.add(label);
+//        }
+
+        logger.info("total blogs:" + pageInfo.getList().size());
+        modelAndView.addObject("startPage", startPage);
+        modelAndView.addObject("endPage", endPage);
+        modelAndView.addObject("blogList", pageInfo.getList());
+        modelAndView.addObject("totalPages", pageInfo.getPages());
+        modelAndView.addObject("nextPages", pageInfo.getPageNum());
+//        modelAndView.addObject("labelList", labelSet);
         modelAndView.setViewName("show_blog_list");
         return modelAndView;
     }

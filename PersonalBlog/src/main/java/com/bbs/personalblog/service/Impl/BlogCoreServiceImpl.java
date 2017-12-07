@@ -3,6 +3,8 @@ package com.bbs.personalblog.service.Impl;
 import com.bbs.personalblog.dao.IBlogCoreDao;
 import com.bbs.personalblog.model.*;
 import com.bbs.personalblog.service.IBlogCoreService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,11 +51,16 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
     }
 
     @Override
-    public List<BlogList> showBlogList(int status) {
+    public PageInfo<BlogList> showBlogList(int nextPage, int status) {
+
+        //将分页操作移到业务层
+        PageHelper.startPage(nextPage, 10);
 
         List<BlogList> blogList = iBlogCoreDao.showBlogList(status);
 
-        return blogList;
+        PageInfo<BlogList> pageInfo = new PageInfo<BlogList>(blogList);
+
+        return pageInfo;
     }
 
     @Override

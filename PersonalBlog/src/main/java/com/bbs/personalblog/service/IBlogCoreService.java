@@ -1,6 +1,7 @@
 package com.bbs.personalblog.service;
 
 import com.bbs.personalblog.model.*;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ public interface IBlogCoreService {
 
     public abstract Map<String, String> insertReplyDetail(Reply reply);
 
-    public abstract List<BlogList> showBlogList(int status);
+    public abstract PageInfo<BlogList> showBlogList(int nextPage, int status);
 
     public abstract BlogDetail showBlogDetail(String blogId);
 
