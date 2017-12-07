@@ -3,11 +3,15 @@ package com.bbs.personalblog.service.Impl;
 import com.bbs.personalblog.dao.IBlogCoreDao;
 import com.bbs.personalblog.model.*;
 import com.bbs.personalblog.service.IBlogCoreService;
+import com.bbs.personalblog.utils.JedisUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +25,9 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
 
     @Autowired
     private IBlogCoreDao iBlogCoreDao;
+
+    @Resource
+    private JedisPool jedisPool;
 
     @Override
     public Map<String, String> insertBlogDetail(Blog blog) {
@@ -51,14 +58,35 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
     }
 
     @Override
-    public PageInfo<BlogList> showBlogList(int nextPage, int status) {
+    public PageInfo<BlogListPv> showBlogList(int nextPage, int status) {
+
+        //redis放在这里操作
+        Jedis jedis = JedisUtil.getJedis(jedisPool);
 
         //将分页操作移到业务层
         PageHelper.startPage(nextPage, 10);
 
         List<BlogList> blogList = iBlogCoreDao.showBlogList(status);
 
-        PageInfo<BlogList> pageInfo = new PageInfo<BlogList>(blogList);
+        //从redis中获取访问量
+        List<BlogListPv> blogListPvList = new ArrayList<>();
+        BlogListPv blogListPv;
+        for (int i = 0; i < blogList.size(); i++) {
+            blogListPv = new BlogListPv();
+            blogListPv.setBlogId(blogList.get(i).getBlogId());
+            blogListPv.setBlogTitle(blogList.get(i).getBlogTitle());
+            blogListPv.setBlogLabel(blogList.get(i).getBlogLabel());
+            blogListPv.setBlogTime(blogList.get(i).getBlogTime());
+            blogListPv.setBlogSimpleContent(blogList.get(i).getBlogSimpleContent());
+            blogListPv.setBlogPicUrl(blogList.get(i).getBlogPicUrl());
+            blogListPv.setBlogAuthorId(blogList.get(i).getBlogAuthorId());
+            blogListPv.setBlogAuthorName(blogList.get(i).getBlogAuthorName());
+            int pv = jedis.get(blogList.get(i).getBlogId()) == null ? 0 : Integer.parseInt(jedis.get(blogList.get(i).getBlogId()));
+            blogListPv.setBlogPv(pv);
+            blogListPvList.add(blogListPv);
+        }
+
+        PageInfo<BlogListPv> pageInfo = new PageInfo<BlogListPv>(blogListPvList);
 
         return pageInfo;
     }

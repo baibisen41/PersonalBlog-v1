@@ -147,7 +147,7 @@
                     </header>
                     <p class="meta">
                         <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
-                        <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 216</span> <a class="comment"
+                        <span class="views"><i class="glyphicon glyphicon-eye-open"></i> ${blog.blogPv}</span> <a class="comment"
                                                                                                        href="##comment"
                                                                                                        title="评论"
                                                                                                        target="_blank"><i

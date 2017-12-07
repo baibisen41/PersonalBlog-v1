@@ -1,9 +1,9 @@
 package com.bbs.personalblog.model;
 
 /**
- * Created by 大森 on 2017/11/5.
+ * Created by 大森 on 2017/12/7.
  */
-public class BlogList {
+public class BlogListPv {
 
     private String blogId;
     private String blogTitle;
@@ -13,6 +13,7 @@ public class BlogList {
     private String blogPicUrl;
     private int blogAuthorId;
     private String blogAuthorName;
+    private int blogPv;
 
     public String getBlogId() {
         return blogId;
@@ -28,22 +29,6 @@ public class BlogList {
 
     public void setBlogTitle(String blogTitle) {
         this.blogTitle = blogTitle;
-    }
-
-    public String getBlogSimpleContent() {
-        return blogSimpleContent;
-    }
-
-    public void setBlogSimpleContent(String blogSimpleContent) {
-        this.blogSimpleContent = blogSimpleContent;
-    }
-
-    public String getBlogPicUrl() {
-        return blogPicUrl;
-    }
-
-    public void setBlogPicUrl(String blogPicUrl) {
-        this.blogPicUrl = blogPicUrl;
     }
 
     public String getBlogLabel() {
@@ -62,6 +47,22 @@ public class BlogList {
         this.blogTime = blogTime;
     }
 
+    public String getBlogSimpleContent() {
+        return blogSimpleContent;
+    }
+
+    public void setBlogSimpleContent(String blogSimpleContent) {
+        this.blogSimpleContent = blogSimpleContent;
+    }
+
+    public String getBlogPicUrl() {
+        return blogPicUrl;
+    }
+
+    public void setBlogPicUrl(String blogPicUrl) {
+        this.blogPicUrl = blogPicUrl;
+    }
+
     public int getBlogAuthorId() {
         return blogAuthorId;
     }
@@ -76,5 +77,13 @@ public class BlogList {
 
     public void setBlogAuthorName(String blogAuthorName) {
         this.blogAuthorName = blogAuthorName;
+    }
+
+    public int getBlogPv() {
+        return blogPv;
+    }
+
+    public void setBlogPv(int blogPv) {
+        this.blogPv = blogPv;
     }
 }

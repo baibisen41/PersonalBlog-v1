@@ -98,7 +98,8 @@
                         href="<%=request.getContextPath()%>/home.do"
                         title="MZ-NetBlog主题">${blogDetail.blogLabel}</a></span>
                     <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title=""
-                          data-original-title="浏览量：219"><i class="glyphicon glyphicon-eye-open"></i> 219</span> <span
+                          data-original-title="浏览量：219"><i
+                            class="glyphicon glyphicon-eye-open"></i> ${blogDetailPv}</span> <span
                             class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title=""
                             data-original-title="评论量"><i class="glyphicon glyphicon-comment"></i> 4</span></div>
             </header>

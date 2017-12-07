@@ -3,10 +3,7 @@ package com.bbs.personalblog.controller;
 import com.bbs.personalblog.common.Common;
 import com.bbs.personalblog.model.*;
 import com.bbs.personalblog.service.IBlogCoreService;
-import com.bbs.personalblog.utils.DateTimeUtil;
-import com.bbs.personalblog.utils.IpUtil;
-import com.bbs.personalblog.utils.KeyIdUtil;
-import com.bbs.personalblog.utils.SimpleContentUtil;
+import com.bbs.personalblog.utils.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -56,7 +53,7 @@ public class BlogCoreController {
         logger.info("翻到第" + nextPage + "页");
 
         //第一部分 最热博文(后期改)  分页操作放在业务层处理
-        PageInfo<BlogList> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.sendStatus);
+        PageInfo<BlogListPv> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.sendStatus);
 
         if (pageInfo.getPages() < 6) {
             startPage = 1;
@@ -102,7 +99,7 @@ public class BlogCoreController {
         logger.info("翻到第" + nextPage + "页");
 
         //拉取全部发布的博客 1->发布；2->草稿
-        PageInfo<BlogList> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.sendStatus);
+        PageInfo<BlogListPv> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.sendStatus);
 
         if (pageInfo.getPages() < 6) {
             startPage = 1;
@@ -140,12 +137,20 @@ public class BlogCoreController {
     public ModelAndView showBlogDetail(@RequestParam("id") String blogId) {
         ModelAndView modelAndView = new ModelAndView();
         logger.info("选择博客id:" + blogId);
+
+        int pvCount = 0;
+        Jedis jedis = JedisUtil.getJedis(jedisPool);
+        pvCount = jedis.get(blogId) == null ? 0 : Integer.parseInt(jedis.get(blogId));
+        pvCount += 1;
+        jedis.set(blogId, String.valueOf(pvCount));
+
         BlogDetail blogDetail = iBlogCoreService.showBlogDetail(blogId);
         List<ReplyDetail> replyDetailList = iBlogCoreService.showReplyDetail(blogId);
         for (ReplyDetail replyDetail : replyDetailList) {
             logger.info("回复信息：" + replyDetail.getReplyAuthorName() + ";内容：" + replyDetail.getReplyContent());
         }
 
+        modelAndView.addObject("blogDetailPv", pvCount);
         modelAndView.addObject("blogDetail", blogDetail);
         modelAndView.addObject("replyDetail", replyDetailList);
         modelAndView.setViewName("show_blog_detail");
