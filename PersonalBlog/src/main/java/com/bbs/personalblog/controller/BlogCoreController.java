@@ -36,9 +36,6 @@ public class BlogCoreController {
     @Autowired
     private IBlogCoreService iBlogCoreService;
 
-    @Resource
-    private JedisPool jedisPool;
-
     @RequestMapping(value = "/home.do", method = RequestMethod.GET)
     public ModelAndView showHome(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
@@ -52,8 +49,15 @@ public class BlogCoreController {
         }
         logger.info("翻到第" + nextPage + "页");
 
-        //第一部分 最热博文(后期改)  分页操作放在业务层处理
+        //第一部分 根据浏览量来评选最热文章  分页操作放在业务层处理
         PageInfo<BlogListPv> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.sendStatus);
+        Collections.sort(pageInfo.getList(), new Comparator<BlogListPv>() {
+            @Override
+            public int compare(BlogListPv o1, BlogListPv o2) {
+                //降序
+                return o2.getBlogPv() - o1.getBlogPv();
+            }
+        });
 
         if (pageInfo.getPages() < 6) {
             startPage = 1;
@@ -138,20 +142,16 @@ public class BlogCoreController {
         ModelAndView modelAndView = new ModelAndView();
         logger.info("选择博客id:" + blogId);
 
-        int pvCount = 0;
-        Jedis jedis = JedisUtil.getJedis(jedisPool);
-        pvCount = jedis.get(blogId) == null ? 0 : Integer.parseInt(jedis.get(blogId));
-        pvCount += 1;
-        jedis.set(blogId, String.valueOf(pvCount));
+        //访问量 + 文章详情
+        Map<String, Object> map = iBlogCoreService.showBlogDetail(blogId);
 
-        BlogDetail blogDetail = iBlogCoreService.showBlogDetail(blogId);
         List<ReplyDetail> replyDetailList = iBlogCoreService.showReplyDetail(blogId);
         for (ReplyDetail replyDetail : replyDetailList) {
             logger.info("回复信息：" + replyDetail.getReplyAuthorName() + ";内容：" + replyDetail.getReplyContent());
         }
 
-        modelAndView.addObject("blogDetailPv", pvCount);
-        modelAndView.addObject("blogDetail", blogDetail);
+        modelAndView.addObject("blogDetailPv", map.get("pvCount"));
+        modelAndView.addObject("blogDetail", map.get("blogDetail"));
         modelAndView.addObject("replyDetail", replyDetailList);
         modelAndView.setViewName("show_blog_detail");
         return modelAndView;

@@ -61,7 +61,7 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
     public PageInfo<BlogListPv> showBlogList(int nextPage, int status) {
 
         //redis放在这里操作
-        Jedis jedis = JedisUtil.getJedis(jedisPool);
+        JedisUtil jedisUtil = JedisUtil.getInstance();
 
         //将分页操作移到业务层
         PageHelper.startPage(nextPage, 10);
@@ -81,7 +81,8 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
             blogListPv.setBlogPicUrl(blogList.get(i).getBlogPicUrl());
             blogListPv.setBlogAuthorId(blogList.get(i).getBlogAuthorId());
             blogListPv.setBlogAuthorName(blogList.get(i).getBlogAuthorName());
-            int pv = jedis.get(blogList.get(i).getBlogId()) == null ? 0 : Integer.parseInt(jedis.get(blogList.get(i).getBlogId()));
+            //给jedisUtil传一个jedisPool的实例，避免工具类中获取不到实例
+            int pv = jedisUtil.get(jedisPool, blogList.get(i).getBlogId()) == null ? 0 : Integer.parseInt(jedisUtil.get(jedisPool, blogList.get(i).getBlogId()));
             blogListPv.setBlogPv(pv);
             blogListPvList.add(blogListPv);
         }
@@ -92,11 +93,20 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
     }
 
     @Override
-    public BlogDetail showBlogDetail(String blogId) {
+    public Map<String, Object> showBlogDetail(String blogId) {
+        Map<String, Object> map = new HashMap<>();
+
+        JedisUtil jedisUtil = JedisUtil.getInstance();
+        //给jedisUtil传一个jedisPool的实例，避免工具类中获取不到实例
+        int pvCount = jedisUtil.get(jedisPool, blogId) == null ? 0 : Integer.parseInt(jedisUtil.get(jedisPool, blogId));
+        pvCount += 1;
+        jedisUtil.set(jedisPool, blogId, String.valueOf(pvCount));
 
         BlogDetail blogDetail = iBlogCoreDao.showBlogDetail(blogId);
 
-        return blogDetail;
+        map.put("pvCount", pvCount);
+        map.put("blogDetail", blogDetail);
+        return map;
     }
 
     @Override
