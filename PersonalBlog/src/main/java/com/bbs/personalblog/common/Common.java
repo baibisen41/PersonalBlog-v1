@@ -15,4 +15,7 @@ public interface Common {
 
     public final static int tempStatus = 2;
 
+    //final url
+    public final static String newsUrl = "https://news.cnblogs.com/";
+
 }

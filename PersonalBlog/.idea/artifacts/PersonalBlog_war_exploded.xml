@@ -34,6 +34,10 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-oxm:4.3.10.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context-support:4.3.10.RELEASE" />
           <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.25" />
+          <element id="library" level="project" name="Maven: org.quartz-scheduler:quartz:2.3.0" />
+          <element id="library" level="project" name="Maven: com.mchange:c3p0:0.9.5.2" />
+          <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.11" />
+          <element id="library" level="project" name="Maven: com.zaxxer:HikariCP-java6:2.3.13" />
           <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.9.2" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.6.3" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.6.3" />

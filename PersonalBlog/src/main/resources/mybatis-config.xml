@@ -74,4 +74,21 @@
             <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice"/>
         </aop:config>-->
 
+    <!-- quartz配置文件 start -->
+    <!-- 定义调用对象 -->
+    <bean id="quartzJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="spiderTask"/>
+        <property name="targetMethod" value="startSpiderHandler"/>
+    </bean>
+    <!-- 定义触发时间 -->
+    <bean id="myTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="quartzJob"/>
+        <property name="cronExpression" value="*/5 * * * * ?"/>
+    </bean>
+    <!-- 总管理类 -->
+    <bean id="scheduleJob" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers" ref="myTrigger"/>
+    </bean>
+    <!-- quartz配置文件 end -->
+
 </beans>

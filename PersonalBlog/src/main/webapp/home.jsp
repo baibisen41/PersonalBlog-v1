@@ -50,7 +50,7 @@
                         </i> RSS订阅
                     </a></li>
                 </ul>
-                爱学习 爱分享
+                （一只不甘平庸的程序猿）
             </div>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -73,7 +73,8 @@
                     <li><a data-cont="主页" title="主页" href="<%=request.getContextPath()%>/home.do">主页</a></li>
                     <li><a data-cont="技术分享页" title="技术分享页" href="<%=request.getContextPath()%>/showBlogList.do">技术分享</a>
                     </li>
-                    <li><a data-cont="资讯头条页" title="资讯头条页" href="list.html">资讯头条</a></li>
+                    <li><a data-cont="资讯头条页" title="资讯头条页"
+                           href="<%=request.getContextPath()%>/show_news_list.jsp">资讯头条</a></li>
                     <li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>
                     <li><a data-cont="生活点滴页" title="生活点滴页" href="show.html">生活点滴</a></li>
                     <li><a data-cont="资源共享页" title="资源共享页" href="show.html">资源共享</a></li>
@@ -147,10 +148,11 @@
                     </header>
                     <p class="meta">
                         <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
-                        <span class="views"><i class="glyphicon glyphicon-eye-open"></i> ${blog.blogPv}</span> <a class="comment"
-                                                                                                       href="##comment"
-                                                                                                       title="评论"
-                                                                                                       target="_blank"><i
+                        <span class="views"><i class="glyphicon glyphicon-eye-open"></i> ${blog.blogPv}</span> <a
+                            class="comment"
+                            href="##comment"
+                            title="评论"
+                            target="_blank"><i
                             class="glyphicon glyphicon-comment"></i> 4</a>
                     </p>
                     <p class="note">${blog.blogSimpleContent}</p>
@@ -237,7 +239,7 @@
             </div>
         </div>
         <div class="widget widget_hot">
-            <h3>今日资讯</h3>
+            <h3>今日快讯</h3>
             <ul>
                 <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#"><span class="thumbnail">
 				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg"
