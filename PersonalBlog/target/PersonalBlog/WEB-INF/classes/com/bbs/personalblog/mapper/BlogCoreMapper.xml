@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bbs.personalblog.dao.IBlogCoreDao">
 
-    <resultMap id="ListResultMap" type="com.bbs.personalblog.model.BlogList">
+    <resultMap id="ListResultMap" type="com.bbs.personalblog.model.BlogListPv">
         <result column="b_show_id" property="blogId" jdbcType="VARCHAR"/>
         <result column="b_show_title" property="blogTitle" jdbcType="VARCHAR"/>
         <result column="b_show_label" property="blogLabel" jdbcType="VARCHAR"/>
@@ -11,6 +11,7 @@
         <result column="b_pic_url" property="blogPicUrl" jdbcType="VARCHAR"/>
         <result column="user_id" property="blogAuthorId" jdbcType="INTEGER"/>
         <result column="user_name" property="blogAuthorName" jdbcType="VARCHAR"/>
+        <result column="p_show_count" property="blogPv" jdbcType="INTEGER"/>
     </resultMap>
 
     <resultMap id="BlogDetailResultMap" type="com.bbs.personalblog.model.BlogDetail">
@@ -22,6 +23,7 @@
         <result column="user_name" property="blogAuthorName" jdbcType="VARCHAR"/>
         <result column="b_full_content" property="blogDetailContent" jdbcType="VARCHAR"/>
         <result column="b_pic_url" property="blogPicUrl" jdbcType="VARCHAR"/>
+        <result column="p_show_count" property="blogPv" jdbcType="INTEGER"/>
     </resultMap>
 
     <resultMap id="ReplyDetailResultMap" type="com.bbs.personalblog.model.ReplyDetail">
@@ -81,24 +83,24 @@
 
     <!--博客列表-->
     <select id="showBlogList" resultMap="ListResultMap">
-        SELECT
-    	b.b_show_id,
-	    b.b_show_title,
-	    b.b_show_label,
-	    b.b_show_time,
-	    b.b_simple_content,
-	    b.b_pic_url,
-	    b.b_author_id,
-	    u.user_name
+	    SELECT
+        b.b_show_id,
+        b.b_show_title,
+        b.b_show_label,
+        b.b_show_time,
+        b.b_simple_content,
+        b.b_pic_url,
+        b.b_author_id,
+        u.user_name,
+        p.p_show_count
         FROM
-	    blog_show_table b
+        blog_show_table b
         RIGHT JOIN user_table u ON b.b_author_id = u.user_id
+        RIGHT JOIN pv_show_table p ON b.b_show_id = p.b_show_id
         WHERE
-	    b.b_send_flag = #{status,jdbcType=INTEGER}
-	    ORDER BY
-	    b.b_show_time
-	    DESC
-
+        b.b_send_flag = #{status,jdbcType=INTEGER}
+        ORDER BY
+        b.b_show_time DESC
     </select>
 
     <!--博客详情-->
@@ -111,13 +113,22 @@
         b.b_full_content,
         b.b_pic_url,
         b.b_author_id,
-        u.user_name
+        u.user_name,
+        p.p_show_count
         FROM
             blog_show_table b
         RIGHT JOIN user_table u ON b.b_author_id = u.user_id
+        RIGHT JOIN pv_show_table p ON b.b_show_id = p.b_show_id
         WHERE
             b.b_show_id = #{blogId,jdbcType=VARCHAR}
     </select>
+
+    <!--博客访问量增长-->
+    <update id="increaseBlogPv" parameterType="java.lang.String">
+        update pv_show_table
+        set p_show_count=p_show_count+1
+        where b_show_id = #{id,jdbcType=VARCHAR}
+    </update>
 
     <!--评论详情-->
     <select id="showReplyDetail" resultMap="ReplyDetailResultMap">

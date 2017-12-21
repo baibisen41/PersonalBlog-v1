@@ -74,7 +74,7 @@
                     <li><a data-cont="技术分享页" title="技术分享页" href="<%=request.getContextPath()%>/showBlogList.do">技术分享</a>
                     </li>
                     <li><a data-cont="资讯头条页" title="资讯头条页"
-                           href="<%=request.getContextPath()%>/show_news_list.jsp">资讯头条</a></li>
+                           href="<%=request.getContextPath()%>/news.do">资讯头条</a></li>
                     <li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>
                     <li><a data-cont="生活点滴页" title="生活点滴页" href="show.html">生活点滴</a></li>
                     <li><a data-cont="资源共享页" title="资源共享页" href="show.html">资源共享</a></li>
@@ -147,7 +147,7 @@
                         </h2>
                     </header>
                     <p class="meta">
-                        <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
+                        <time class="time"><i class="glyphicon glyphicon-time"></i> ${blog.blogTime}</time>
                         <span class="views"><i class="glyphicon glyphicon-eye-open"></i> ${blog.blogPv}</span> <a
                             class="comment"
                             href="##comment"

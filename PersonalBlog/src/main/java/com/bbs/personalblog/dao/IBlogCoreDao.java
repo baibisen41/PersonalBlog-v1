@@ -16,7 +16,9 @@ public interface IBlogCoreDao {
 
     public abstract int insertReplyDetail(Reply reply);
 
-    public abstract List<BlogList> showBlogList(int status);
+    public abstract int increaseBlogPv(String id);
+
+    public abstract List<BlogListPv> showBlogList(int status);
 
     public abstract BlogDetail showBlogDetail(String blogId);
 

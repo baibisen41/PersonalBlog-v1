@@ -72,7 +72,7 @@
                     <li><a data-cont="主页" title="主页" href="<%=request.getContextPath()%>/home.do">主页</a></li>
                     <li><a data-cont="技术分享页" title="技术分享页" href="<%=request.getContextPath()%>/showBlogList.do">技术分享</a>
                     </li>
-                    <li><a data-cont="资讯头条页" title="资讯头条页" href="list.html">资讯头条</a></li>
+                    <li><a data-cont="资讯头条页" title="资讯头条页" href="<%=request.getContextPath()%>/news.do">资讯头条</a></li>
                     <li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>
                     <li><a data-cont="生活点滴页" title="生活点滴页" href="show.html">生活点滴</a></li>
                     <li><a data-cont="资源共享页" title="资源共享页" href="show.html">资源共享</a></li>
@@ -89,48 +89,36 @@
             <div class="title">
                 <h3 style="line-height: 1.3">最新发布</h3>
             </div>
-            <%--            <c:forEach var="blog" items="${blogList}">
-                            <article class="excerpt excerpt-1"><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）"
-                                                                  target="_blank"><img
-                                    class="thumb" data-original="images/message_pic.jpg" src="images/message_pic.jpg"
-                                    alt="用DTcms做一个独立博客网站（响应式模板）" style="display: inline;"></a>
-                                <header><a class="cat" href="#" title="MZ-NetBlog主题">${blog.blogLabel}<i></i></a>
-                                    <h2><a href="<%=request.getContextPath()%>/showBlogDetail.do?id=${blog.blogId}"
-                                           title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">${blog.blogTitle}</a></h2>
-                                </header>
-                                <p class="meta">
-                                    <time class="time"><i class="glyphicon glyphicon-time"></i>${blog.blogTime}</time>
-                                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> ${blog.blogPv}</span> <a class="comment"
-                                                                                                                   href="##comment"
-                                                                                                                   title="评论"
-                                                                                                                   target="_blank"><i
-                                        class="glyphicon glyphicon-comment"></i> 4</a></p>
-                                <p class="note">${blog.blogSimpleContent}</p>
-                            </article>
-                        </c:forEach>--%>
-
-            <article class="excerpt excerpt-2"><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank"><img
-                    class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg"
-                    alt="用DTcms做一个独立博客网站（响应式模板）" style="display: inline;"></a>
-                <header>
-                    <h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">用DTcms做一个独立博客网站（响应式模板）</a></h2>
-                </header>
-                <p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms
-                    V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p><br>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i>发布于：2016-10-14</time>
-                </p>
-            </article>
+            <c:forEach var="news" items="${newsList}">
+                <article class="excerpt excerpt-1"><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）"
+                                                      target="_blank"><img
+                        class="thumb" data-original="images/message_pic.jpg" src="images/message_pic.jpg"
+                        alt="用DTcms做一个独立博客网站（响应式模板）" style="display: inline;"></a>
+                    <header><a class="cat" href="#" title="MZ-NetBlog主题">来自 ${news.newsFrom}<i></i></a>
+                        <h2><a href="<%=request.getContextPath()%>/showBlogDetail.do?id=${blog.blogId}"
+                               title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">${news.newsTitle}</a></h2>
+                    </header>
+                    <p class="meta">
+                        <time class="time"><i class="glyphicon glyphicon-time"></i>${news.newsTime}</time>
+                        <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 10</span> <a
+                            class="comment"
+                            href="##comment"
+                            title="评论"
+                            target="_blank"><i
+                            class="glyphicon glyphicon-comment"></i> 4</a></p>
+                    <p class="note">${news.newsSummary}</p>
+                </article>
+            </c:forEach>
 
             <%--  分页  --%>
             <c:if test="${totalPages > 1}">
                 <div class="pagination" style="background: transparent">
                     <ul>
                         <li>
-                            <a href="${pageContext.request.contextPath}/showBlogList.do?pagenum=1">首页</a>
+                            <a href="${pageContext.request.contextPath}/news.do?pagenum=1">首页</a>
                         </li>
                         <li class="prev-page"><a
-                                href="${pageContext.request.contextPath}/showBlogList.do?pagenum=${nextPages - 1}">上一页</a>
+                                href="${pageContext.request.contextPath}/news.do?pagenum=${nextPages - 1}">上一页</a>
                         </li>
                         <c:forEach var="pageIndex" begin="${startPage}" end="${endPage}">
                             <c:choose>
@@ -139,7 +127,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/showBlogList.do?pagenum=${pageIndex}">${pageIndex}</a>
+                                        <a href="${pageContext.request.contextPath}/news.do?pagenum=${pageIndex}">${pageIndex}</a>
                                     </li>
                                 </c:otherwise>
                             </c:choose>
@@ -147,11 +135,11 @@
 
                         <c:if test="${nextPages != totalPages}">
                             <li class="next-page"><a
-                                    href="${pageContext.request.contextPath}/showBlogList.do?pagenum=${nextPages+1}">下一页</a>
+                                    href="${pageContext.request.contextPath}/news.do?pagenum=${nextPages+1}">下一页</a>
                             </li>
                         </c:if>
                         <li>
-                            <a href="${pageContext.request.contextPath}/showBlogList.do?pagenum=${endPage}">末页</a>
+                            <a href="${pageContext.request.contextPath}/news.do?pagenum=${endPage}">末页</a>
                         </li>
                         <li>
                             <a>共${totalPages}页</a>
@@ -280,4 +268,3 @@
 <script src="js/scripts.js"></script>
 </body>
 </html>
-

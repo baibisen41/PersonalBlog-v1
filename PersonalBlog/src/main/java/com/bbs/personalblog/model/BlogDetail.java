@@ -13,6 +13,7 @@ public class BlogDetail {
     private String blogAuthorName;
     private String blogDetailContent;
     private String blogPicUrl;
+    private int blogPv;
 
     public String getBlogLabel() {
         return blogLabel;
@@ -78,4 +79,11 @@ public class BlogDetail {
         this.blogDetailContent = blogDetailContent;
     }
 
+    public int getBlogPv() {
+        return blogPv;
+    }
+
+    public void setBlogPv(int blogPv) {
+        this.blogPv = blogPv;
+    }
 }

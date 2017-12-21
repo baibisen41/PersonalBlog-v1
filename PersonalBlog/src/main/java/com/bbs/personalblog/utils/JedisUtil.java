@@ -90,5 +90,25 @@ public class JedisUtil {
             close(jedis);
         }
     }
+
+    public void del(JedisPool jedisPool, String key) {
+        Jedis jedis = null;
+        try {
+            jedis = getJedis(jedisPool);
+            if (jedis != null) {
+                jedis.del(key);
+            } else {
+                logger.error("del opt connection null error!");
+            }
+        } catch (JedisConnectionException e) {
+            if (jedis != null) {
+                jedis.close();
+                jedis = null;
+            }
+            logger.error("set connect error:", e);
+        } finally {
+            close(jedis);
+        }
+    }
 }
 

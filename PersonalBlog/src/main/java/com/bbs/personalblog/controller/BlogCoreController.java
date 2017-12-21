@@ -51,13 +51,6 @@ public class BlogCoreController {
 
         //第一部分 根据浏览量来评选最热文章  分页操作放在业务层处理
         PageInfo<BlogListPv> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.sendStatus);
-        Collections.sort(pageInfo.getList(), new Comparator<BlogListPv>() {
-            @Override
-            public int compare(BlogListPv o1, BlogListPv o2) {
-                //降序
-                return o2.getBlogPv() - o1.getBlogPv();
-            }
-        });
 
         if (pageInfo.getPages() < 6) {
             startPage = 1;
@@ -78,6 +71,7 @@ public class BlogCoreController {
 
         //第四部分 小功能---前台完成
 
+        logger.info("总页数：" + pageInfo.getPages());
         modelAndView.addObject("startPage", startPage);
         modelAndView.addObject("endPage", endPage);
         modelAndView.addObject("blogList", pageInfo.getList());
@@ -150,7 +144,7 @@ public class BlogCoreController {
             logger.info("回复信息：" + replyDetail.getReplyAuthorName() + ";内容：" + replyDetail.getReplyContent());
         }
 
-        modelAndView.addObject("blogDetailPv", map.get("pvCount"));
+//        modelAndView.addObject("blogDetailPv", map.get("pvCount"));
         modelAndView.addObject("blogDetail", map.get("blogDetail"));
         modelAndView.addObject("replyDetail", replyDetailList);
         modelAndView.setViewName("show_blog_detail");
@@ -218,4 +212,5 @@ public class BlogCoreController {
 
         return "redirect:/showBlogDetail.do?id=" + getBlogId;
     }
+
 }
