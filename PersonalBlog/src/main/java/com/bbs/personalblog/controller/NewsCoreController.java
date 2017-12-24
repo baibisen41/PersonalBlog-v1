@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by 大森 on 2017/12/9.
@@ -38,34 +39,21 @@ public class NewsCoreController {
     @RequestMapping(value = "/news.do", method = RequestMethod.GET)
     public ModelAndView getNewsList(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        String page = request.getParameter("pagenum");
-        int nextPage, startPage, endPage;
+        String req = request.getParameter("type");
+        List<News> newsList = null;
+        if (StringUtils.isEmpty(req)) {
+            newsList = service.showNewsList(0);
+        } else {
+            int newsType = Integer.parseInt(req);
 
-        if (StringUtils.isEmpty(page)) {
-            nextPage = 1;
-        } else {
-            nextPage = Integer.parseInt(page);
-        }
-        logger.info("翻到第" + nextPage + "页");
-        PageInfo<News> pageInfo = service.showNewsList(nextPage);
-        if (pageInfo.getPages() < 6) {
-            startPage = 1;
-            endPage = pageInfo.getPages();
-        } else {
-            if (nextPage > 3) {
-                startPage = pageInfo.getPageNum() - 3;
-                endPage = pageInfo.getPageNum() + 3 > pageInfo.getPages() ? pageInfo.getPages() : pageInfo.getPageNum() + 3;
-            } else {
-                startPage = 1;
-                endPage = pageInfo.getPageNum() + 4;
+            if (newsType == 0) {
+                newsList = service.showNewsList(newsType);
+            } else if (newsType == 1) {
+                newsList = service.showNewsList(newsType);
             }
         }
 
-        modelAndView.addObject("startPage", startPage);
-        modelAndView.addObject("endPage", endPage);
-        modelAndView.addObject("newsList", pageInfo.getList());
-        modelAndView.addObject("totalPages", pageInfo.getPages());
-        modelAndView.addObject("nextPages", pageInfo.getPageNum());
+        modelAndView.addObject("newsList", newsList);
         modelAndView.setViewName("show_news_list");
         return modelAndView;
     }

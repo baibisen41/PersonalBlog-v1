@@ -36,7 +36,7 @@ public class BlogCoreController {
     @Autowired
     private IBlogCoreService iBlogCoreService;
 
-    @RequestMapping(value = "/home.do", method = RequestMethod.GET)
+/*    @RequestMapping(value = "/home.do", method = RequestMethod.GET)
     public ModelAndView showHome(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         String page = request.getParameter("pagenum");
@@ -49,7 +49,13 @@ public class BlogCoreController {
         }
         logger.info("翻到第" + nextPage + "页");
 
-        //第一部分 根据浏览量来评选最热文章  分页操作放在业务层处理
+        */
+
+    /**
+     * 主页的博客列表通过pv来进行排序
+     * 目前的想法是在mybatis写两个显示方法
+     * 一个通过pv给主页排序，一个通过时间给博客列表排序
+     *//*
         PageInfo<BlogListPv> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.sendStatus);
 
         if (pageInfo.getPages() < 6) {
@@ -79,7 +85,7 @@ public class BlogCoreController {
         modelAndView.addObject("nextPages", pageInfo.getPageNum());
         modelAndView.setViewName("home");
         return modelAndView;
-    }
+    }*/
 
     //博客列表
     @RequestMapping(value = "/showBlogList.do", method = RequestMethod.GET)
@@ -97,7 +103,7 @@ public class BlogCoreController {
         logger.info("翻到第" + nextPage + "页");
 
         //拉取全部发布的博客 1->发布；2->草稿
-        PageInfo<BlogListPv> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.sendStatus);
+        PageInfo<BlogListPv> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.blogListFrom, Common.sendStatus);
 
         if (pageInfo.getPages() < 6) {
             startPage = 1;

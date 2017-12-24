@@ -73,7 +73,7 @@
                     <li><a data-cont="技术分享页" title="技术分享页" href="<%=request.getContextPath()%>/showBlogList.do">技术分享</a>
                     </li>
                     <li><a data-cont="资讯头条页" title="资讯头条页" href="<%=request.getContextPath()%>/news.do">资讯头条</a></li>
-                    <li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>
+                    <%--<li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>--%>
                     <li><a data-cont="生活点滴页" title="生活点滴页" href="show.html">生活点滴</a></li>
                     <li><a data-cont="资源共享页" title="资源共享页" href="show.html">资源共享</a></li>
                     <li><a data-cont="留言板页" title="留言板页" href="show.html">留言板</a></li>
@@ -87,7 +87,11 @@
     <div class="content-wrap">
         <div class="content">
             <div class="title">
-                <h3 style="line-height: 1.3">最新发布</h3>
+                <h3 style="line-height: 1.3">
+                    <a href="<%=request.getContextPath()%>/news.do?type=0">最新发布 </a>
+                    |
+                    <a href="<%=request.getContextPath()%>/news.do?type=1"> 热门资讯</a>
+                </h3>
             </div>
             <c:forEach var="news" items="${newsList}">
                 <article class="excerpt excerpt-1"><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）"

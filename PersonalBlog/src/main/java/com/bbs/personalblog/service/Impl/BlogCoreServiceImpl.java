@@ -59,7 +59,7 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
     }
 
     @Override
-    public PageInfo<BlogListPv> showBlogList(int nextPage, int status) {
+    public PageInfo<BlogListPv> showBlogList(int nextPage, int from, int status) {
 
         //redis放在这里操作
         JedisUtil jedisUtil = JedisUtil.getInstance();
@@ -67,7 +67,7 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
         //将分页操作移到业务层
         PageHelper.startPage(nextPage, 3);
 
-        List<BlogListPv> showBlogList = iBlogCoreDao.showBlogList(status);
+        List<BlogListPv> showBlogList = iBlogCoreDao.showBlogList(from, status);
         Collections.sort(showBlogList, new Comparator<BlogListPv>() {
             @Override
             public int compare(BlogListPv o1, BlogListPv o2) {

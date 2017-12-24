@@ -83,7 +83,7 @@
 
     <!--博客列表-->
     <select id="showBlogList" resultMap="ListResultMap">
-	    SELECT
+        SELECT
         b.b_show_id,
         b.b_show_title,
         b.b_show_label,
@@ -99,8 +99,14 @@
         RIGHT JOIN pv_show_table p ON b.b_show_id = p.b_show_id
         WHERE
         b.b_send_flag = #{status,jdbcType=INTEGER}
-        ORDER BY
-        b.b_show_time DESC
+        <if test="from == 0">
+            ORDER BY
+            p.p_show_count DESC
+        </if>
+        <if test="from == 1">
+            ORDER BY
+            b.b_show_time DESC
+        </if>
     </select>
 
     <!--博客详情-->

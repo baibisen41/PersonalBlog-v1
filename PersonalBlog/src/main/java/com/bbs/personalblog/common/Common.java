@@ -15,7 +15,26 @@ public interface Common {
 
     public final static int tempStatus = 2;
 
-    //final url
+    /**
+     * 爬虫url
+     */
     public final static String newsUrl = "https://news.cnblogs.com/";
+
+    public final static String newsHotUrl = "https://news.cnblogs.com/n/digg";
+
+    /**
+     * 拉取全部文章来源标识
+     */
+    public final static int homeFrom = 0;
+
+    public final static int blogListFrom = 1;
+
+    /**
+     * 资讯头条页标识
+     */
+    public final static int newsNew = 0;
+
+    public final static int newsHot = 1;
+
 
 }

@@ -1,6 +1,7 @@
 package com.bbs.personalblog.dao;
 
 import com.bbs.personalblog.model.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface IBlogCoreDao {
 
     public abstract int increaseBlogPv(String id);
 
-    public abstract List<BlogListPv> showBlogList(int status);
+    public abstract List<BlogListPv> showBlogList(@Param("from") int from, @Param("status") int status);
 
     public abstract BlogDetail showBlogDetail(String blogId);
 
