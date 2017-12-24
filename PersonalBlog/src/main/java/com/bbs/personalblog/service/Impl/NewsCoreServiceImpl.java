@@ -29,6 +29,33 @@ public class NewsCoreServiceImpl implements INewsCoreService {
 
     private Logger logger = LoggerFactory.getLogger(NewsCoreServiceImpl.class);
 
+
+    @Override
+    public List<News> hotNewsList() {
+        JedisUtil jedisUtil = JedisUtil.getInstance();
+        String newsJson = null;
+
+        if (jedisUtil.get(jedisPool, "hotNewsKey") != null) {
+            newsJson = jedisUtil.get(jedisPool, "hotNewsKey");
+            logger.info(newsJson);
+        } else {
+            //如果主页短资讯为空，则去取出全部热门资讯，获取前10条存储
+
+        }
+
+        List<News> list = new ArrayList<>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            list = objectMapper.readValue(newsJson, new TypeReference<List<News>>() {
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("资讯页有：" + list.size() + "条");
+
+        return null;
+    }
+
     @Override
     public List<News> showNewsList(int newsType) {
         JedisUtil jedisUtil = JedisUtil.getInstance();

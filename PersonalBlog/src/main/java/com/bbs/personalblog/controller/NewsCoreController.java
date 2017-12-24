@@ -26,10 +26,20 @@ public class NewsCoreController {
 
     private Logger logger = LoggerFactory.getLogger(NewsCoreController.class);
 
-    //此处精选资讯
+    /**
+     * 热门资讯单独读取前十条存起来，使用率高单独存放
+     * 每次侧边栏读取热门资讯都读这里->跳转推荐资讯页
+     *
+     * @return
+     */
     @RequestMapping(value = "/shortNews.do", method = RequestMethod.GET)
     public ModelAndView getShortNews() {
         ModelAndView modelAndView = new ModelAndView();
+
+        List<News> shortNewsList = service.hotNewsList();
+
+        modelAndView.addObject("hotNewsList", shortNewsList);
+        modelAndView.setViewName("side_common_bar");
         return modelAndView;
     }
 
