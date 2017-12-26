@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface INewsCoreService {
 
-    public abstract List<News> hotNewsList();
+    public abstract List<News> topNewsList();
 
     public abstract List<News> showNewsList(int newsType);
 

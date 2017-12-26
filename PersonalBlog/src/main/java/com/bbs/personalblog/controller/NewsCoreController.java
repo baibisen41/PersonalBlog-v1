@@ -36,7 +36,7 @@ public class NewsCoreController {
     public ModelAndView getShortNews() {
         ModelAndView modelAndView = new ModelAndView();
 
-        List<News> shortNewsList = service.hotNewsList();
+        List<News> shortNewsList = service.topNewsList();
 
         modelAndView.addObject("hotNewsList", shortNewsList);
         modelAndView.setViewName("side_common_bar");

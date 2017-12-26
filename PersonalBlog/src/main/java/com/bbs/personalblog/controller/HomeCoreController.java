@@ -2,7 +2,9 @@ package com.bbs.personalblog.controller;
 
 import com.bbs.personalblog.common.Common;
 import com.bbs.personalblog.model.BlogListPv;
+import com.bbs.personalblog.model.News;
 import com.bbs.personalblog.service.IBlogCoreService;
+import com.bbs.personalblog.service.INewsCoreService;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by 大森 on 2017/12/22.
@@ -25,6 +28,9 @@ public class HomeCoreController {
 
     @Autowired
     private IBlogCoreService iBlogCoreService;
+
+    @Autowired
+    private INewsCoreService iNewsCoreService;
 
     @RequestMapping(value = "/home.do", method = RequestMethod.GET)
     public ModelAndView showHome(HttpServletRequest request) {
@@ -60,7 +66,8 @@ public class HomeCoreController {
         }
 
         //第二部分 每日资讯
-
+        List<News> shortNewsList = iNewsCoreService.topNewsList();
+        logger.info("推荐资讯数量：" + shortNewsList.size());
         //第三部分站长统计
 
         //第四部分 小功能---前台完成
@@ -71,6 +78,7 @@ public class HomeCoreController {
         modelAndView.addObject("blogList", pageInfo.getList());
         modelAndView.addObject("totalPages", pageInfo.getPages());
         modelAndView.addObject("nextPages", pageInfo.getPageNum());
+        modelAndView.addObject("hotNewsList", shortNewsList);
         modelAndView.setViewName("home");
         return modelAndView;
     }

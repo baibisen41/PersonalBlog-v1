@@ -31,12 +31,12 @@ public class NewsCoreServiceImpl implements INewsCoreService {
 
 
     @Override
-    public List<News> hotNewsList() {
+    public List<News> topNewsList() {
         JedisUtil jedisUtil = JedisUtil.getInstance();
         String newsJson = null;
 
-        if (jedisUtil.get(jedisPool, "hotNewsKey") != null) {
-            newsJson = jedisUtil.get(jedisPool, "hotNewsKey");
+        if (jedisUtil.get(jedisPool, "topNewsKey") != null) {
+            newsJson = jedisUtil.get(jedisPool, "topNewsKey");
             logger.info(newsJson);
         } else {
             //如果主页短资讯为空，则去取出全部热门资讯，获取前10条存储
@@ -53,7 +53,7 @@ public class NewsCoreServiceImpl implements INewsCoreService {
         }
         System.out.println("资讯页有：" + list.size() + "条");
 
-        return null;
+        return list;
     }
 
     @Override

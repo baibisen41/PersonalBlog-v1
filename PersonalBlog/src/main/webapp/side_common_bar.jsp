@@ -8,6 +8,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
+
+<%--<script src="js/jquery-2.1.4.min.js"></script>
+<script>
+    $.ajax({
+        url: "<%=request.getContextPath()%>/shortNews.do",
+        type: "get",
+        dataType: 'json',
+        success: function (data) {
+            var html = "";
+            var topNewsFrame = $(".topNewsFrame");
+            for (var i = 0; i < data.length; i++) {
+                html += "    <li><a href=\"" + "${pageContext.request.contextPath}/getblogdetail.html?blogid=" + data[i].blogid + "\"\n" +
+                    "    title=\"" + data[i].newsTitle + "\">\n" +
+                    "        <span class=\"thumbnail\"><img class=\"thumb\" src=\"" + "images/message_pic.jpg" + "\" alt=\"" + data[i].title + "\" width=\"100px\"></span>\n" +
+                    "        <span class=\"text\">" + data[i].title + "</span><span class=\"muted\">" + "100" + "</span>\n" +
+                    "    <span class=\"muted\">" + "100" + "浏览</span></a></li>\n";
+            }
+            topNewsFrame.append(html);
+        },
+        error: function (e) {
+        }
+    });
+</script>--%>
+
+
 <aside class="sidebar">
     <div class="fixed">
         <div class="widget widget-tabs">
@@ -52,73 +77,20 @@
     <div class="widget widget_hot">
         <h3>大家都在看</h3>
         <ul>
-            <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#"><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg"
-                     alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i
-                    class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-            <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#"><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg"
-                     alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i
-                    class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-            <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#"><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg"
-                     alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i
-                    class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-            <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#"><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg"
-                     alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i
-                    class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-            <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#"><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg"
-                     alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i
-                    class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-            <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#"><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg"
-                     alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i
-                    class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-            <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#"><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg"
-                     alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i
-                    class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-            <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#"><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg"
-                     alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i
-                    class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
+            <c:forEach var="topNews" items="${topNewsList}">
+                <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#"><span class="thumbnail">
+                            <img class="thumb" data-original="images/201610181739277776.jpg"
+                                 src="images/201610181739277776.jpg"
+                                 alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;">
+                        </span><span class="text">${topNews.newsTitle}</span><span class="muted"><i
+                        class="glyphicon glyphicon-time"></i>
+                            ${topNews.newsTime}
+                        </span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
+            </c:forEach>
 
         </ul>
     </div>
-    <%--        <div class="widget widget_sentence">
-                <a href="#" target="_blank" rel="nofollow" title="专业网站建设">
-                    <img style="width: 100%" src="images/201610241224221511.jpg" alt="专业网站建设"></a>
-            </div>--%>
-    <%--        <div class="widget widget_sentence">
-                <a href="#" target="_blank" rel="nofollow" title="MZ-NetBlog主题">
-                    <img style="width: 100%" src="images/ad.jpg" alt="MZ-NetBlog主题"></a>
-            </div>--%>
+
     <div class="widget widget_sentence">
         <h3>友情链接</h3>
         <div class="widget-sentence-link">
