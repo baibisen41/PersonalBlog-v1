@@ -1,18 +1,15 @@
-package com.bbs.personalblog.service;
+package com.bbs.personalblog.dao;
 
 import com.bbs.personalblog.model.News;
-import com.github.pagehelper.PageInfo;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
- * Created by 大森 on 2017/12/9.
+ * Created by 大森 on 2017/12/27.
  */
-public interface INewsCoreService {
-
-/*    public abstract List<News> topNewsList();
-
-    public abstract List<News> showNewsList(int newsType);*/
+@Repository
+public interface INewsCoreDao {
 
     public abstract int insertHotNewsList(List<News> newsList);
 

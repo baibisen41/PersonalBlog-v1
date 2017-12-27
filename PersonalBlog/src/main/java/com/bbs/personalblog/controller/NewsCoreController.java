@@ -36,7 +36,7 @@ public class NewsCoreController {
     public ModelAndView getShortNews() {
         ModelAndView modelAndView = new ModelAndView();
 
-        List<News> shortNewsList = service.topNewsList();
+        List<News> shortNewsList = service.showTopNewsList();
 
         modelAndView.addObject("hotNewsList", shortNewsList);
         modelAndView.setViewName("side_common_bar");
@@ -51,7 +51,7 @@ public class NewsCoreController {
         ModelAndView modelAndView = new ModelAndView();
         String req = request.getParameter("type");
         List<News> newsList = null;
-        if (StringUtils.isEmpty(req)) {
+/*        if (StringUtils.isEmpty(req)) {
             newsList = service.showNewsList(0);
         } else {
             int newsType = Integer.parseInt(req);
@@ -61,7 +61,7 @@ public class NewsCoreController {
             } else if (newsType == 1) {
                 newsList = service.showNewsList(newsType);
             }
-        }
+        }*/
 
         modelAndView.addObject("newsList", newsList);
         modelAndView.setViewName("show_news_list");

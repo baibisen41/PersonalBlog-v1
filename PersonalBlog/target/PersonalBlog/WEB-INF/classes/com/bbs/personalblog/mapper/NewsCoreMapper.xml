@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bbs.personalblog.dao.INewsCoreDao">
+
+    <resultMap id="ListResultMap" type="com.bbs.personalblog.model.News">
+        <result column="news_show_title" property="newsTitle" jdbcType="VARCHAR"/>
+        <result column="news_show_time" property="newsTime" jdbcType="VARCHAR"/>
+        <result column="news_show_from" property="newsFrom" jdbcType="VARCHAR"/>
+        <result column="news_show_summary" property="newsSummary" jdbcType="VARCHAR"/>
+        <result column="news_show_content" property="newsContent" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insertHotNewsList" parameterType="java.util.List">
+
+        INSERT INTO news_hot_table (
+        news_show_title,
+        news_show_time,
+        news_show_from,
+        news_show_summary,
+        news_show_content)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.newsTitle,jdbcType=VARCHAR},
+            #{item.newsTime,jdbcType=VARCHAR},
+            #{item.newsFrom,jdbcType=VARCHAR},
+            #{item.newsSummary,jdbcType=VARCHAR},
+            #{item.newsContent,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <insert id="insertNewNewsList" parameterType="com.bbs.personalblog.model.News">
+
+        INSERT INTO news_new_table (
+        news_show_title,
+        news_show_time,
+        news_show_from,
+        news_show_summary,
+        news_show_content)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.newsTitle,jdbcType=VARCHAR},
+            #{item.newsTime,jdbcType=VARCHAR},
+            #{item.newsFrom,jdbcType=VARCHAR},
+            #{item.newsSummary,jdbcType=VARCHAR},
+            #{item.newsContent,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+</mapper>

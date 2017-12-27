@@ -1,6 +1,7 @@
 package com.bbs.personalblog.service.Impl;
 
 import com.bbs.personalblog.common.Common;
+import com.bbs.personalblog.dao.INewsCoreDao;
 import com.bbs.personalblog.model.News;
 import com.bbs.personalblog.service.INewsCoreService;
 import com.bbs.personalblog.utils.JedisUtil;
@@ -10,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.JedisPool;
 
@@ -27,10 +29,51 @@ public class NewsCoreServiceImpl implements INewsCoreService {
     @Resource
     private JedisPool jedisPool;
 
+    @Autowired
+    private INewsCoreDao iNewsCoreDao;
+
     private Logger logger = LoggerFactory.getLogger(NewsCoreServiceImpl.class);
 
+    @Override
+    public int insertHotNewsList(List<News> newsList) {
+
+        logger.info("hotNews插入数量:" + newsList.size());
+        int result = iNewsCoreDao.insertHotNewsList(newsList);
+        logger.info("插入结果:" + result);
+        return result;
+    }
 
     @Override
+    public int insertNewNewsList(List<News> newsList) {
+
+        logger.info("hotNews插入数量:" + newsList.size());
+        int result = iNewsCoreDao.insertNewNewsList(newsList);
+        logger.info("插入结果:" + result);
+        return result;
+    }
+
+    @Override
+    public List<News> showTopNewsList() {
+        List<News> list = iNewsCoreDao.showTopNewsList();
+        return list;
+    }
+
+    @Override
+    public List<News> showHotNewsList() {
+        List<News> list = new ArrayList<>();
+        list = iNewsCoreDao.showHotNewsList();
+        return list;
+    }
+
+    @Override
+    public List<News> showNewNewsList() {
+        List<News> list = new ArrayList<>();
+        list = iNewsCoreDao.showNewNewsList();
+        return list;
+    }
+
+
+/*    @Override
     public List<News> topNewsList() {
         JedisUtil jedisUtil = JedisUtil.getInstance();
         String newsJson = null;
@@ -82,5 +125,5 @@ public class NewsCoreServiceImpl implements INewsCoreService {
         System.out.println("资讯页有：" + list.size() + "条");
 
         return list;
-    }
+    }*/
 }

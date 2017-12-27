@@ -2,8 +2,10 @@ package com.bbs.personalblog.Task;
 
 import com.bbs.personalblog.common.Common;
 import com.bbs.personalblog.model.News;
+import com.bbs.personalblog.service.INewsCoreService;
 import com.bbs.personalblog.utils.DateTimeUtil;
 import com.bbs.personalblog.utils.JedisUtil;
+import com.bbs.personalblog.utils.SpecialWordUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jsoup.Jsoup;
@@ -11,6 +13,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import redis.clients.jedis.JedisPool;
@@ -28,6 +31,9 @@ public class SpiderTask {
     private static Logger logger = LoggerFactory.getLogger(SpiderTask.class);
 
     private static volatile boolean isFinish = false;
+
+    @Autowired
+    private INewsCoreService iNewsCoreService;
 
     @Resource
     private JedisPool jedisPool;
@@ -115,8 +121,8 @@ public class SpiderTask {
                 news.setNewsTitle(elementsTitle.get(j).text());
                 news.setNewsTime(elementsTime.get(j).select("span.gray").text());
                 news.setNewsFrom("博客园");
-                news.setNewsSummary(elementsSummary.get(j).text());
-                news.setNewsContent(docContent.select("#news_body").select("p").text());
+                news.setNewsSummary(SpecialWordUtil.filterEmoji(elementsSummary.get(j).text()));
+                news.setNewsContent(SpecialWordUtil.filterEmoji(docContent.select("#news_body").select("p").text()));
                 newsList.add(news);
             }
         }
@@ -162,18 +168,18 @@ public class SpiderTask {
                 news.setNewsTitle(elementsTitle.get(j).text());
                 news.setNewsTime(elementsTime.get(j).select("span.gray").text());
                 news.setNewsFrom("博客园");
-                news.setNewsSummary(elementsSummary.get(j).text());
-                news.setNewsContent(docContent.select("#news_body").select("p").text());
+                news.setNewsSummary(SpecialWordUtil.filterEmoji(elementsSummary.get(j).text()));
+                news.setNewsContent(SpecialWordUtil.filterEmoji(docContent.select("#news_body").select("p").text()));
                 newsList.add(news);
 
-                if (count < 10 && i == 1) {
+/*                if (count < 10 && i == 1) {
                     topNewsList.add(news);
                     count++;
                     logger.error("计数器：" + count);
-                }
+                }*/
             }
         }
-        map.put("topNewsMapKey", topNewsList);
+//        map.put("topNewsMapKey", topNewsList);
         map.put("hotNewsMapKey", newsList);
         return map;
     }
@@ -198,7 +204,7 @@ public class SpiderTask {
             JedisUtil jedisUtil = JedisUtil.getInstance();
 
             if (from == 0) {
-                if (!StringUtils.isEmpty(newsMap.get("newNewsMapKey"))) {
+/*                if (!StringUtils.isEmpty(newsMap.get("newNewsMapKey"))) {
                     String newNewsJson = objectMapper.writeValueAsString(newsMap.get("newNewsMapKey"));
                     logger.info("来自最新资讯的封装jon:" + newNewsJson);
                     logger.error("本次最新资讯总计爬取了：" + newsMap.get("newNewsMapKey").size() + "条");
@@ -206,9 +212,11 @@ public class SpiderTask {
                         jedisUtil.del(jedisPool, "newNewsKey");
                     }
                     jedisUtil.set(jedisPool, "newNewsKey", newNewsJson);
-                }
+                }*/
+                int result = iNewsCoreService.insertNewNewsList(newsMap.get("newNewsMapKey"));
+                logger.info("SpiderTask插入最新资讯结果：" + result);
             } else {
-                if (!StringUtils.isEmpty(newsMap.get("topNewsMapKey"))) {
+/*                if (!StringUtils.isEmpty(newsMap.get("topNewsMapKey"))) {
                     String topNewsJson = objectMapper.writeValueAsString(newsMap.get("topNewsMapKey"));
                     logger.info("来自热门资讯前10条的封装jon:" + topNewsJson);
                     logger.error("本次总计爬取了：" + newsMap.get("topNewsMapKey").size() + "条");
@@ -230,9 +238,11 @@ public class SpiderTask {
                     jedisUtil.set(jedisPool, "hotNewsKey", hotNewsJson);
                 } else {
                     logger.info("爬取数据为空");
-                }
+                }*/
+                int result = iNewsCoreService.insertHotNewsList(newsMap.get("hotNewsMapKey"));
+                logger.info("SpiderTask插入最新资讯结果：" + result);
             }
-        } catch (JsonProcessingException e) {
+        } catch (Throwable e) {
             e.printStackTrace();
             saveResultCode = 1;
         }
