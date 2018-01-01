@@ -1,5 +1,6 @@
 package com.bbs.personalblog.utils;
 
+import com.bbs.personalblog.common.Common;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,7 +71,7 @@ public class DateTimeUtil {
         if (getSpiderTime < needStopTime) {
             isNeedStop = true;
         }
-        logger.info("spider time is:" + getDateHandler(getSpiderTime) + "；should stop time is:" + getDateHandler(needStopTime));
+        logger.error("spider time is:" + getDateHandler(getSpiderTime) + "；should stop time is:" + getDateHandler(needStopTime));
         return isNeedStop;
     }
 
@@ -84,9 +85,9 @@ public class DateTimeUtil {
         Calendar calendar = Calendar.getInstance();
         int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
         int diffDay = currentDay - 7;
-        logger.info("相差天数：" + diffDay);
+        logger.error("相差天数：" + diffDay);
         int currentYear = calendar.get(Calendar.YEAR);
-        int currentMonth = calendar.get(Calendar.MONTH);
+        int currentMonth = calendar.get(Calendar.MONTH) + 1;
 
         if (currentMonth == 3) {
             //判断闰年
@@ -102,7 +103,7 @@ public class DateTimeUtil {
         } else {
             revertTime = currentYear + "-" + (currentMonth - 1) + "-" + (31 + diffDay) + " 00:00";
         }
-        logger.info("目标日期：" + revertTime);
+        logger.error("目标日期：" + revertTime);
         needStopTime = revertHandler(revertTime);
 
         return needStopTime;

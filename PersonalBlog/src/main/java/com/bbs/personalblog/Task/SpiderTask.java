@@ -32,13 +32,19 @@ public class SpiderTask {
 
     private static volatile boolean isFinish = false;
 
+    //爬虫每次爬取的最后时间
+    private String spiderHotMark;
+    private String spiderNewMark;
+    private boolean isNewFirst = true;
+    private boolean isHotFirst = true;
+
     @Autowired
     private INewsCoreService iNewsCoreService;
 
     @Resource
     private JedisPool jedisPool;
 
-    private Document getDocument(String url) {
+    protected Document getDocument(String url) {
         Document document = null;
         try {
             document = Jsoup.connect(url).timeout(10000).get();
@@ -60,8 +66,10 @@ public class SpiderTask {
         int i = saveContentHandler(0, spiderNewHandler());
         logger.info("存储结果：" + i);
 
+
         int j = saveContentHandler(1, spiderHotHandler());
-        logger.info("存储结果：" + i);
+        logger.info("存储结果：" + j);
+
 
 /*        new Thread(new Runnable() {
             @Override
@@ -78,6 +86,51 @@ public class SpiderTask {
         }).start();*/
     }
 
+    private boolean isNeedStop(int from, String getTime) {
+        logger.info("isNeedStop getTime:" + getTime);
+        boolean isNeedStop = false;
+        JedisUtil jedisUtil = JedisUtil.getInstance();
+        if (from == Common.newsNew) {
+            logger.info("from:" + Common.newsNew + "; redis time:" + jedisUtil.get(jedisPool, "newMark"));
+            if (getTime.equals(jedisUtil.get(jedisPool, "newMark"))) {
+                isNeedStop = true;
+            }
+        } else if (from == Common.newsHot) {
+            logger.info("from:" + Common.newsHot + "; redis time:" + jedisUtil.get(jedisPool, "hotMark"));
+            if (getTime.equals(jedisUtil.get(jedisPool, "hotMark"))) {
+                isNeedStop = true;
+            }
+        }
+        return isNeedStop;
+    }
+
+    private boolean isSaveFinish(int from, String getTime) {
+        logger.info("isSaveFinish time:" + getTime);
+        boolean isSaveOk = true;
+        try {
+            JedisUtil jedisUtil = JedisUtil.getInstance();
+            if (from == Common.newsNew) {
+                if (!StringUtils.isEmpty(jedisUtil.get(jedisPool, "newMark"))) {
+                    logger.info("newMark:" + jedisUtil.get(jedisPool, "newMark"));
+                    jedisUtil.del(jedisPool, "newMark");
+                }
+                jedisUtil.set(jedisPool, "newMark", getTime);
+            } else if (from == Common.newsHot) {
+                if (!StringUtils.isEmpty(jedisUtil.get(jedisPool, "hotMark"))) {
+                    logger.info("hotMark:" + jedisUtil.get(jedisPool, "hotMark"));
+                    jedisUtil.del(jedisPool, "hotMark");
+                }
+                jedisUtil.set(jedisPool, "hotMark", getTime);
+            } else {
+                isSaveOk = false;
+            }
+        } catch (Throwable e) {
+            e.printStackTrace();
+            isSaveOk = false;
+        }
+        return isSaveOk;
+    }
+
     private Map<String, List<News>> spiderNewHandler() {
         Map<String, List<News>> map = new HashMap<>();
         List<News> newsList = new ArrayList<>();
@@ -85,7 +138,7 @@ public class SpiderTask {
 
         //获取全部文章 共计3000条，下一页根据规律仿写url
         ok:
-        for (int i = 1; i <= 17; i++) {
+        for (int i = 1; i <= 20; i++) {
             Document document = null;
             if (i == 1) {
                 document = getDocument(Common.newsUrl);
@@ -104,8 +157,14 @@ public class SpiderTask {
             for (int j = 0; j < elementsTitle.size(); j++) {
                 news = new News();
                 String time = elementsTime.get(j).select("span.gray").text();
-//                if (DateTimeUtil.revertHandler("2017-12-13 00:00") > DateTimeUtil.revertHandler(time))
-//                    break ok;//只获取本周的新鲜资讯
+
+                if (isNewFirst) {
+                    boolean result = isSaveFinish(Common.newsNew, time);
+                    logger.error("from:" + Common.newsNew + ";mark结果:" + result);
+                    isNewFirst = false;
+                }
+
+                //重构前爬虫时间判断
                 if (DateTimeUtil.isNeedStopSpiderHandler(time))
                     break ok;
 
@@ -126,6 +185,7 @@ public class SpiderTask {
                 newsList.add(news);
             }
         }
+        logger.error("本次爬取最新资讯数量：" + newsList.size());
         map.put("newNewsMapKey", newsList);
         return map;
     }
@@ -138,6 +198,7 @@ public class SpiderTask {
         int count = 0;
 
         //获取全部文章 共计3000条，下一页根据规律仿写url
+        ok:
         for (int i = 1; i <= 27; i++) {
             Document document = null;
             if (i == 1) {
@@ -159,11 +220,20 @@ public class SpiderTask {
                 //获取内容详情链接，再次访问该链接，并获取内容详情
                 String contentUrl = elementsContent.get(j).getElementsByTag("a").attr("href");
                 Document docContent = getDocument(Common.newsUrl + contentUrl);
+                String time = elementsTime.get(j).select("span.gray").text();
+
+                if (isHotFirst) {
+                    logger.error("first time:" + time);
+                    boolean result = isSaveFinish(Common.newsHot, time);
+                    logger.error("from:" + Common.newsHot + "mark结果：" + result);
+                    isHotFirst = false;
+                }
 
 /*                logger.info((j + 1) + "标题：" + elementsTitle.get(j).text());
                 logger.info((j + 1) + "时间：" + elementsTime.get(j).select("span.gray").text());
                 logger.info((j + 1) + "描述：" + elementsSummary.get(j).text());
                 logger.info((j + 1) + "内容：" + docContent.select("#news_body").select("p").text() + "\n");*/
+//                String time = elementsTime.get(j).select("span.gray").text();
 
                 news.setNewsTitle(elementsTitle.get(j).text());
                 news.setNewsTime(elementsTime.get(j).select("span.gray").text());
@@ -172,79 +242,40 @@ public class SpiderTask {
                 news.setNewsContent(SpecialWordUtil.filterEmoji(docContent.select("#news_body").select("p").text()));
                 newsList.add(news);
 
-/*                if (count < 10 && i == 1) {
-                    topNewsList.add(news);
-                    count++;
-                    logger.error("计数器：" + count);
-                }*/
             }
         }
 //        map.put("topNewsMapKey", topNewsList);
+        logger.error("本次爬取热门新闻数量：" + newsList.size());
         map.put("hotNewsMapKey", newsList);
         return map;
     }
 
     /**
-     * 思路：获取主页侧边10条热门资讯
-     * 截取爬取的全部热门资讯的前10条，通过Map封装两部分，分别是Top10和全部热门
-     * 在封装成json及存储在redis前进行判断，是来自热门资讯还是最新资讯
-     * 判断完成后再进行封装和存储
-     * <p>
-     * 业务写的有点繁琐，不清晰，后期优化
+     * 后期加入时间标识，防止存入重复的数据
      *
      * @param from
      * @param newsMap
      * @return
      */
     private synchronized int saveContentHandler(int from, Map<String, List<News>> newsMap) {
-        int saveResultCode = 0;
+        int saveResultCode = 200;
         try {
             logger.error("本次处理来自：" + from + " 的请求");
             ObjectMapper objectMapper = new ObjectMapper();
             JedisUtil jedisUtil = JedisUtil.getInstance();
 
             if (from == 0) {
-/*                if (!StringUtils.isEmpty(newsMap.get("newNewsMapKey"))) {
-                    String newNewsJson = objectMapper.writeValueAsString(newsMap.get("newNewsMapKey"));
-                    logger.info("来自最新资讯的封装jon:" + newNewsJson);
-                    logger.error("本次最新资讯总计爬取了：" + newsMap.get("newNewsMapKey").size() + "条");
-                    if (!StringUtils.isEmpty(jedisUtil.get(jedisPool, "newNewsKey"))) {
-                        jedisUtil.del(jedisPool, "newNewsKey");
-                    }
-                    jedisUtil.set(jedisPool, "newNewsKey", newNewsJson);
-                }*/
+
                 int result = iNewsCoreService.insertNewNewsList(newsMap.get("newNewsMapKey"));
                 logger.info("SpiderTask插入最新资讯结果：" + result);
             } else {
-/*                if (!StringUtils.isEmpty(newsMap.get("topNewsMapKey"))) {
-                    String topNewsJson = objectMapper.writeValueAsString(newsMap.get("topNewsMapKey"));
-                    logger.info("来自热门资讯前10条的封装jon:" + topNewsJson);
-                    logger.error("本次总计爬取了：" + newsMap.get("topNewsMapKey").size() + "条");
-                    if (!StringUtils.isEmpty(jedisUtil.get(jedisPool, "topNewsKey"))) {
-                        jedisUtil.del(jedisPool, "topNewsKey");
-                    }
-                    jedisUtil.set(jedisPool, "topNewsKey", topNewsJson);
-                } else {
-                    logger.info("爬取数据为空");
-                }
 
-                if (!StringUtils.isEmpty(newsMap.get("hotNewsMapKey"))) {
-                    String hotNewsJson = objectMapper.writeValueAsString(newsMap.get("hotNewsMapKey"));
-                    logger.info("来自热门资讯全部的封装jon:" + hotNewsJson);
-                    logger.error("本次总计爬取了：" + newsMap.get("hotNewsMapKey").size() + "条");
-                    if (!StringUtils.isEmpty(jedisUtil.get(jedisPool, "hotNewsKey"))) {
-                        jedisUtil.del(jedisPool, "hotNewsKey");
-                    }
-                    jedisUtil.set(jedisPool, "hotNewsKey", hotNewsJson);
-                } else {
-                    logger.info("爬取数据为空");
-                }*/
                 int result = iNewsCoreService.insertHotNewsList(newsMap.get("hotNewsMapKey"));
                 logger.info("SpiderTask插入最新资讯结果：" + result);
             }
         } catch (Throwable e) {
             e.printStackTrace();
-            saveResultCode = 1;
+            saveResultCode = 500;
         }
         return saveResultCode;
     }

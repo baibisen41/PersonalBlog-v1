@@ -28,7 +28,7 @@
         </foreach>
     </insert>
 
-    <insert id="insertNewNewsList" parameterType="com.bbs.personalblog.model.News">
+    <insert id="insertNewNewsList" parameterType="java.util.List">
 
         INSERT INTO news_new_table (
         news_show_title,

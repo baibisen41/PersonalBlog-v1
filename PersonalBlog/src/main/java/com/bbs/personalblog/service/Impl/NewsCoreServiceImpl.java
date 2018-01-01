@@ -48,6 +48,7 @@ public class NewsCoreServiceImpl implements INewsCoreService {
 
         logger.info("hotNews插入数量:" + newsList.size());
         int result = iNewsCoreDao.insertNewNewsList(newsList);
+        logger.info("标识位flag");
         logger.info("插入结果:" + result);
         return result;
     }
