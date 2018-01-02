@@ -139,7 +139,7 @@
                             </li>
                         </c:if>
                         <li>
-                            <a href="${pageContext.request.contextPath}/showBlogList.do?pagenum=${endPage}">末页</a>
+                            <a href="${pageContext.request.contextPath}/showBlogList.do?pagenum=${totalPages}">末页</a>
                         </li>
                         <li>
                             <a>共${totalPages}页</a>

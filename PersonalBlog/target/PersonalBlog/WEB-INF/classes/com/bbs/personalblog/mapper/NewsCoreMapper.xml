@@ -46,4 +46,38 @@
         </foreach>
     </insert>
 
+    <select id="showTopNewsList" resultMap="ListResultMap">
+        SELECT
+        n.news_show_title,
+        n.news_show_time,
+        n.news_show_from,
+        n.news_show_summary,
+        n.news_show_content
+        FROM
+        news_hot_table n
+        LIMIT 0,10
+    </select>
+
+    <select id="showHotNewsList" resultMap="ListResultMap">
+        SELECT
+        n.news_show_title,
+        n.news_show_time,
+        n.news_show_from,
+        n.news_show_summary,
+        n.news_show_content
+        FROM
+        news_hot_table n
+    </select>
+
+    <select id="showNewNewsList" resultMap="ListResultMap">
+        SELECT
+        n.news_show_title,
+        n.news_show_time,
+        n.news_show_from,
+        n.news_show_summary,
+        n.news_show_content
+        FROM
+        news_new_table n
+    </select>
+
 </mapper>

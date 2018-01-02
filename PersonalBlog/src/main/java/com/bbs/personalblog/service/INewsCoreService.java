@@ -20,8 +20,8 @@ public interface INewsCoreService {
 
     public abstract List<News> showTopNewsList();
 
-    public abstract List<News> showHotNewsList();
+    public abstract PageInfo<News> showHotNewsList(int nextPage);
 
-    public abstract List<News> showNewNewsList();
+    public abstract PageInfo<News> showNewNewsList(int nextPage);
 
 }

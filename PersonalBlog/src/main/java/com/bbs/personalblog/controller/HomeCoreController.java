@@ -67,9 +67,9 @@ public class HomeCoreController {
         }
 
         //第二部分 每日资讯
-//        List<News> shortNewsList = iNewsCoreService.showTopNewsList();
-//        logger.info("推荐资讯数量：" + shortNewsList.size());
-        List<News> shortNewsList = new ArrayList<>();
+        List<News> shortNewsList = iNewsCoreService.showTopNewsList();
+        logger.info("推荐资讯数量：" + shortNewsList.size());
+//        List<News> shortNewsList = new ArrayList<>();
         //第三部分站长统计
 
         //第四部分 小功能---前台完成

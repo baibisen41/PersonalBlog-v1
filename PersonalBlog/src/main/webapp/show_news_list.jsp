@@ -88,7 +88,7 @@
         <div class="content">
             <div class="title">
                 <h3 style="line-height: 1.3">
-                    <a href="<%=request.getContextPath()%>/news.do?type=0">最新发布 </a>
+                    <a href="<%=request.getContextPath()%>/news.do">最新发布 </a>
                     |
                     <a href="<%=request.getContextPath()%>/news.do?type=1"> 热门资讯</a>
                 </h3>
@@ -115,41 +115,81 @@
             </c:forEach>
 
             <%--  分页  --%>
-            <c:if test="${totalPages > 1}">
-                <div class="pagination" style="background: transparent">
-                    <ul>
-                        <li>
-                            <a href="${pageContext.request.contextPath}/news.do?pagenum=1">首页</a>
-                        </li>
-                        <li class="prev-page"><a
-                                href="${pageContext.request.contextPath}/news.do?pagenum=${nextPages - 1}">上一页</a>
-                        </li>
-                        <c:forEach var="pageIndex" begin="${startPage}" end="${endPage}">
-                            <c:choose>
-                                <c:when test="${pageIndex == nextPages}">
-                                    <li class="active"><span> ${pageIndex} </span></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/news.do?pagenum=${pageIndex}">${pageIndex}</a>
-                                    </li>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-
-                        <c:if test="${nextPages != totalPages}">
-                            <li class="next-page"><a
-                                    href="${pageContext.request.contextPath}/news.do?pagenum=${nextPages+1}">下一页</a>
+            <c:if test="${newsUrl == 0}">
+                <c:if test="${totalPages > 1}">
+                    <div class="pagination" style="background: transparent">
+                        <ul>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/news.do?pagenum=1">首页</a>
                             </li>
-                        </c:if>
-                        <li>
-                            <a href="${pageContext.request.contextPath}/news.do?pagenum=${endPage}">末页</a>
-                        </li>
-                        <li>
-                            <a>共${totalPages}页</a>
-                        </li>
-                    </ul>
-                </div>
+                            <li class="prev-page"><a
+                                    href="${pageContext.request.contextPath}/news.do?pagenum=${nextPages - 1}">上一页</a>
+                            </li>
+                            <c:forEach var="pageIndex" begin="${startPage}" end="${endPage}">
+                                <c:choose>
+                                    <c:when test="${pageIndex == nextPages}">
+                                        <li class="active"><span> ${pageIndex} </span></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/news.do?pagenum=${pageIndex}">${pageIndex}</a>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+
+                            <c:if test="${nextPages != totalPages}">
+                                <li class="next-page"><a
+                                        href="${pageContext.request.contextPath}/news.do?pagenum=${nextPages+1}">下一页</a>
+                                </li>
+                            </c:if>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/news.do?pagenum=${totalPages}">末页</a>
+                            </li>
+                            <li>
+                                <a>共${totalPages}页</a>
+                            </li>
+                        </ul>
+                    </div>
+                </c:if>
+            </c:if>
+            <c:if test="${newsUrl == 1}">
+                <c:if test="${totalPages > 1}">
+                    <div class="pagination" style="background: transparent">
+                        <ul>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/news.do?type=1&pagenum=1">首页</a>
+                            </li>
+                            <li class="prev-page"><a
+                                    href="${pageContext.request.contextPath}/news.do?type=1&pagenum=${nextPages - 1}">上一页</a>
+                            </li>
+                            <c:forEach var="pageIndex" begin="${startPage}" end="${endPage}">
+                                <c:choose>
+                                    <c:when test="${pageIndex == nextPages}">
+                                        <li class="active"><span> ${pageIndex} </span></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/news.do?type=1&pagenum=${pageIndex}">${pageIndex}</a>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+
+                            <c:if test="${nextPages != totalPages}">
+                                <li class="next-page"><a
+                                        href="${pageContext.request.contextPath}/news.do?type=1&pagenum=${nextPages+1}">下一页</a>
+                                </li>
+                            </c:if>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/news.do?type=1&pagenum=${endPage}">末页</a>
+                            </li>
+                            <li>
+                                <a>共${totalPages}页</a>
+                            </li>
+                        </ul>
+                    </div>
+                </c:if>
             </c:if>
         </div>
     </div>

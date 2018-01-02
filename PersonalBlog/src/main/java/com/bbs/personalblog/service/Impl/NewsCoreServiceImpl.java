@@ -60,17 +60,25 @@ public class NewsCoreServiceImpl implements INewsCoreService {
     }
 
     @Override
-    public List<News> showHotNewsList() {
-        List<News> list = new ArrayList<>();
-        list = iNewsCoreDao.showHotNewsList();
-        return list;
+    public PageInfo<News> showHotNewsList(int nextPage) {
+
+        PageHelper.startPage(nextPage, 20);
+
+        List<News> list = iNewsCoreDao.showHotNewsList();
+
+        PageInfo<News> pageInfo = new PageInfo<News>(list);
+        return pageInfo;
     }
 
     @Override
-    public List<News> showNewNewsList() {
-        List<News> list = new ArrayList<>();
-        list = iNewsCoreDao.showNewNewsList();
-        return list;
+    public PageInfo<News> showNewNewsList(int nextPage) {
+
+        PageHelper.startPage(nextPage, 20);
+
+        List<News> list = iNewsCoreDao.showNewNewsList();
+
+        PageInfo<News> pageInfo = new PageInfo<News>(list);
+        return pageInfo;
     }
 
 
