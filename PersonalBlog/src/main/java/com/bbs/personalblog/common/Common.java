@@ -30,6 +30,13 @@ public interface Common {
     public final static int blogListFrom = 1;
 
     /**
+     * 各页面拉取信息标识：home  blog  life
+     */
+    public final static int blogListFromId = 0;
+
+    public final static int lifeListFromId = 2;
+
+    /**
      * 资讯头条页标识
      */
     public final static int newsNew = 0;

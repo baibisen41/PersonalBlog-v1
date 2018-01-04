@@ -14,6 +14,7 @@ public class BlogListPv {
     private int blogAuthorId;
     private String blogAuthorName;
     private int blogPv;
+    private int blogFromId;
 
     public String getBlogId() {
         return blogId;
@@ -85,5 +86,13 @@ public class BlogListPv {
 
     public void setBlogPv(int blogPv) {
         this.blogPv = blogPv;
+    }
+
+    public int getBlogFromId() {
+        return blogFromId;
+    }
+
+    public void setBlogFromId(int blogFromId) {
+        this.blogFromId = blogFromId;
     }
 }

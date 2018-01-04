@@ -19,10 +19,12 @@ public interface IBlogCoreDao {
 
     public abstract int increaseBlogPv(String id);
 
-    public abstract List<BlogListPv> showBlogList(@Param("from") int from, @Param("status") int status);
+    public abstract List<BlogListPv> showBlogList(@Param("from") int from, @Param("status") int status, @Param("fromId") int fromId);
 
     public abstract BlogDetail showBlogDetail(String blogId);
 
     public abstract List<ReplyDetail> showReplyDetail(String blogId);
+
+    public abstract List<BlogListPv> showLifeList(@Param("fromId") int fromId, @Param("status") int status);
 
 }

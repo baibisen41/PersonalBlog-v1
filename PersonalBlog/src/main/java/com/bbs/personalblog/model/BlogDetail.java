@@ -14,6 +14,7 @@ public class BlogDetail {
     private String blogDetailContent;
     private String blogPicUrl;
     private int blogPv;
+    private int blogFromId;
 
     public String getBlogLabel() {
         return blogLabel;
@@ -85,5 +86,13 @@ public class BlogDetail {
 
     public void setBlogPv(int blogPv) {
         this.blogPv = blogPv;
+    }
+
+    public int getBlogFromId() {
+        return blogFromId;
+    }
+
+    public void setBlogFromId(int blogFromId) {
+        this.blogFromId = blogFromId;
     }
 }

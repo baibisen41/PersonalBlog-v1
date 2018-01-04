@@ -51,7 +51,7 @@ public class HomeCoreController {
          * 目前的想法是在mybatis写两个显示方法
          * 一个通过pv给主页排序，一个通过时间给博客列表排序
          */
-        PageInfo<BlogListPv> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.homeFrom, Common.sendStatus);
+        PageInfo<BlogListPv> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.homeFrom, Common.sendStatus, Common.blogListFromId);
 
         if (pageInfo.getPages() < 6) {
             startPage = 1;

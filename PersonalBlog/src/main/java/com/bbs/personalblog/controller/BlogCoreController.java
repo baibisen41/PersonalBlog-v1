@@ -103,7 +103,11 @@ public class BlogCoreController {
         logger.info("翻到第" + nextPage + "页");
 
         //拉取全部发布的博客 1->发布；2->草稿
-        PageInfo<BlogListPv> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.blogListFrom, Common.sendStatus);
+        PageInfo<BlogListPv> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.blogListFrom, Common.sendStatus, Common.blogListFromId);
+
+        for (int i = 0; i < pageInfo.getList().size(); i++) {
+            logger.info("get content from:" + pageInfo.getList().get(i).getBlogFromId());
+        }
 
         if (pageInfo.getPages() < 6) {
             startPage = 1;

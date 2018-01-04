@@ -74,7 +74,7 @@
                     </li>
                     <li><a data-cont="资讯头条页" title="资讯头条页" href="<%=request.getContextPath()%>/news.do">资讯头条</a></li>
                     <%--<li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>--%>
-                    <li><a data-cont="生活点滴页" title="生活点滴页" href="show.html">生活点滴</a></li>
+                    <li><a data-cont="生活点滴页" title="生活点滴页" href="<%=request.getContextPath()%>/showLifeList.do">生活点滴</a></li>
                     <li><a data-cont="资源共享页" title="资源共享页" href="show.html">资源共享</a></li>
                     <li><a data-cont="留言板页" title="留言板页" href="show.html">留言板</a></li>
                     <li><a data-cont="关于我页" title="关于我页" href="show.html">关于我</a></li>

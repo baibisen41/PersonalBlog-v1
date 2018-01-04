@@ -15,6 +15,7 @@ public class Blog {
     private String blogPicUrl;
     private String ip;
     private int blogAuthorId;
+    private int blogFromId;
 
     public int getBlogAuthorId() {
         return blogAuthorId;
@@ -94,5 +95,13 @@ public class Blog {
 
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public int getBlogFromId() {
+        return blogFromId;
+    }
+
+    public void setBlogFromId(int blogFromId) {
+        this.blogFromId = blogFromId;
     }
 }

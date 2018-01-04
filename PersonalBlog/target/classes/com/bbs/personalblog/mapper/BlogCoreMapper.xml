@@ -48,7 +48,8 @@
 	    b_send_flag,
 	    b_pic_url,
 	    b_show_ip,
-	    b_author_id)
+	    b_author_id,
+	    b_from_id)
         VALUES
 	  (
 		#{blogId,jdbcType=VARCHAR},
@@ -60,7 +61,8 @@
 		#{sendStatus,jdbcType=INTEGER},
 		#{blogPicUrl,jdbcType=VARCHAR},
 		#{ip,jdbcType=VARCHAR},
-		#{blogAuthorId,jdbcType=INTEGER})
+		#{blogAuthorId,jdbcType=INTEGER},
+		#{blogFromId,jdbcType=INTEGER})
     </insert>
 
     <!--编辑评论-->
@@ -92,13 +94,18 @@
         b.b_pic_url,
         b.b_author_id,
         u.user_name,
-        p.p_show_count
+        p.p_show_count,
+        b.b_from_id
         FROM
         blog_show_table b
         RIGHT JOIN user_table u ON b.b_author_id = u.user_id
         RIGHT JOIN pv_show_table p ON b.b_show_id = p.b_show_id
         WHERE
         b.b_send_flag = #{status,jdbcType=INTEGER}
+        <if test="from == 1">
+            AND
+            b.b_from_id = #{fromId,jdbcType=INTEGER}
+        </if>
         <if test="from == 0">
             ORDER BY
             p.p_show_count DESC
@@ -107,6 +114,31 @@
             ORDER BY
             b.b_show_time DESC
         </if>
+    </select>
+
+    <!--生活点滴列表-->
+    <select id="showLifeList" resultMap="ListResultMap">
+        SELECT
+        b.b_show_id,
+        b.b_show_title,
+        b.b_show_label,
+        b.b_show_time,
+        b.b_simple_content,
+        b.b_pic_url,
+        b.b_author_id,
+        u.user_name,
+        p.p_show_count,
+        b.b_from_id
+        FROM
+        blog_show_table b
+        RIGHT JOIN user_table u ON b.b_author_id = u.user_id
+        RIGHT JOIN pv_show_table p ON b.b_show_id = p.b_show_id
+        WHERE
+        b.b_send_flag = #{status,jdbcType=INTEGER}
+        AND
+        b.b_from_id = #{fromId,jdbcType=INTEGER}
+        ORDER BY
+        b.b_show_time DESC
     </select>
 
     <!--博客详情-->
@@ -120,7 +152,8 @@
         b.b_pic_url,
         b.b_author_id,
         u.user_name,
-        p.p_show_count
+        p.p_show_count,
+        b.b_from_id
         FROM
             blog_show_table b
         RIGHT JOIN user_table u ON b.b_author_id = u.user_id

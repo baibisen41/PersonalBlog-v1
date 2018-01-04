@@ -15,10 +15,12 @@ public interface IBlogCoreService {
 
     public abstract Map<String, String> insertReplyDetail(Reply reply);
 
-    public abstract PageInfo<BlogListPv> showBlogList(int nextPage, int form, int status);
+    public abstract PageInfo<BlogListPv> showBlogList(int nextPage, int form, int status, int fromId);
 
     public abstract Map<String, Object> showBlogDetail(String blogId);
 
     public abstract List<ReplyDetail> showReplyDetail(String blogId);
+
+    public abstract PageInfo<BlogListPv> showLifeList(int nextPage, int status);
 
 }

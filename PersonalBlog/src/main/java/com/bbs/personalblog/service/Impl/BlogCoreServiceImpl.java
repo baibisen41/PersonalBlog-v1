@@ -1,5 +1,6 @@
 package com.bbs.personalblog.service.Impl;
 
+import com.bbs.personalblog.common.Common;
 import com.bbs.personalblog.dao.IBlogCoreDao;
 import com.bbs.personalblog.model.*;
 import com.bbs.personalblog.service.IBlogCoreService;
@@ -59,7 +60,7 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
     }
 
     @Override
-    public PageInfo<BlogListPv> showBlogList(int nextPage, int from, int status) {
+    public PageInfo<BlogListPv> showBlogList(int nextPage, int from, int status, int fromId) {
 
         //redis放在这里操作
         JedisUtil jedisUtil = JedisUtil.getInstance();
@@ -67,14 +68,17 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
         //将分页操作移到业务层
         PageHelper.startPage(nextPage, 3);
 
-        List<BlogListPv> showBlogList = iBlogCoreDao.showBlogList(from, status);
-        Collections.sort(showBlogList, new Comparator<BlogListPv>() {
+        List<BlogListPv> showBlogList = iBlogCoreDao.showBlogList(from, status, fromId);
+        /**
+         * mybatis中进行时间排序
+         */
+/*        Collections.sort(showBlogList, new Comparator<BlogListPv>() {
             @Override
             public int compare(BlogListPv o1, BlogListPv o2) {
                 //降序
                 return o2.getBlogPv() - o1.getBlogPv();
             }
-        });
+        });*/
 
 /*        //从redis中获取访问量
         List<BlogListPv> blogListPvList = new ArrayList<>();
@@ -140,5 +144,15 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
         List<ReplyDetail> replyDetailList = iBlogCoreDao.showReplyDetail(blogId);
 
         return replyDetailList;
+    }
+
+    @Override
+    public PageInfo<BlogListPv> showLifeList(int nextPage, int status) {
+
+        PageHelper.startPage(nextPage, 3);
+        List<BlogListPv> blogList = iBlogCoreDao.showLifeList(Common.lifeListFromId, status);
+        PageInfo<BlogListPv> pageInfo = new PageInfo<>(blogList);
+
+        return pageInfo;
     }
 }
