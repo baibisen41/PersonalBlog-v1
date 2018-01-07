@@ -15,6 +15,8 @@ public interface IBlogCoreDao {
 
     public abstract int insertBlogDetail(Blog blog);
 
+    public abstract int insertPV(PV pv);
+
     public abstract int insertReplyDetail(Reply reply);
 
     public abstract int increaseBlogPv(String id);

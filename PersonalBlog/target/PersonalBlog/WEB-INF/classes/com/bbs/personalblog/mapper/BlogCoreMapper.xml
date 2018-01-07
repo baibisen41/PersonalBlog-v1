@@ -65,6 +65,17 @@
 		#{blogFromId,jdbcType=INTEGER})
     </insert>
 
+    <!--注册pv访问量-->
+    <insert id="insertPV" parameterType="com.bbs.personalblog.model.PV">
+        INSERT INTO pv_show_table (
+        b_show_id,
+        p_show_count)
+        VALUES
+        (
+        #{blogId,jdbcType=VARCHAR},
+        #{blogPv,jdbcType=INTEGER})
+    </insert>
+
     <!--编辑评论-->
     <insert id="insertReplyDetail" parameterType="com.bbs.personalblog.model.Reply">
         INSERT INTO reply_show_table (

@@ -13,6 +13,8 @@ public interface IBlogCoreService {
 
     public abstract Map<String, String> insertBlogDetail(Blog blog);
 
+    public abstract Map<String, String> insertPV(PV pv);
+
     public abstract Map<String, String> insertReplyDetail(Reply reply);
 
     public abstract PageInfo<BlogListPv> showBlogList(int nextPage, int form, int status, int fromId);

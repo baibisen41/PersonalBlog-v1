@@ -46,6 +46,20 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
     }
 
     @Override
+    public Map<String, String> insertPV(PV pv) {
+        Map<String, String> map = new HashMap<String, String>();
+        int resultCode = iBlogCoreDao.insertPV(pv);
+        if (resultCode == 1) {
+            logger.info("200");
+            map.put("resultCode", "200");
+        } else {
+            logger.info("500");
+            map.put("resultCode", "500");
+        }
+        return map;
+    }
+
+    @Override
     public Map<String, String> insertReplyDetail(Reply reply) {
         Map<String, String> map = new HashMap<String, String>();
         int resultCode = iBlogCoreDao.insertReplyDetail(reply);

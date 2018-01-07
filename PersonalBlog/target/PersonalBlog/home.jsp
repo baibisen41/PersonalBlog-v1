@@ -76,7 +76,7 @@
                     <li><a data-cont="资讯头条页" title="资讯头条页"
                            href="<%=request.getContextPath()%>/news.do">资讯头条</a></li>
                     <%--<li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>--%>
-                    <li><a data-cont="生活点滴页" title="生活点滴页" href="show.html">生活点滴</a></li>
+                    <li><a data-cont="生活点滴页" title="生活点滴页" href="<%=request.getContextPath()%>/showLifeList.do">生活点滴</a></li>
                     <li><a data-cont="资源共享页" title="资源共享页" href="show.html">资源共享</a></li>
                     <li><a data-cont="留言板页" title="留言板页" href="show.html">留言板</a></li>
                     <li><a data-cont="关于我页" title="关于我页" href="show.html">关于我</a></li>
@@ -197,8 +197,8 @@
             </c:if>
         </div>
     </div>
-    <%--<%@include file="side_common_bar.jsp" %>--%>
-    <aside class="sidebar">
+    <%@include file="side_common_bar.jsp" %>
+<%--    <aside class="sidebar">
         <div class="fixed">
             <div class="widget widget-tabs">
                 <ul class="nav nav-tabs" role="tablist">
@@ -214,8 +214,8 @@
                                     height="70" frameborder="0" marginwidth="0" marginheight="0"
                                     scrolling="no"></iframe>
                         </h2>
-                        <%--<h2>网站运行:
-                            <span id="sitetime">88天 </span></h2>--%>
+                        &lt;%&ndash;<h2>网站运行:
+                            <span id="sitetime">88天 </span></h2>&ndash;%&gt;
                     </div>
                     <div role="tabpanel" class="tab-pane contact" id="contact">
                         <h2>QQ:
@@ -262,7 +262,7 @@
                 <a href="#" title="网站建设" target="_blank">网站建设</a>&nbsp;&nbsp;&nbsp;
             </div>
         </div>
-    </aside>
+    </aside>--%>
 
 </section>
 <footer class="footer">

@@ -28,7 +28,7 @@
 
 <textarea name="blog_content_text" id="blog_content_text" rows="10" cols="20"></textarea><br><br>
 
-<input name="blog_from_id" name="blog_from_id" type="text"/><br><br>
+<input name="blog_from_id" id="blog_from_id" type="text"/><br><br>
 
 <input name="blog_send_button" id="blog_send_button" type="button" onclick="submitBlogEdit()" value="提交"/>
 <input name="blog_temp_button" id="blog_temp_button" type="button" onclick="submitTempEdit()" value="草稿"/>

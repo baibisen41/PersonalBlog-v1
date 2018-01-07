@@ -1,37 +1,14 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 大森
-  Date: 2017/12/24
-  Time: 22:12
+  Date: 2018/1/6
+  Time: 17:42
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
-
-<%--<script src="js/jquery-2.1.4.min.js"></script>
-<script>
-    $.ajax({
-        url: "<%=request.getContextPath()%>/shortNews.do",
-        type: "get",
-        dataType: 'json',
-        success: function (data) {
-            var html = "";
-            var topNewsFrame = $(".topNewsFrame");
-            for (var i = 0; i < data.length; i++) {
-                html += "    <li><a href=\"" + "${pageContext.request.contextPath}/getblogdetail.html?blogid=" + data[i].blogid + "\"\n" +
-                    "    title=\"" + data[i].newsTitle + "\">\n" +
-                    "        <span class=\"thumbnail\"><img class=\"thumb\" src=\"" + "images/message_pic.jpg" + "\" alt=\"" + data[i].title + "\" width=\"100px\"></span>\n" +
-                    "        <span class=\"text\">" + data[i].title + "</span><span class=\"muted\">" + "100" + "</span>\n" +
-                    "    <span class=\"muted\">" + "100" + "浏览</span></a></li>\n";
-            }
-            topNewsFrame.append(html);
-        },
-        error: function (e) {
-        }
-    });
-</script>--%>
-
+<script src="<%=request.getContextPath()%>/js/jquery-2.1.4.min.js"></script>
 
 <aside class="sidebar">
     <div class="fixed">
@@ -76,17 +53,7 @@
     </div>
     <div class="widget widget_hot">
         <h3>大家都在看</h3>
-        <ul>
-            <c:forEach var="topNews" items="${topNewsList}">
-                <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#"><span class="thumbnail">
-                            <img class="thumb" data-original="images/201610181739277776.jpg"
-                                 src="images/201610181739277776.jpg"
-                                 alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;">
-                        </span><span class="text">${topNews.newsTitle}</span><span class="muted"><i
-                        class="glyphicon glyphicon-time"></i>
-                            ${topNews.newsTime}
-                        </span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-            </c:forEach>
+        <ul class="recommend">
 
         </ul>
     </div>
@@ -98,3 +65,29 @@
         </div>
     </div>
 </aside>
+
+<script>
+
+    $.ajax({
+        url: "<%=request.getContextPath()%>/testNews.do",
+        type: "get",
+        dataType: "json",
+        success: function (data) {
+            var html = "";
+            for (var i = 0; i < data.data.length; i++) {
+                html += "<li><a title=\"\" href=\"#\"><span class=\"thumbnail\">"+
+                    "<img class=\"thumb\" src=\"images/message_pic.jpg\" alt=\"\" style=\"display: block;\">"+
+                    "</span><span class=\"text\">"+data.data[i].newsTitle+"</span><span class=\"muted\"><i class=\"glyphicon glyphicon-time\"></i>"+data.data[i].newsTime+"</span>"+
+                    "<span class=\"muted\"><i class=\"glyphicon glyphicon-eye-open\"></i>88</span></a></li>";
+            }
+//                alert("result:" + html);
+//                $("#recommend").html(html);
+            $(".recommend").append(html);
+            }
+            ,
+            error: function (data) {
+
+            }
+        });
+
+</script>

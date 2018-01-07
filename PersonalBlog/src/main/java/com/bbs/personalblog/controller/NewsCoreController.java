@@ -11,10 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 大森 on 2017/12/9.
@@ -40,9 +43,19 @@ public class NewsCoreController {
         List<News> shortNewsList = iNewsCoreService.showTopNewsList();
 
         modelAndView.addObject("hotNewsList", shortNewsList);
-        modelAndView.setViewName("side_common_bar");
+        modelAndView.setViewName("temp_side_bar");
         return modelAndView;
     }
+
+    @RequestMapping("/testNews.do")
+    @ResponseBody
+    public Map<String, Object> testShortNews() {
+        Map<String, Object> map = new HashMap<>();
+        List<News> shortNewsList = iNewsCoreService.showTopNewsList();
+        map.put("data", shortNewsList);
+        return map;
+    }
+
 
     //此处爬 https://news.cnblogs.com/
     @RequestMapping(value = "/news.do", method = RequestMethod.GET)

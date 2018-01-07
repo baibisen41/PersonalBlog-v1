@@ -149,7 +149,8 @@
             </c:if>
         </div>
     </div>
-    <aside class="sidebar">
+    <%@include file="side_common_bar.jsp" %>
+    <%--<aside class="sidebar">
         <div class="fixed">
             <div class="widget widget_search">
                 <form class="navbar-form" action="/Search" method="post">
@@ -170,7 +171,7 @@
                             </li>
                         </c:forEach>
 
-                        <%--                    <li><a href="#list/67/" title="移动统计" draggable="false">移动统计 <span class="badge">1</span></a>
+                        &lt;%&ndash;                    <li><a href="#list/67/" title="移动统计" draggable="false">移动统计 <span class="badge">1</span></a>
                                                 </li>
                                                 <li><a href="#list/256/" title="404" draggable="false">404 <span class="badge">1</span></a></li>
                                                 <li><a href="#list/252/" title="VS2010" draggable="false">VS2010 <span
@@ -182,7 +183,7 @@
                                                 <li><a href="#list/49/" title="循环" draggable="false">循环 <span class="badge">2</span></a></li>
                                                 <li><a href="#list/22/" title="百度统计" draggable="false">百度统计 <span class="badge">2</span></a>
                                                 </li>
-                                                <li><a href="#list/132/" title="sql" draggable="false">sql <span class="badge">6</span></a></li>--%>
+                                                <li><a href="#list/132/" title="sql" draggable="false">sql <span class="badge">6</span></a></li>&ndash;%&gt;
                     </ul>
                 </div>
             </div>
@@ -254,7 +255,7 @@
                 <img style="width: 100%" src="images/201610241224221511.jpg" alt="专业网站建设"></a>
 
         </div>
-    </aside>
+    </aside>--%>
 </section>
 <footer class="footer">
     <div class="container">

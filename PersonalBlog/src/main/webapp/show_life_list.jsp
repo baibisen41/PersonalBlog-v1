@@ -115,10 +115,10 @@
                 <div class="pagination" style="background: transparent">
                     <ul>
                         <li>
-                            <a href="${pageContext.request.contextPath}/showBlogList.do?pagenum=1">首页</a>
+                            <a href="${pageContext.request.contextPath}/showLifeList.do?pagenum=1">首页</a>
                         </li>
                         <li class="prev-page"><a
-                                href="${pageContext.request.contextPath}/showBlogList.do?pagenum=${nextPages - 1}">上一页</a>
+                                href="${pageContext.request.contextPath}/showLifeList.do?pagenum=${nextPages - 1}">上一页</a>
                         </li>
                         <c:forEach var="pageIndex" begin="${startPage}" end="${endPage}">
                             <c:choose>
@@ -127,7 +127,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/showBlogList.do?pagenum=${pageIndex}">${pageIndex}</a>
+                                        <a href="${pageContext.request.contextPath}/showLifeList.do?pagenum=${pageIndex}">${pageIndex}</a>
                                     </li>
                                 </c:otherwise>
                             </c:choose>
@@ -135,11 +135,11 @@
 
                         <c:if test="${nextPages != totalPages}">
                             <li class="next-page"><a
-                                    href="${pageContext.request.contextPath}/showBlogList.do?pagenum=${nextPages+1}">下一页</a>
+                                    href="${pageContext.request.contextPath}/showLifeList.do?pagenum=${nextPages+1}">下一页</a>
                             </li>
                         </c:if>
                         <li>
-                            <a href="${pageContext.request.contextPath}/showBlogList.do?pagenum=${totalPages}">末页</a>
+                            <a href="${pageContext.request.contextPath}/showLifeList.do?pagenum=${totalPages}">末页</a>
                         </li>
                         <li>
                             <a>共${totalPages}页</a>
@@ -149,7 +149,8 @@
             </c:if>
         </div>
     </div>
-    <aside class="sidebar">
+    <%@include file="side_common_bar.jsp" %>
+    <%--<aside class="sidebar">
         <div class="fixed">
             <div class="widget widget_search">
                 <form class="navbar-form" action="/Search" method="post">
@@ -170,7 +171,7 @@
                             </li>
                         </c:forEach>
 
-                        <%--                    <li><a href="#list/67/" title="移动统计" draggable="false">移动统计 <span class="badge">1</span></a>
+                        &lt;%&ndash;                    <li><a href="#list/67/" title="移动统计" draggable="false">移动统计 <span class="badge">1</span></a>
                                                 </li>
                                                 <li><a href="#list/256/" title="404" draggable="false">404 <span class="badge">1</span></a></li>
                                                 <li><a href="#list/252/" title="VS2010" draggable="false">VS2010 <span
@@ -182,7 +183,7 @@
                                                 <li><a href="#list/49/" title="循环" draggable="false">循环 <span class="badge">2</span></a></li>
                                                 <li><a href="#list/22/" title="百度统计" draggable="false">百度统计 <span class="badge">2</span></a>
                                                 </li>
-                                                <li><a href="#list/132/" title="sql" draggable="false">sql <span class="badge">6</span></a></li>--%>
+                                                <li><a href="#list/132/" title="sql" draggable="false">sql <span class="badge">6</span></a></li>&ndash;%&gt;
                     </ul>
                 </div>
             </div>
@@ -254,7 +255,7 @@
                 <img style="width: 100%" src="images/201610241224221511.jpg" alt="专业网站建设"></a>
 
         </div>
-    </aside>
+    </aside>--%>
 </section>
 <footer class="footer">
     <div class="container">

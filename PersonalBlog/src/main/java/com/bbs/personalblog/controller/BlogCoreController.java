@@ -167,11 +167,13 @@ public class BlogCoreController {
     public Map editBlogDetail(HttpServletRequest request, HttpServletResponse response) {
         Map map = new HashMap();
         Blog blog = new Blog();
+        PV pv = new PV();
         String strTitle = request.getParameter("blog_title_text");
         String strLabel = request.getParameter("blog_label_hidden");
         String strContent = request.getParameter("blog_content_text");
         int sendStatus = Integer.parseInt(request.getParameter("status"));
-        logger.info("title=" + strTitle + ";label=" + strLabel + ";content=" + strContent + ";status=" + sendStatus);
+        int fromId = Integer.parseInt(request.getParameter("blog_from_id"));
+        logger.info("title=" + strTitle + ";label=" + strLabel + ";content=" + strContent + ";status=" + sendStatus + ";fromid=" + fromId);
         String strBlogId = KeyIdUtil.getId();
         String strSimpleContent = SimpleContentUtil.getSimpleContent(strContent);
         String strBlogTime = DateTimeUtil.getDateHandler(System.currentTimeMillis());
@@ -188,8 +190,13 @@ public class BlogCoreController {
         blog.setBlogPicUrl(strPicUrl);
         blog.setIp(strIp);
         blog.setBlogAuthorId(2013082401);
+        blog.setBlogFromId(fromId);
         String code = iBlogCoreService.insertBlogDetail(blog).get("resultCode").toString();
         logger.info("返回状态码:" + code);
+
+        pv.setBlogId(strBlogId);
+        String pvCode = iBlogCoreService.insertPV(pv).get("resultCode").toString();
+        logger.info("注册pv返回码：" + pvCode);
 
         if (code.equals(Common.successCode)) {
             if (sendStatus == 1) {
