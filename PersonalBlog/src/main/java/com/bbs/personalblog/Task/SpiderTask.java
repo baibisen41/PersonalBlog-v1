@@ -168,6 +168,9 @@ public class SpiderTask {
                 if (DateTimeUtil.isNeedStopSpiderHandler(time))
                     break ok;
 
+//                if (isNeedStop(Common.newsNew, time))
+//                    break ok;
+
                 //获取内容详情链接，再次访问该链接，并获取内容详情
                 String contentUrl = elementsContent.get(j).getElementsByTag("a").attr("href");
                 Document docContent = getDocument(Common.newsUrl + contentUrl);
@@ -181,7 +184,8 @@ public class SpiderTask {
                 news.setNewsTime(elementsTime.get(j).select("span.gray").text());
                 news.setNewsFrom("博客园");
                 news.setNewsSummary(SpecialWordUtil.filterEmoji(elementsSummary.get(j).text()));
-                news.setNewsContent(SpecialWordUtil.filterEmoji(docContent.select("#news_body").select("p").text()));
+//                news.setNewsContent(SpecialWordUtil.filterEmoji(docContent.select("#news_body").select("p").text()));
+                news.setNewsContent(SpecialWordUtil.filterEmoji(String.valueOf(docContent.getElementById("news_body").select("p"))));
                 newsList.add(news);
             }
         }
@@ -229,6 +233,9 @@ public class SpiderTask {
                     isHotFirst = false;
                 }
 
+//                if (isNeedStop(Common.newsHot, time))
+//                    break ok;
+
 /*                logger.info((j + 1) + "标题：" + elementsTitle.get(j).text());
                 logger.info((j + 1) + "时间：" + elementsTime.get(j).select("span.gray").text());
                 logger.info((j + 1) + "描述：" + elementsSummary.get(j).text());
@@ -239,7 +246,7 @@ public class SpiderTask {
                 news.setNewsTime(elementsTime.get(j).select("span.gray").text());
                 news.setNewsFrom("博客园");
                 news.setNewsSummary(SpecialWordUtil.filterEmoji(elementsSummary.get(j).text()));
-                news.setNewsContent(SpecialWordUtil.filterEmoji(docContent.select("#news_body").select("p").text()));
+                news.setNewsContent(SpecialWordUtil.filterEmoji(String.valueOf(docContent.getElementById("news_body").select("p"))));
                 newsList.add(news);
 
             }

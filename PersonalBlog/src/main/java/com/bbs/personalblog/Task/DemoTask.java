@@ -24,8 +24,8 @@ import java.util.Map;
 @Component
 public class DemoTask {
 
-    @Autowired
-    public INewsCoreService iNewsCoreService;
+//    @Autowired
+//    public INewsCoreService iNewsCoreService;
 
     private static Logger logger = LoggerFactory.getLogger(DemoTask.class);
 
@@ -77,7 +77,9 @@ public class DemoTask {
                 news.setNewsTime(elementsTime.get(j).select("span.gray").text());
                 news.setNewsFrom("博客园");
                 news.setNewsSummary(SpecialWordUtil.filterEmoji(elementsSummary.get(j).text()));
-                news.setNewsContent(SpecialWordUtil.filterEmoji(docContent.select("#news_body").select("p").text()));
+                news.setNewsContent(SpecialWordUtil.filterEmoji(String.valueOf(docContent.getElementById("news_body").select("p"))));
+
+ //               logger.info((j + 1) + "文章内容" + String.valueOf(docContent.getElementById("news_body").select("p")));
                 newsList.add(news);
             }
         }
@@ -91,7 +93,7 @@ public class DemoTask {
         int saveCode = 1;//0代表失败，1代表成功
         try {
             logger.info("存储数量：" + list.size());
-            iNewsCoreService.insertNewNewsList(list);
+//            iNewsCoreService.insertNewNewsList(list);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             saveCode = 0;
@@ -107,7 +109,8 @@ public class DemoTask {
 
     public static void main(String[] args) {
         DemoTask demoTask = new DemoTask();
-        int i = demoTask.saveSpiderHandler(demoTask.spiderDemoHandler());
-        logger.info("save result:" + i);
+        demoTask.spiderDemoHandler();
+        //       int i = demoTask.saveSpiderHandler(demoTask.spiderDemoHandler());
+//        logger.info("save result:" + i);
     }
 }

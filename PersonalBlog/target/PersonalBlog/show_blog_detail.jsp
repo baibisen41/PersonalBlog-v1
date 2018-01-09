@@ -26,6 +26,26 @@
     <script src="<%=request.getContextPath()%>/js/jquery-2.1.4.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/nprogress.js"></script>
     <script src="<%=request.getContextPath()%>/js/jquery.lazyload.min.js"></script>
+    <%-- editor.md  start --%>
+    <script src="<%=request.getContextPath()%>/editor/lib/marked.min.js"></script>
+    <script src="<%=request.getContextPath()%>/editor/lib/prettify.min.js"></script>
+    <script src="<%=request.getContextPath()%>/editor/lib/raphael.min.js"></script>
+    <script src="<%=request.getContextPath()%>/editor/lib/underscore.min.js"></script>
+    <script src="<%=request.getContextPath()%>/editor/lib/sequence-diagram.min.js"></script>
+    <script src="<%=request.getContextPath()%>/editor/lib/flowchart.min.js"></script>
+    <script src="<%=request.getContextPath()%>/editor/lib/jquery.flowchart.min.js"></script>
+    <script src="<%=request.getContextPath()%>/editor/editormd.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            editormd.markdownToHTML("doc-content", {
+                htmlDecode: "style,script,iframe",  // you can filter tags decode
+                emoji: true,
+                taskList: true,
+                tex: true  // 默认不解析
+            });
+        });
+    </script>
+    <%-- end --%>
     <!--[if gte IE 9]>
     <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
     <script src="js/html5shiv.min.js" type="text/javascript"></script>
@@ -105,7 +125,10 @@
             </header>
             <article class="article-content">
                 <p><img data-original="images/201610181557196870.jpg" src="images/201610181557196870.jpg" alt=""/></p>
-                <p>${blogDetail.blogDetailContent}</p>
+                <div id="doc-content">
+                    <textarea style="display:none;"> ${blogDetail.blogDetailContent}</textarea>
+                </div>
+                <%--<p>${blogDetail.blogDetailContent}</p>--%>
                 <pre class="prettyprint lang-cs"></pre>
                 <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#"
                                                                                                   class="bds_qzone"
@@ -156,9 +179,11 @@
             <div id="respond">
                 <form id="comment-form" name="comment-form" action="" method="POST">
                     <div class="comment">
-                        <input name="" id="" class="form-control" size="22" placeholder="您的昵称（必填）" maxlength="15"
+                        <input name="nick_name" id="nick_name" class="form-control" size="22" placeholder="您的昵称（必填）"
+                               maxlength="15"
                                autocomplete="off" tabindex="1" type="text">
-                        <input name="" id="" class="form-control" size="22" placeholder="您的网址或邮箱（非必填）" maxlength="58"
+                        <input name="e_mail" id="e_mail" class="form-control" size="22" placeholder="您的网址或邮箱（非必填）"
+                               maxlength="58"
                                autocomplete="off" tabindex="2" type="text">
                         <div class="comment-box">
                             <textarea placeholder="您的评论或留言（必填）" name="comment-textarea" id="comment-textarea"
@@ -192,7 +217,8 @@
             </div>
         </div>
     </div>
-    <aside class="sidebar">
+    <%@include file="side_common_bar.jsp" %>
+    <%--<aside class="sidebar">
         <div class="fixed">
             <div class="widget widget-tabs">
                 <ul class="nav nav-tabs" role="tablist">
@@ -299,7 +325,7 @@
                 <img style="width: 100%" src="images/201610241224221511.jpg" alt="专业网站建设"></a>
 
         </div>
-    </aside>
+    </aside>--%>
 </section>
 <footer class="footer">
     <div class="container">

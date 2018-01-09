@@ -62,6 +62,7 @@
         <h3>友情链接</h3>
         <div class="widget-sentence-link">
             <a href="#" title="网站建设" target="_blank">网站建设</a>&nbsp;&nbsp;&nbsp;
+            <a href="show_editor_page.jsp">编辑页</a>
         </div>
     </div>
 </aside>
@@ -75,19 +76,19 @@
         success: function (data) {
             var html = "";
             for (var i = 0; i < data.data.length; i++) {
-                html += "<li><a title=\"\" href=\"#\"><span class=\"thumbnail\">"+
-                    "<img class=\"thumb\" src=\"images/message_pic.jpg\" alt=\"\" style=\"display: block;\">"+
-                    "</span><span class=\"text\">"+data.data[i].newsTitle+"</span><span class=\"muted\"><i class=\"glyphicon glyphicon-time\"></i>"+data.data[i].newsTime+"</span>"+
+                html += "<li><a title=\"\" href=\"#\"><span class=\"thumbnail\">" +
+                    "<img class=\"thumb\" src=\"images/message_pic.jpg\" alt=\"\" style=\"display: block;\">" +
+                    "</span><span class=\"text\">" + data.data[i].newsTitle + "</span><span class=\"muted\"><i class=\"glyphicon glyphicon-time\"></i>" + data.data[i].newsTime + "</span>" +
                     "<span class=\"muted\"><i class=\"glyphicon glyphicon-eye-open\"></i>88</span></a></li>";
             }
 //                alert("result:" + html);
 //                $("#recommend").html(html);
             $(".recommend").append(html);
-            }
-            ,
-            error: function (data) {
+        }
+        ,
+        error: function (data) {
 
-            }
-        });
+        }
+    });
 
 </script>
