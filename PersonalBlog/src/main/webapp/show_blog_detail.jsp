@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 大森
@@ -92,9 +93,9 @@
                     <li><a data-cont="主页" title="主页" href="<%=request.getContextPath()%>/home.do">主页</a></li>
                     <li><a data-cont="技术分享页" title="技术分享页" href="<%=request.getContextPath()%>/showBlogList.do">技术分享</a>
                     </li>
-                    <li><a data-cont="资讯头条页" title="资讯头条页" href="list.html">资讯头条</a></li>
-                    <li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>
-                    <li><a data-cont="生活点滴页" title="生活点滴页" href="show.html">生活点滴</a></li>
+                    <li><a data-cont="资讯头条页" title="资讯头条页" href="<%=request.getContextPath()%>/news.do">资讯头条</a></li>
+                    <%--<li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>--%>
+                    <li><a data-cont="生活点滴页" title="生活点滴页" href="<%=request.getContextPath()%>/showLifeList.do">生活点滴</a></li>
                     <li><a data-cont="资源共享页" title="资源共享页" href="show.html">资源共享</a></li>
                     <li><a data-cont="留言板页" title="留言板页" href="show.html">留言板</a></li>
                     <li><a data-cont="关于我页" title="关于我页" href="show.html">关于我</a></li>
@@ -106,27 +107,55 @@
 <section class="container">
     <div class="content-wrap">
         <div class="content">
-            <header class="article-header">
-                <h1 class="article-title"><a href="#" title="用DTcms做一个独立博客网站（响应式模板）">${blogDetail.blogTitle}</a></h1>
-                <div class="article-meta"> <span class="item article-meta-time">
+            <c:if test="${blogDetailFlag == 101}">
+                <header class="article-header">
+                    <h1 class="article-title"><a href="#" title="用DTcms做一个独立博客网站（响应式模板）">${blogDetail.blogTitle}</a>
+                    </h1>
+                    <div class="article-meta"> <span class="item article-meta-time">
 	  <time class="time" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="发表时间：2016-10-14"><i
               class="glyphicon glyphicon-time"></i> ${blogDetail.blogTime}</time>
 	  </span> <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title=""
                     data-original-title="来源：木庄网络博客"><i class="glyphicon glyphicon-globe"></i> NoException</span> <span
-                        class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title=""
-                        data-original-title="MZ-NetBlog主题"><i class="glyphicon glyphicon-list"></i> <a
-                        href="<%=request.getContextPath()%>/home.do"
-                        title="MZ-NetBlog主题">${blogDetail.blogLabel}</a></span>
-                    <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title=""
-                          data-original-title="浏览量：219"><i
-                            class="glyphicon glyphicon-eye-open"></i> ${blogDetail.blogPv}</span> <span
-                            class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title=""
-                            data-original-title="评论量"><i class="glyphicon glyphicon-comment"></i> 4</span></div>
-            </header>
+                            class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title=""
+                            data-original-title="MZ-NetBlog主题"><i class="glyphicon glyphicon-list"></i> <a
+                            href="<%=request.getContextPath()%>/home.do"
+                            title="MZ-NetBlog主题">${blogDetail.blogLabel}</a></span>
+                        <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title=""
+                              data-original-title="浏览量：219"><i
+                                class="glyphicon glyphicon-eye-open"></i> ${blogDetail.blogPv}</span> <span
+                                class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title=""
+                                data-original-title="评论量"><i class="glyphicon glyphicon-comment"></i> 4</span></div>
+                </header>
+            </c:if>
+            <c:if test="${blogDetailFlag == 102}">
+                <header class="article-header">
+                    <h1 class="article-title"><a href="#" title="用DTcms做一个独立博客网站（响应式模板）">${newsDetail.newsTitle}</a>
+                    </h1>
+                    <div class="article-meta"> <span class="item article-meta-time">
+	  <time class="time" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="发表时间：2016-10-14"><i
+              class="glyphicon glyphicon-time"></i> ${newsDetail.newsTime}</time>
+	  </span> <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title=""
+                    data-original-title="来源：木庄网络博客"><i class="glyphicon glyphicon-globe"></i> NoException</span> <span
+                            class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title=""
+                            data-original-title="MZ-NetBlog主题"><i class="glyphicon glyphicon-list"></i> <a
+                            href="<%=request.getContextPath()%>/home.do"
+                            title="MZ-NetBlog主题">${newsDetail.newsFrom}</a></span>
+                        <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title=""
+                              data-original-title="浏览量：219"><i
+                                class="glyphicon glyphicon-eye-open"></i> ${blogDetail.blogPv}</span> <span
+                                class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title=""
+                                data-original-title="评论量"><i class="glyphicon glyphicon-comment"></i> 4</span></div>
+                </header>
+            </c:if>
             <article class="article-content">
                 <p><img data-original="images/201610181557196870.jpg" src="images/201610181557196870.jpg" alt=""/></p>
                 <div id="doc-content">
-                    <textarea style="display:none;"> ${blogDetail.blogDetailContent}</textarea>
+                    <c:if test="${blogDetailFlag == 101}">
+                        <textarea style="display:none;"> ${blogDetail.blogDetailContent}</textarea>
+                    </c:if>
+                    <c:if test="${blogDetailFlag == 102}">
+                        <textarea style="display:none;"> ${newsDetail.newsContent}</textarea>
+                    </c:if>
                 </div>
                 <%--<p>${blogDetail.blogDetailContent}</p>--%>
                 <pre class="prettyprint lang-cs"></pre>

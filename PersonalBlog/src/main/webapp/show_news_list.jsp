@@ -74,7 +74,8 @@
                     </li>
                     <li><a data-cont="资讯头条页" title="资讯头条页" href="<%=request.getContextPath()%>/news.do">资讯头条</a></li>
                     <%--<li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>--%>
-                    <li><a data-cont="生活点滴页" title="生活点滴页" href="<%=request.getContextPath()%>/showLifeList.do">生活点滴</a></li>
+                    <li><a data-cont="生活点滴页" title="生活点滴页" href="<%=request.getContextPath()%>/showLifeList.do">生活点滴</a>
+                    </li>
                     <li><a data-cont="资源共享页" title="资源共享页" href="show.html">资源共享</a></li>
                     <li><a data-cont="留言板页" title="留言板页" href="show.html">留言板</a></li>
                     <li><a data-cont="关于我页" title="关于我页" href="show.html">关于我</a></li>
@@ -99,8 +100,14 @@
                         class="thumb" data-original="images/message_pic.jpg" src="images/message_pic.jpg"
                         alt="用DTcms做一个独立博客网站（响应式模板）" style="display: inline;"></a>
                     <header><a class="cat" href="#" title="MZ-NetBlog主题">来自 ${news.newsFrom}<i></i></a>
-                        <h2><a href="<%=request.getContextPath()%>/showBlogDetail.do?id=${blog.blogId}"
-                               title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">${news.newsTitle}</a></h2>
+                        <c:if test="${newsUrl == 0}">
+                            <h2><a href="<%=request.getContextPath()%>/showNewsDetail.do?id=${news.newsId}"
+                                   title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">${news.newsTitle}</a></h2>
+                        </c:if>
+                        <c:if test="${newsUrl == 1}">
+                            <h2><a href="<%=request.getContextPath()%>/showNewsDetail.do?type=1&id=${news.newsId}"
+                                   title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">${news.newsTitle}</a></h2>
+                        </c:if>
                     </header>
                     <p class="meta">
                         <time class="time"><i class="glyphicon glyphicon-time"></i>${news.newsTime}</time>

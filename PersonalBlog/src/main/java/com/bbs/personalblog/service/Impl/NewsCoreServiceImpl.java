@@ -18,7 +18,9 @@ import redis.clients.jedis.JedisPool;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 大森 on 2017/12/9.
@@ -79,6 +81,17 @@ public class NewsCoreServiceImpl implements INewsCoreService {
 
         PageInfo<News> pageInfo = new PageInfo<News>(list);
         return pageInfo;
+    }
+
+    @Override
+    public Map<String, Object> showNewsDetail(String newsId, int type) {
+        Map<String, Object> map = new HashMap<>();
+
+        News newsDetail = iNewsCoreDao.showNewsDetail(newsId, type);
+
+//        map.put("pvCount", pvCount);
+        map.put("newsDetail", newsDetail);
+        return map;
     }
 
 

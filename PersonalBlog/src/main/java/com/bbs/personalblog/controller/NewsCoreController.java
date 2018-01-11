@@ -114,4 +114,29 @@ public class NewsCoreController {
         return modelAndView;
     }
 
+    //详情
+    @RequestMapping("/showNewsDetail.do")
+    public ModelAndView showBlogDetail(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+        Map<String, Object> map = new HashMap<>();
+
+        String newsId = request.getParameter("id");
+        logger.info("选择资讯id:" + newsId);
+        String newsType = request.getParameter("type");
+        int type = 0;
+
+        if (!StringUtils.isEmpty(newsType)) {
+            type = Integer.parseInt(newsType);
+        }
+        logger.info("资讯type:" + type);
+        map = iNewsCoreService.showNewsDetail(newsId, type);
+
+
+//        modelAndView.addObject("blogDetailPv", map.get("pvCount"));
+        modelAndView.addObject("newsDetail", map.get("newsDetail"));
+        modelAndView.addObject("blogDetailFlag", Common.newsDetailFlag);
+        modelAndView.setViewName("show_blog_detail");
+        return modelAndView;
+    }
+
 }

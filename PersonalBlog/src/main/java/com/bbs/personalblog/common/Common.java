@@ -43,5 +43,12 @@ public interface Common {
 
     public final static int newsHot = 1;
 
+    /**
+     * 博客详情页标识 分为 博客类和资讯类
+     */
+    public final static int blogDetailFlag = 101;
+
+    public final static int newsDetailFlag = 102;
+
 
 }

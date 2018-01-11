@@ -1,7 +1,9 @@
 package com.bbs.personalblog.dao;
 
 import com.bbs.personalblog.model.News;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -20,5 +22,7 @@ public interface INewsCoreDao {
     public abstract List<News> showHotNewsList();
 
     public abstract List<News> showNewNewsList();
+
+    public abstract News showNewsDetail(@Param("id") String id, @Param("type") int type);
 
 }

@@ -5,11 +5,20 @@ package com.bbs.personalblog.model;
  */
 public class News {
 
+    private String newsId;
     private String newsTitle;
     private String newsTime;
     private String newsFrom;
     private String newsSummary;
     private String newsContent;
+
+    public String getNewsId() {
+        return newsId;
+    }
+
+    public void setNewsId(String newsId) {
+        this.newsId = newsId;
+    }
 
     public String getNewsTitle() {
         return newsTitle;

@@ -156,6 +156,7 @@ public class BlogCoreController {
 
 //        modelAndView.addObject("blogDetailPv", map.get("pvCount"));
         modelAndView.addObject("blogDetail", map.get("blogDetail"));
+        modelAndView.addObject("blogDetailFlag", Common.blogDetailFlag);
         modelAndView.addObject("replyDetail", replyDetailList);
         modelAndView.setViewName("show_blog_detail");
         return modelAndView;

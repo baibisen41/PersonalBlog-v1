@@ -4,6 +4,7 @@ import com.bbs.personalblog.model.News;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 大森 on 2017/12/9.
@@ -23,5 +24,7 @@ public interface INewsCoreService {
     public abstract PageInfo<News> showHotNewsList(int nextPage);
 
     public abstract PageInfo<News> showNewNewsList(int nextPage);
+
+    public abstract Map<String, Object> showNewsDetail(String newsId, int type);
 
 }

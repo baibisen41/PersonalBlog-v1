@@ -5,6 +5,7 @@ import com.bbs.personalblog.model.News;
 import com.bbs.personalblog.service.INewsCoreService;
 import com.bbs.personalblog.utils.DateTimeUtil;
 import com.bbs.personalblog.utils.JedisUtil;
+import com.bbs.personalblog.utils.KeyIdUtil;
 import com.bbs.personalblog.utils.SpecialWordUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -180,6 +181,7 @@ public class SpiderTask {
                 logger.info((j + 1) + "描述：" + elementsSummary.get(j).text());
                 logger.info((j + 1) + "内容：" + docContent.select("#news_body").select("p").text() + "\n");*/
 
+                news.setNewsId(KeyIdUtil.getId());
                 news.setNewsTitle(elementsTitle.get(j).text());
                 news.setNewsTime(elementsTime.get(j).select("span.gray").text());
                 news.setNewsFrom("博客园");
@@ -242,6 +244,7 @@ public class SpiderTask {
                 logger.info((j + 1) + "内容：" + docContent.select("#news_body").select("p").text() + "\n");*/
 //                String time = elementsTime.get(j).select("span.gray").text();
 
+                news.setNewsId(KeyIdUtil.getId());
                 news.setNewsTitle(elementsTitle.get(j).text());
                 news.setNewsTime(elementsTime.get(j).select("span.gray").text());
                 news.setNewsFrom("博客园");
