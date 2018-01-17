@@ -38,53 +38,7 @@
     <![endif]-->
 </head>
 <body class="user-select">
-<header class="header">
-    <nav class="navbar navbar-default" id="navbar">
-        <div class="container">
-            <div class="header-topbar hidden-xs link-border">
-                <ul class="site-nav topmenu">
-                    <li><a href="#">标签云</a></li>
-                    <li><a href="#" rel="nofollow">读者墙</a></li>
-                    <li><a href="#" title="RSS订阅">
-                        <i class="fa fa-rss">
-                        </i> RSS订阅
-                    </a></li>
-                </ul>
-                （一只不甘平庸的程序猿）
-            </div>
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#header-navbar" aria-expanded="false"><span class="sr-only"></span> <span
-                        class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
-                <h1 class="logo hvr-bounce-in"><a href="#" title="木庄网络博客"><img src="images/logo.png"
-                                                                               alt="木庄网络博客"></a></h1>
-            </div>
-            <div class="collapse navbar-collapse" id="header-navbar">
-                <form class="navbar-form visible-xs" action="/Search" method="post">
-                    <div class="input-group">
-                        <input type="text" name="keyword" class="form-control" placeholder="请输入关键字" maxlength="20"
-                               autocomplete="off">
-                        <span class="input-group-btn">
-		<button class="btn btn-default btn-search" name="search" type="submit">搜索</button>
-		</span></div>
-                </form>
-                <%-- 改bootstrap.min.css中（.navbar-default .navbar-nav > li > a）中的字体颜色 --%>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a data-cont="主页" title="主页" href="<%=request.getContextPath()%>/home.do">主页</a></li>
-                    <li><a data-cont="技术分享页" title="技术分享页" href="<%=request.getContextPath()%>/showBlogList.do">技术分享</a>
-                    </li>
-                    <li><a data-cont="资讯头条页" title="资讯头条页"
-                           href="<%=request.getContextPath()%>/news.do">资讯头条</a></li>
-                    <%--<li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>--%>
-                    <li><a data-cont="生活点滴页" title="生活点滴页" href="<%=request.getContextPath()%>/showLifeList.do">生活点滴</a></li>
-                    <li><a data-cont="资源共享页" title="资源共享页" href="show.html">资源共享</a></li>
-                    <li><a data-cont="留言板页" title="留言板页" href="show.html">留言板</a></li>
-                    <li><a data-cont="关于我页" title="关于我页" href="show.html">关于我</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
+<%@include file="header_common_bar.jsp" %>
 <section class="container">
     <div class="content-wrap">
         <div class="content">
@@ -198,72 +152,6 @@
         </div>
     </div>
     <%@include file="side_common_bar.jsp" %>
-<%--    <aside class="sidebar">
-        <div class="fixed">
-            <div class="widget widget-tabs">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#notice" aria-controls="notice" role="tab"
-                                                              data-toggle="tab">统计信息</a></li>
-                    <li role="presentation"><a href="#contact" aria-controls="contact" role="tab"
-                                               data-toggle="tab">联系站长</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane contact active" id="notice">
-                        <h2>
-                            <iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=2&num=2" width="330"
-                                    height="70" frameborder="0" marginwidth="0" marginheight="0"
-                                    scrolling="no"></iframe>
-                        </h2>
-                        &lt;%&ndash;<h2>网站运行:
-                            <span id="sitetime">88天 </span></h2>&ndash;%&gt;
-                    </div>
-                    <div role="tabpanel" class="tab-pane contact" id="contact">
-                        <h2>QQ:
-                            <a href="" target="_blank" rel="nofollow" data-toggle="tooltip" data-placement="bottom"
-                               title="" data-original-title="QQ:"></a>
-                        </h2>
-                        <h2>Email:
-                            <a href="#" target="_blank" data-toggle="tooltip" rel="nofollow" data-placement="bottom"
-                               title="" data-original-title="#"></a></h2>
-                    </div>
-                </div>
-            </div>
-            <div class="widget widget_search">
-                <form class="navbar-form" action="/Search" method="post">
-                    <div class="input-group">
-                        <input type="text" name="keyword" class="form-control" size="35" placeholder="请输入关键字"
-                               maxlength="15" autocomplete="off">
-                        <span class="input-group-btn">
-		<button class="btn btn-default btn-search" name="search" type="submit">搜索</button>
-		</span></div>
-                </form>
-            </div>
-        </div>
-        <div class="widget widget_hot">
-            <h3>大家都在看</h3>
-            <ul>
-                <c:forEach var="topNews" items="${hotNewsList}">
-                    <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#"><span class="thumbnail">
-                            <img class="thumb" data-original="images/message_pic.jpg"
-                                 src="images/message_pic.jpg"
-                                 alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;">
-                        </span><span class="text">${topNews.newsTitle}</span><span class="muted"><i
-                            class="glyphicon glyphicon-time"></i>
-                            ${topNews.newsTime}
-                        </span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-                </c:forEach>
-
-            </ul>
-        </div>
-
-        <div class="widget widget_sentence">
-            <h3>友情链接</h3>
-            <div class="widget-sentence-link">
-                <a href="#" title="网站建设" target="_blank">网站建设</a>&nbsp;&nbsp;&nbsp;
-            </div>
-        </div>
-    </aside>--%>
-
 </section>
 <footer class="footer">
     <div class="container">

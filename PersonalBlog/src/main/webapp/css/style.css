@@ -909,6 +909,17 @@ body, input, button, textarea, select {
     }
 }
 
+.about-content {
+/*    font-size: 15px;
+    line-height: 25px;
+    word-wrap: break-word;
+    cursor: default;*/
+    font-family: 'Open Sans', sans-serif !important;
+    background: url(/PersonalBlog/images/moban/5.jpg) no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+}
+
 .article-content {
     font-size: 15px;
     line-height: 25px;

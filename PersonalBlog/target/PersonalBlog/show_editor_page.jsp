@@ -20,7 +20,9 @@
 </div>
 <br>
 <div align="center">
-    <input id="editormd-from" name="editormd-from" type="text"/>
+    <%--<input id="editormd-from" name="editormd-from" type="text"/>--%>
+    <label><input name="editormd-check" type="radio" value="0"/>技术类型</label>
+    <label><input name="editormd-check" type="radio" value="2"/>生活类型</label>
 </div>
 <br>
 <div id="my-editormd">
@@ -48,8 +50,11 @@
     function submitBlogEdit() {
         var title = $("#editormd-title").val();
         var content = $("#my-editormd-markdown-doc").val();
-        var fromId = $("#editormd-from").val();
-        alert(content);
+        //   var fromId = $("#editormd-from").val();
+        //   var fromId = $("#editormd-check").val();
+        var fromId = $('input:radio[name="editormd-check"]:checked').val();
+        alert(fromId);
+//        alert(content);
 
         $.ajax({
             url: "editBlogDetails.do?status=1",

@@ -202,10 +202,10 @@ public class BlogCoreController {
         if (code.equals(Common.successCode)) {
             if (sendStatus == 1) {
                 map.put("respStatus", "200");
-                map.put("resultView", "temp_select_page.jsp");
+                map.put("resultView", "home.jsp");
             } else if (sendStatus == 2) {
                 map.put("respStatus", "200");
-                map.put("resultView", "temp_select_page.jsp");
+                map.put("resultView", "home.jsp");
             }
         }
         return map;

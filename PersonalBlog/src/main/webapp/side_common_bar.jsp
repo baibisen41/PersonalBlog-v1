@@ -14,9 +14,9 @@
         <div class="widget widget-tabs">
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#notice" aria-controls="notice" role="tab"
-                                                          data-toggle="tab">统计信息</a></li>
+                                                          data-toggle="tab">今日天气</a></li>
                 <li role="presentation"><a href="#contact" aria-controls="contact" role="tab"
-                                           data-toggle="tab">联系站长</a></li>
+                                           data-toggle="tab">统计信息</a></li>
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane contact active" id="notice">
@@ -75,7 +75,7 @@
         success: function (data) {
             var html = "";
             for (var i = 0; i < data.data.length; i++) {
-                html += "<li><a title=\"\" href=\"#\"><span class=\"thumbnail\">" +
+                html += "<li><a title=\"\" href=\"" + "<%=request.getContextPath()%>/showNewsDetail.do?type=1&id=" + data.data[i].newsId + "\" target=\"_blank\"><span class=\"thumbnail\">" +
                     "<img class=\"thumb\" src=\"images/message_pic.jpg\" alt=\"\" style=\"display: block;\">" +
                     "</span><span class=\"text\">" + data.data[i].newsTitle + "</span><span class=\"muted\"><i class=\"glyphicon glyphicon-time\"></i>" + data.data[i].newsTime + "</span>" +
                     "<span class=\"muted\"><i class=\"glyphicon glyphicon-eye-open\"></i>88</span></a></li>";
