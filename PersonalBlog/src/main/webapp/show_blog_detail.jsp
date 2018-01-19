@@ -65,7 +65,7 @@
         <div class="content">
             <c:if test="${blogDetailFlag == 101}">
                 <header class="article-header">
-                    <h1 class="article-title"><a href="#" title="用DTcms做一个独立博客网站（响应式模板）">${blogDetail.blogTitle}</a>
+                    <h1 class="article-title"><a href="#" title="personalblog">${blogDetail.blogTitle}</a>
                     </h1>
                     <div class="article-meta"> <span class="item article-meta-time">
 	  <time class="time" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="发表时间：2016-10-14"><i
@@ -73,23 +73,23 @@
 	  </span> <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title=""
                     data-original-title="来源：木庄网络博客"><i class="glyphicon glyphicon-globe"></i> NoException</span> <span
                             class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title=""
-                            data-original-title="MZ-NetBlog主题"><i class="glyphicon glyphicon-list"></i> <a
+                            data-original-title="blogTheme"><i class="glyphicon glyphicon-list"></i> <a
                             href="<%=request.getContextPath()%>/home.do"
-                            title="MZ-NetBlog主题">${blogDetail.blogLabel}</a></span>
+                            title="blogTheme">${blogDetail.blogLabel}</a></span>
                         <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title=""
                               data-original-title="浏览量：219"><i
                                 class="glyphicon glyphicon-eye-open"></i> ${blogDetail.blogPv}</span> <span
                                 class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title=""
                                 data-original-title="评论量"><i class="glyphicon glyphicon-comment"></i> 4</span>
                         <span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title=""
-                              data-original-title="MZ-NetBlog主题"> <a
+                              data-original-title="blogTheme"> <a
                                 href="<%=request.getContextPath()%>/home.do"
-                                title="MZ-NetBlog主题">删除</a></span></div>
+                                title="blogTheme">删除</a></span></div>
                 </header>
             </c:if>
             <c:if test="${blogDetailFlag == 102}">
                 <header class="article-header">
-                    <h1 class="article-title"><a href="#" title="用DTcms做一个独立博客网站（响应式模板）">${newsDetail.newsTitle}</a>
+                    <h1 class="article-title"><a href="#" title="personalblog">${newsDetail.newsTitle}</a>
                     </h1>
                     <div class="article-meta"> <span class="item article-meta-time">
 	  <time class="time" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="发表时间：2016-10-14"><i
@@ -97,9 +97,9 @@
 	  </span> <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title=""
                     data-original-title="来源：木庄网络博客"><i class="glyphicon glyphicon-globe"></i> NoException</span> <span
                             class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title=""
-                            data-original-title="MZ-NetBlog主题"><i class="glyphicon glyphicon-list"></i> <a
+                            data-original-title="blogTheme"><i class="glyphicon glyphicon-list"></i> <a
                             href="<%=request.getContextPath()%>/home.do"
-                            title="MZ-NetBlog主题">${newsDetail.newsFrom}</a></span>
+                            title="blogTheme">${newsDetail.newsFrom}</a></span>
                         <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title=""
                               data-original-title="浏览量：219"><i
                                 class="glyphicon glyphicon-eye-open"></i> ${blogDetail.blogPv}</span> <span
@@ -152,14 +152,14 @@
                     <h3>相关推荐</h3>
                 </div>
                 <ul>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
+                    <li><a href="#" title="">personalblog-blogTheme</a></li>
+                    <li><a href="#" title="">personalblog-blogTheme</a></li>
+                    <li><a href="#" title="">personalblog-blogTheme</a></li>
+                    <li><a href="#" title="">personalblog-blogTheme</a></li>
+                    <li><a href="#" title="">personalblog-blogTheme</a></li>
+                    <li><a href="#" title="">personalblog-blogTheme</a></li>
+                    <li><a href="#" title="">personalblog-blogTheme</a></li>
+                    <li><a href="#" title="">personalblog-blogTheme</a></li>
                 </ul>
             </div>
             <div class="title" id="comment">
@@ -208,15 +208,9 @@
     </div>
     <%@include file="side_common_bar.jsp" %>
 </section>
-<footer class="footer">
-    <div class="container">
-        <p>Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
-        </p>
-    </div>
-    <div id="gotop"><a class="gotop"></a></div>
-</footer>
+<%@include file="footer_common_bar.jsp"%>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/jquery.ias.js"></script>
+<%--<script src="<%=request.getContextPath()%>/js/jquery.ias.js"></script>--%>
 <script src="<%=request.getContextPath()%>/js/scripts.js"></script>
 </body>
 </html>

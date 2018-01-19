@@ -16,13 +16,13 @@
 
 <div>
     <c:forEach var="blog" items="${blogList}">
-        <article class="excerpt excerpt-1"><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）"
+        <article class="excerpt excerpt-1"><a class="focus" href="#" title="personalblog"
                                               target="_blank"><img
                 class="thumb" data-original="images/message_pic.jpg" src="images/message_pic.jpg"
-                alt="用DTcms做一个独立博客网站（响应式模板）" style="display: inline;"></a>
-            <header><a class="cat" href="#" title="MZ-NetBlog主题">${blog.blogLabel}<i></i></a>
+                alt="personalblog" style="display: inline;"></a>
+            <header><a class="cat" href="#" title="blogTheme">${blog.blogLabel}<i></i></a>
                 <h2><a href="<%=request.getContextPath()%>/showBlogDetail.do?id=${blog.blogId}"
-                       title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">${blog.blogTitle}</a></h2>
+                       title="personalblog" target="_blank">${blog.blogTitle}</a></h2>
             </header>
             <p class="meta">
                 <time class="time"><i class="glyphicon glyphicon-time"></i>${blog.blogTime}</time>

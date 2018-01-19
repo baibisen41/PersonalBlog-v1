@@ -13,14 +13,14 @@
     <nav class="navbar navbar-default" id="navbar">
         <div class="container">
             <div class="header-topbar hidden-xs link-border">
-                <ul class="site-nav topmenu">
+<%--                <ul class="site-nav topmenu">
                     <li><a href="#">标签云</a></li>
                     <li><a href="#" rel="nofollow">读者墙</a></li>
-                    <li><a href="#" title="RSS订阅">
+                    <li><a href="#" title="">
                         <i class="fa fa-rss">
                         </i> RSS订阅
                     </a></li>
-                </ul>
+                </ul>--%>
                 （一只不甘平庸的程序猿）
             </div>
             <div class="navbar-header">
@@ -49,37 +49,14 @@
                     <%--<li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>--%>
                     <li><a data-cont="生活点滴页" title="生活点滴页" href="<%=request.getContextPath()%>/showLifeList.do">生活点滴</a>
                     </li>
-                    <li><a data-cont="资源共享页" title="资源共享页" href="<%=request.getContextPath()%>/show_source_page.jsp">资源共享</a></li>
-                    <li><a data-cont="留言板页" title="留言板页" href="<%=request.getContextPath()%>/show_comment_page.jsp">留言板</a></li>
-                    <li><a data-cont="关于我页" title="关于我页" href="<%=request.getContextPath()%>/show_about_page.jsp">关于我</a></li>
+                    <li><a data-cont="资源共享页" title="资源共享页" href="<%=request.getContextPath()%>/show_source_page.jsp">资源共享</a>
+                    </li>
+                    <li><a data-cont="留言板页" title="留言板页"
+                           href="<%=request.getContextPath()%>/show_comment_page.jsp">留言板</a></li>
+                    <li><a data-cont="关于我页" title="关于我页"
+                           href="<%=request.getContextPath()%>/show_about_page.jsp">关于我</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
-
-<script>
-
-/*    $.ajax({
-        url: "<%=request.getContextPath()%>/testNews.do",
-        type: "get",
-        dataType: "json",
-        success: function (data) {
-            var html = "";
-            for (var i = 0; i < data.data.length; i++) {
-                html += "<li><a title=\"\" href=\"#\"><span class=\"thumbnail\">" +
-                    "<img class=\"thumb\" src=\"images/message_pic.jpg\" alt=\"\" style=\"display: block;\">" +
-                    "</span><span class=\"text\">" + data.data[i].newsTitle + "</span><span class=\"muted\"><i class=\"glyphicon glyphicon-time\"></i>" + data.data[i].newsTime + "</span>" +
-                    "<span class=\"muted\"><i class=\"glyphicon glyphicon-eye-open\"></i>88</span></a></li>";
-            }
-//                alert("result:" + html);
-//                $("#recommend").html(html);
-            $(".recommend").append(html);
-        }
-        ,
-        error: function (data) {
-
-        }
-    });*/
-
-</script>

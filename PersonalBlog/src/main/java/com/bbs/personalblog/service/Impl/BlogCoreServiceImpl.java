@@ -80,7 +80,7 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
         JedisUtil jedisUtil = JedisUtil.getInstance();
 
         //将分页操作移到业务层
-        PageHelper.startPage(nextPage, 3);
+        PageHelper.startPage(nextPage, 15);
 
         List<BlogListPv> showBlogList = iBlogCoreDao.showBlogList(from, status, fromId);
         /**
@@ -163,7 +163,7 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
     @Override
     public PageInfo<BlogListPv> showLifeList(int nextPage, int status) {
 
-        PageHelper.startPage(nextPage, 3);
+        PageHelper.startPage(nextPage, 15);
         List<BlogListPv> blogList = iBlogCoreDao.showLifeList(Common.lifeListFromId, status);
         PageInfo<BlogListPv> pageInfo = new PageInfo<>(blogList);
 

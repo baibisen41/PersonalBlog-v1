@@ -50,18 +50,18 @@
                 </h3>
             </div>
             <c:forEach var="news" items="${newsList}">
-                <article class="excerpt excerpt-1"><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）"
+                <article class="excerpt excerpt-1"><a class="focus" href="#" title="personalblog"
                                                       target="_blank"><img
                         class="thumb" data-original="images/message_pic.jpg" src="images/message_pic.jpg"
-                        alt="用DTcms做一个独立博客网站（响应式模板）" style="display: inline;"></a>
-                    <header><a class="cat" href="#" title="MZ-NetBlog主题">来自 ${news.newsFrom}<i></i></a>
+                        alt="personalblog" style="display: inline;"></a>
+                    <header><a class="cat" href="#" title="blogTheme">来自 ${news.newsFrom}<i></i></a>
                         <c:if test="${newsUrl == 0}">
                             <h2><a href="<%=request.getContextPath()%>/showNewsDetail.do?id=${news.newsId}"
-                                   title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">${news.newsTitle}</a></h2>
+                                   title="personalblog" target="_blank">${news.newsTitle}</a></h2>
                         </c:if>
                         <c:if test="${newsUrl == 1}">
                             <h2><a href="<%=request.getContextPath()%>/showNewsDetail.do?type=1&id=${news.newsId}"
-                                   title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">${news.newsTitle}</a></h2>
+                                   title="personalblog" target="_blank">${news.newsTitle}</a></h2>
                         </c:if>
                     </header>
                     <p class="meta">
@@ -157,13 +157,7 @@
     </div>
     <%@include file="side_common_bar.jsp" %>
 </section>
-<footer class="footer">
-    <div class="container">
-        <p>Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
-        </p>
-    </div>
-    <div id="gotop"><a class="gotop"></a></div>
-</footer>
+<%@include file="footer_common_bar.jsp"%>
 <script src="js/bootstrap.min.js"></script>
 <%--<script src="js/jquery.ias.js"></script>--%>
 <script src="js/scripts.js"></script>

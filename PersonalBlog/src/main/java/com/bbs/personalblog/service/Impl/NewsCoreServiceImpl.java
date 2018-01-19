@@ -64,7 +64,7 @@ public class NewsCoreServiceImpl implements INewsCoreService {
     @Override
     public PageInfo<News> showHotNewsList(int nextPage) {
 
-        PageHelper.startPage(nextPage, 20);
+        PageHelper.startPage(nextPage, 15);
 
         List<News> list = iNewsCoreDao.showHotNewsList();
 
