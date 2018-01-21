@@ -51,17 +51,17 @@
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
                         <a href="#" target="_blank" title="木庄网络博客源码">
-                            <img src="<%=request.getContextPath()%>/images/home_page1.jpg" alt="木庄网络博客源码"
+                            <img src="<%=request.getContextPath()%>/images/home_page5.jpg" alt="木庄网络博客源码"
                                  class="img-responsive"></a>
                     </div>
                     <div class="item">
                         <a href="#" target="_blank" title="专业网站建设">
-                            <img src="<%=request.getContextPath()%>/images/home_page2.jpg" alt="专业网站建设"
+                            <img src="<%=request.getContextPath()%>/images/home_page6.jpg" alt="专业网站建设"
                                  class="img-responsive"></a>
                     </div>
                     <div class="item">
                         <a href="#" target="_blank" title="专业网站建设">
-                            <img src="<%=request.getContextPath()%>/images/home_page3.jpg" alt="专业网站建设"
+                            <img src="<%=request.getContextPath()%>/images/home_page1.jpg" alt="专业网站建设"
                                  class="img-responsive"></a>
                     </div>
                 </div>
