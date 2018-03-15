@@ -227,7 +227,6 @@ public class BlogCoreController {
 
         String resultCode = iBlogCoreService.insertReplyDetail(reply).get("resultCode");
         System.out.println("回复返回码：" + resultCode);
-
         return "redirect:/showBlogDetail.do?id=" + getBlogId;
     }
 
