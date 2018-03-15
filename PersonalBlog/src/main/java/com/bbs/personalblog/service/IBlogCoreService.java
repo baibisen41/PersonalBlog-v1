@@ -19,6 +19,8 @@ public interface IBlogCoreService {
 
     public abstract PageInfo<BlogListPv> showBlogList(int nextPage, int form, int status, int fromId);
 
+    public abstract List<Tag> showTagList();
+
     public abstract Map<String, Object> showBlogDetail(String blogId);
 
     public abstract List<ReplyDetail> showReplyDetail(String blogId);

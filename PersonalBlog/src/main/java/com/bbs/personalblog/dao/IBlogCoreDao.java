@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -22,6 +23,8 @@ public interface IBlogCoreDao {
     public abstract int increaseBlogPv(String id);
 
     public abstract List<BlogListPv> showBlogList(@Param("from") int from, @Param("status") int status, @Param("fromId") int fromId);
+
+    public abstract List<Tag> showTagList();
 
     public abstract BlogDetail showBlogDetail(String blogId);
 

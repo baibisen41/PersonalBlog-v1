@@ -13,14 +13,14 @@
     <nav class="navbar navbar-default" id="navbar">
         <div class="container">
             <div class="header-topbar hidden-xs link-border">
-<%--                <ul class="site-nav topmenu">
-                    <li><a href="#">标签云</a></li>
-                    <li><a href="#" rel="nofollow">读者墙</a></li>
-                    <li><a href="#" title="">
-                        <i class="fa fa-rss">
-                        </i> RSS订阅
-                    </a></li>
-                </ul>--%>
+                <%--                <ul class="site-nav topmenu">
+                                    <li><a href="#">标签云</a></li>
+                                    <li><a href="#" rel="nofollow">读者墙</a></li>
+                                    <li><a href="#" title="">
+                                        <i class="fa fa-rss">
+                                        </i> RSS订阅
+                                    </a></li>
+                                </ul>--%>
                 （一只不甘平庸的程序猿）
             </div>
             <div class="navbar-header">
@@ -41,20 +41,26 @@
                 </form>
                 <%-- 改bootstrap.min.css中（.navbar-default .navbar-nav > li > a）中的字体颜色 --%>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-cont="主页" title="主页" href="<%=request.getContextPath()%>/home.do">主页</a></li>
-                    <li><a data-cont="技术分享页" title="技术分享页" href="<%=request.getContextPath()%>/showBlogList.do">技术分享</a>
+                    <li><a data-cont="主页" title="主页"
+                           href="<%=request.getContextPath()%>/home.do">主页</a></li>
+                    <li><a data-cont="技术之路" title="技术之路"
+                           href="<%=request.getContextPath()%>/showBlogList.do">技术之路</a>
                     </li>
-                    <li><a data-cont="资讯头条页" title="资讯头条页"
-                           href="<%=request.getContextPath()%>/news.do">资讯头条</a></li>
-                    <%--<li><a data-cont="技术论坛页" title="技术论坛页" href="show.html">技术论坛</a></li>--%>
-                    <li><a data-cont="生活点滴页" title="生活点滴页" href="<%=request.getContextPath()%>/showLifeList.do">生活点滴</a>
+                    <li><a data-cont="生活感悟" title="生活感悟"
+                           href="<%=request.getContextPath()%>/showLifeList.do">生活感悟</a>
                     </li>
-                    <li><a data-cont="资源共享页" title="资源共享页" href="<%=request.getContextPath()%>/show_source_page.jsp">资源共享</a>
+                    <li><a data-cont="资讯头条" title="资讯头条"
+                           href="<%=request.getContextPath()%>/news.do">资讯头条</a>
+                    </li>
+                    <li><a data-cont="资源共享" title="资源共享"
+                           href="<%=request.getContextPath()%>/show_source_page.jsp">资源共享</a>
+                    </li>
+                    <li><a data-cont="关于我页" title="关于我页"
+                           href="<%=request.getContextPath()%>/show_about_page.jsp">关于我</a>
                     </li>
                     <li><a data-cont="留言板页" title="留言板页"
-                           href="<%=request.getContextPath()%>/show_comment_page.jsp">留言板</a></li>
-                    <li><a data-cont="关于我页" title="关于我页"
-                           href="<%=request.getContextPath()%>/show_about_page.jsp">关于我</a></li>
+                           href="<%=request.getContextPath()%>/show_comment_page.jsp">留言板</a>
+                    </li>
                 </ul>
             </div>
         </div>

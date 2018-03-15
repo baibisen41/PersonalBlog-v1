@@ -130,6 +130,14 @@ public class BlogCoreServiceImpl implements IBlogCoreService {
     }
 
     @Override
+    public List<Tag> showTagList() {
+        List<Tag> tagList = iBlogCoreDao.showTagList();
+        logger.info("tag service size:{}", tagList.size());
+        logger.info("tag label:{},count:{}", tagList.get(1).getLabel(), tagList.get(1).getCount());
+        return tagList;
+    }
+
+    @Override
     public Map<String, Object> showBlogDetail(String blogId) {
         Map<String, Object> map = new HashMap<>();
 

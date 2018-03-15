@@ -1,8 +1,10 @@
 package com.bbs.personalblog.controller;
 
 import com.bbs.personalblog.common.Common;
+import com.bbs.personalblog.model.Blog;
 import com.bbs.personalblog.model.BlogListPv;
 import com.bbs.personalblog.model.News;
+import com.bbs.personalblog.model.Tag;
 import com.bbs.personalblog.service.IBlogCoreService;
 import com.bbs.personalblog.service.INewsCoreService;
 import com.github.pagehelper.PageInfo;
@@ -13,11 +15,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by 大森 on 2017/12/22.
@@ -83,5 +85,15 @@ public class HomeCoreController {
         modelAndView.addObject("hotNewsList", shortNewsList);
         modelAndView.setViewName("home");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/showTagList.do", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, List<Tag>> showTagList() {
+        Map<String, List<Tag>> map = new HashMap<>();
+        List<Tag> tagList = iBlogCoreService.showTagList();
+        logger.debug("tag size:" + tagList.size());
+        map.put("tagMap", tagList);
+        return map;
     }
 }
