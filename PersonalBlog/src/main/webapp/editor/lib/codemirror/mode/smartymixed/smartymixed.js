@@ -9,7 +9,7 @@
 * @date 05.07.2013
 */
 
-// Warning: Don't base other modes on this one. This here is a
+// Warning: Don't common other modes on this one. This here is a
 // terrible way to write a mixed mode.
 
 (function(mod) {

@@ -322,7 +322,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
 
   def("text/x-csharp", {
     name: "clike",
-    keywords: words("abstract as base break case catch checked class const continue" +
+    keywords: words("abstract as common break case catch checked class const continue" +
                     " default delegate do else enum event explicit extern finally fixed for" +
                     " foreach goto if implicit in interface internal is lock namespace new" +
                     " operator out override params private protected public readonly ref return sealed" +

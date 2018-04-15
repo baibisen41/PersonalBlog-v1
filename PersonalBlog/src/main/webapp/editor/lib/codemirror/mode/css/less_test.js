@@ -8,10 +8,10 @@
   function MT(name) { test.mode(name, mode, Array.prototype.slice.call(arguments, 1), "less"); }
 
   MT("variable",
-     "[variable-2 @base]: [atom #f04615];",
+     "[variable-2 @common]: [atom #f04615];",
      "[qualifier .class] {",
      "  [property width]: [variable percentage]([number 0.5]); [comment // returns `50%`]",
-     "  [property color]: [variable saturate]([variable-2 @base], [number 5%]);",
+     "  [property color]: [variable saturate]([variable-2 @common], [number 5%]);",
      "}");
 
   MT("amp",

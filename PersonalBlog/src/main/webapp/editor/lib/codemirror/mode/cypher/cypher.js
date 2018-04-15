@@ -66,7 +66,7 @@
     var operatorChars = /[*+\-<>=&|~%^]/;
 
     return {
-      startState: function(/*base*/) {
+      startState: function(/*common*/) {
         return {
           tokenize: tokenBase,
           context: null,

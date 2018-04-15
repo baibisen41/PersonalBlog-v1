@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bbs.personalblog.dao.dao.INewsCoreDao">
+
+    <resultMap id="ListResultMap" type="com.bbs.personalblog.dao.entity.News">
+        <result column="news_show_id" property="newsId" jdbcType="VARCHAR"/>
+        <result column="news_show_title" property="newsTitle" jdbcType="VARCHAR"/>
+        <result column="news_show_time" property="newsTime" jdbcType="VARCHAR"/>
+        <result column="news_show_from" property="newsFrom" jdbcType="VARCHAR"/>
+        <result column="news_show_summary" property="newsSummary" jdbcType="VARCHAR"/>
+        <result column="news_show_content" property="newsContent" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insertHotNewsList" parameterType="java.util.List">
+
+        INSERT INTO news_hot_table (
+        news_show_id,
+        news_show_title,
+        news_show_time,
+        news_show_from,
+        news_show_summary,
+        news_show_content)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.newsId,jdbcType=VARCHAR},
+            #{item.newsTitle,jdbcType=VARCHAR},
+            #{item.newsTime,jdbcType=VARCHAR},
+            #{item.newsFrom,jdbcType=VARCHAR},
+            #{item.newsSummary,jdbcType=VARCHAR},
+            #{item.newsContent,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <insert id="insertNewNewsList" parameterType="java.util.List">
+
+        INSERT INTO news_new_table (
+        news_show_id,
+        news_show_title,
+        news_show_time,
+        news_show_from,
+        news_show_summary,
+        news_show_content)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.newsId,jdbcType=VARCHAR},
+            #{item.newsTitle,jdbcType=VARCHAR},
+            #{item.newsTime,jdbcType=VARCHAR},
+            #{item.newsFrom,jdbcType=VARCHAR},
+            #{item.newsSummary,jdbcType=VARCHAR},
+            #{item.newsContent,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <select id="showTopNewsList" resultMap="ListResultMap">
+        SELECT
+        n.news_show_id,
+        n.news_show_title,
+        n.news_show_time,
+        n.news_show_from,
+        n.news_show_summary,
+        n.news_show_content
+        FROM
+        news_hot_table n
+        LIMIT 0,6
+    </select>
+
+    <select id="showHotNewsList" resultMap="ListResultMap">
+        SELECT
+        n.news_show_id,
+        n.news_show_title,
+        n.news_show_time,
+        n.news_show_from,
+        n.news_show_summary,
+        n.news_show_content
+        FROM
+        news_hot_table n
+    </select>
+
+    <select id="showNewNewsList" resultMap="ListResultMap">
+        SELECT
+        n.news_show_id,
+        n.news_show_title,
+        n.news_show_time,
+        n.news_show_from,
+        n.news_show_summary,
+        n.news_show_content
+        FROM
+        news_new_table n
+    </select>
+
+    <!--博客详情-->
+    <select id="showNewsDetail" resultMap="ListResultMap">
+        SELECT
+        n.news_show_id,
+        n.news_show_title,
+        n.news_show_time,
+        n.news_show_from,
+        n.news_show_summary,
+        n.news_show_content
+        <if test="type == 0">
+            FROM
+            news_new_table n
+        </if>
+        <if test="type == 1">
+            FROM
+            news_hot_table n
+        </if>
+        WHERE
+        n.news_show_id = #{id,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

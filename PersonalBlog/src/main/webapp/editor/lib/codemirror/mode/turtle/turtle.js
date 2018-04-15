@@ -19,7 +19,7 @@ CodeMirror.defineMode("turtle", function(config) {
     return new RegExp("^(?:" + words.join("|") + ")$", "i");
   }
   var ops = wordRegexp([]);
-  var keywords = wordRegexp(["@prefix", "@base", "a"]);
+  var keywords = wordRegexp(["@prefix", "@common", "a"]);
   var operatorChars = /[*+\-<>=&|]/;
 
   function tokenBase(stream, state) {
