@@ -10,6 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public abstract class BaseEvent {
 
+    public BaseEvent() {
+    }
+
     // 请求解析方法
     public abstract void resolve() throws Exception;
 

@@ -1,6 +1,8 @@
 package com.bbs.personalblog.businesswork.controller;
 
 import com.bbs.personalblog.businesswork.common.Common;
+import com.bbs.personalblog.businesswork.common.DispatcherFactory;
+import com.bbs.personalblog.businesswork.common.EventRegistration;
 import com.bbs.personalblog.dao.entity.BlogListPv;
 import com.bbs.personalblog.dao.entity.News;
 import com.bbs.personalblog.dao.entity.Tag;
@@ -28,15 +30,20 @@ public class PbHomeController {
 
     private Logger logger = LoggerFactory.getLogger(PbHomeController.class);
 
-    @Autowired
-    private IBlogCoreService iBlogCoreService;
+    /**
+     * 显示主页博客列表
+     *
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/home")
+    public ModelAndView showHomeView(HttpServletRequest request) throws Exception {
 
-    @Autowired
-    private INewsCoreService iNewsCoreService;
+        logger.info("controller");
 
-    @RequestMapping(value = "/home.do", method = RequestMethod.GET)
-    public ModelAndView showHome(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView();
+        return new DispatcherFactory().getEventHandler(EventRegistration.PB_GET_ALL_BLOG_EVENT, request);
+/*        ModelAndView modelAndView = new ModelAndView();
         String page = request.getParameter("pagenum");
         int nextPage, startPage, endPage;
 
@@ -47,11 +54,11 @@ public class PbHomeController {
         }
         logger.info("翻到第" + nextPage + "页");
 
-        /**
+        *//**
          * 主页的博客列表通过pv来进行排序
          * 目前的想法是在mybatis写两个显示方法
          * 一个通过pv给主页排序，一个通过时间给博客列表排序
-         */
+         *//*
         PageInfo<BlogListPv> pageInfo = iBlogCoreService.showBlogList(nextPage, Common.homeFrom, Common.sendStatus, Common.blogListFromId);
 
         if (pageInfo.getPages() < 6) {
@@ -82,11 +89,10 @@ public class PbHomeController {
         modelAndView.addObject("totalPages", pageInfo.getPages());
         modelAndView.addObject("nextPages", pageInfo.getPageNum());
         modelAndView.addObject("hotNewsList", shortNewsList);
-        modelAndView.setViewName("home");
-        return modelAndView;
+        modelAndView.setViewName("home");*/
     }
 
-    @RequestMapping(value = "/showTagList.do", method = RequestMethod.GET)
+/*    @RequestMapping(value = "/showTagList.do", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, List<Tag>> showTagList() {
         Map<String, List<Tag>> map = new HashMap<>();
@@ -94,5 +100,18 @@ public class PbHomeController {
         logger.debug("tag size:" + tagList.size());
         map.put("tagMap", tagList);
         return map;
+    }*/
+
+    /**
+     * 标签云
+     *
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/showTagList", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView showTagList(HttpServletRequest request) throws Exception {
+        return new DispatcherFactory().getEventHandler(EventRegistration.SHOW_TAG_LIST, request);
     }
 }

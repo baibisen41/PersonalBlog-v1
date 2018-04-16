@@ -2,7 +2,9 @@ package com.bbs.personalblog.businesswork.common;
 
 import com.bbs.personalblog.base.BaseDispatcherFactory;
 import com.bbs.personalblog.base.BaseEvent;
+import com.bbs.personalblog.businesswork.event.PbBlogListEvent;
 import com.bbs.personalblog.businesswork.event.PbLoginEvent;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,10 +18,12 @@ public class DispatcherFactory extends BaseDispatcherFactory {
     private BaseEvent baseEvent = null;
 
     //搭建接口工厂
-    public BaseEvent getEventHandler(Integer eventType, HttpServletRequest request) {
+    public ModelAndView getEventHandler(Integer eventType, HttpServletRequest request) throws Exception {
         switch (eventType) {
+            case 0:
+                baseEvent = new PbBlogListEvent(request);
+                break;
             case 1:
-                baseEvent = new PbLoginEvent(request);
                 break;
             case 2:
                 break;
@@ -30,6 +34,12 @@ public class DispatcherFactory extends BaseDispatcherFactory {
             case 5:
                 break;
         }
-        return baseEvent;
+
+        return getModelAndView(baseEvent);
+    }
+
+    private ModelAndView getModelAndView(BaseEvent baseEvent) throws Exception {
+
+        return baseEvent.execute();
     }
 }

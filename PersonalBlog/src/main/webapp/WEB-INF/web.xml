@@ -29,13 +29,13 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:applicationContext.xml</param-value>
+        <param-value>classpath:beans/applicationContext.xml</param-value>
     </context-param>
 
     <!--设置log4j的配置文件位置-->
     <context-param>
         <param-name>log4jConfigLocation</param-name>
-        <param-value>classpath:log4j.properties</param-value>
+        <param-value>classpath:props/log4j.properties</param-value>
     </context-param>
     <!--使用监听加载log4j的配置文件-->
     <listener>
@@ -49,7 +49,7 @@
         </servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath*:springmvc-servlet.xml</param-value>
+            <param-value>classpath:beans/springmvc-servlet.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
