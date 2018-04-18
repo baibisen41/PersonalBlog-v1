@@ -3,6 +3,7 @@ package com.bbs.personalblog.businesswork.controller;
 import com.bbs.personalblog.businesswork.common.Common;
 import com.bbs.personalblog.businesswork.common.DispatcherFactory;
 import com.bbs.personalblog.businesswork.common.EventRegistration;
+import com.bbs.personalblog.businesswork.common.MainTask;
 import com.bbs.personalblog.dao.entity.BlogListPv;
 import com.bbs.personalblog.dao.entity.News;
 import com.bbs.personalblog.dao.entity.Tag;
@@ -42,7 +43,7 @@ public class PbHomeController {
 
         logger.info("controller");
 
-        return new DispatcherFactory().getEventHandler(EventRegistration.PB_GET_ALL_BLOG_EVENT, request);
+        return new MainTask().mainEventHandler(EventRegistration.PB_GET_ALL_BLOG_EVENT, request);
 /*        ModelAndView modelAndView = new ModelAndView();
         String page = request.getParameter("pagenum");
         int nextPage, startPage, endPage;
@@ -112,6 +113,6 @@ public class PbHomeController {
     @RequestMapping(value = "/showTagList", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView showTagList(HttpServletRequest request) throws Exception {
-        return new DispatcherFactory().getEventHandler(EventRegistration.SHOW_TAG_LIST, request);
+        return new MainTask().mainEventHandler(EventRegistration.SHOW_TAG_LIST, request);
     }
 }

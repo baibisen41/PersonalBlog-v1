@@ -17,5 +17,8 @@ public abstract class BaseEvent {
     public abstract void resolve() throws Exception;
 
     // 请求执行方法
-    public abstract ModelAndView execute() throws Exception;
+    public ModelAndView execute() throws Exception {
+        resolve();
+        return null;
+    }
 }

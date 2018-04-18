@@ -11,5 +11,5 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class BaseDispatcherFactory {
 
-    public abstract ModelAndView getEventHandler(Integer eventType, HttpServletRequest request) throws Exception;
+    public abstract BaseEvent getEventHandler(Integer eventType, HttpServletRequest request) throws Exception;
 }

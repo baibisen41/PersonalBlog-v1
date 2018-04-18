@@ -15,10 +15,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class DispatcherFactory extends BaseDispatcherFactory {
 
-    private BaseEvent baseEvent = null;
-
     //搭建接口工厂
-    public ModelAndView getEventHandler(Integer eventType, HttpServletRequest request) throws Exception {
+    public BaseEvent getEventHandler(Integer eventType, HttpServletRequest request) throws Exception {
+        BaseEvent baseEvent = null;
         switch (eventType) {
             case 0:
                 baseEvent = new PbBlogListEvent(request);
@@ -35,11 +34,6 @@ public class DispatcherFactory extends BaseDispatcherFactory {
                 break;
         }
 
-        return getModelAndView(baseEvent);
-    }
-
-    private ModelAndView getModelAndView(BaseEvent baseEvent) throws Exception {
-
-        return baseEvent.execute();
+        return baseEvent;
     }
 }

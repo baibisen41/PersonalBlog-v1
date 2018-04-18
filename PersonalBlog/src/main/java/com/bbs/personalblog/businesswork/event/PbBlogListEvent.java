@@ -1,10 +1,8 @@
 package com.bbs.personalblog.businesswork.event;
 
 import com.bbs.personalblog.base.BaseEvent;
-import com.bbs.personalblog.businesswork.service.PbBlogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,9 +22,6 @@ public class PbBlogListEvent extends BaseEvent {
 
     private String blogPageNum;
 
-    @Autowired
-    private PbBlogService pbBlogService;
-
     public PbBlogListEvent() {
     }
 
@@ -43,7 +38,9 @@ public class PbBlogListEvent extends BaseEvent {
     @Override
     public ModelAndView execute() throws Exception {
         logger.info("event execute");
-        return pbBlogService.getBlogList(this);
+//        pbBlogService = AppContext.getBean(PbBlogServiceImpl.class);
+//        pbBlogService.getBlogList(this);
+        return null;
     }
 
     private final static class Keys {
