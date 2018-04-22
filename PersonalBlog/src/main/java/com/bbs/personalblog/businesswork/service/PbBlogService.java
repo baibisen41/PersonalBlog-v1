@@ -1,7 +1,10 @@
 package com.bbs.personalblog.businesswork.service;
 
-import com.bbs.personalblog.businesswork.event.PbBlogListEvent;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 /**
  * User: baibisen
@@ -9,6 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public interface PbBlogService {
 
-    ModelAndView getBlogList(PbBlogListEvent event) throws Exception;
+    ModelAndView getBlogList(Map<String, String> map) throws Exception;
 
+    JSONArray getTagList() throws Exception;
+
+    ModelAndView getBlogDetail(Map<String, Object> map) throws Exception;
 }

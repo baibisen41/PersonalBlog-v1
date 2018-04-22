@@ -28,7 +28,7 @@ public class PbLifeController {
     @RequestMapping(value = "/showLifeList.do")
     public ModelAndView showLifeList(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        String page = request.getParameter("pagenum");
+/*        String page = request.getParameter("pagenum");
         int nextPage, startPage, endPage;
         if (StringUtils.isEmpty(page)) {
             nextPage = 1;
@@ -61,7 +61,7 @@ public class PbLifeController {
         modelAndView.addObject("blogList", lifePageInfo.getList());
         modelAndView.addObject("totalPages", lifePageInfo.getPages());
         modelAndView.addObject("nextPages", lifePageInfo.getPageNum());
-        modelAndView.setViewName("show_life_list");
+        modelAndView.setViewName("show_life_list");*/
         return modelAndView;
     }
 }

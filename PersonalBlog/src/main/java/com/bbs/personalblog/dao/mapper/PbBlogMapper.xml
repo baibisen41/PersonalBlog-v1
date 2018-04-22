@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bbs.personalblog.dao.dao.PbBlogDao">
+
+    <insert id="insertBlogDetail" parameterType="com.bbs.personalblog.dao.entity.Blog">
+        INSERT INTO blog_show_table (
+	    b_show_id,
+	    b_show_title,
+	    b_show_label,
+	    b_show_time,
+	    b_simple_content,
+	    b_full_content,
+	    b_send_flag,
+	    b_pic_url,
+	    b_show_ip,
+	    b_author_id,
+	    b_from_id)
+        VALUES
+	  (
+		#{blogId,jdbcType=VARCHAR},
+		#{blogTitle,jdbcType=VARCHAR},
+		#{blogLabel,jdbcType=VARCHAR},
+		#{blogTime,jdbcType=VARCHAR},
+		#{blogSimpleContent,jdbcType=VARCHAR},
+		#{blogContent,jdbcType=VARCHAR},
+		#{sendStatus,jdbcType=INTEGER},
+		#{blogPicUrl,jdbcType=VARCHAR},
+		#{ip,jdbcType=VARCHAR},
+		#{blogAuthorId,jdbcType=INTEGER},
+		#{blogFromId,jdbcType=INTEGER})
+    </insert>
+
+    <select id="selectAllBlogByDate" resultType="com.bbs.personalblog.dao.entity.Blog">
+        SELECT
+        pb.id AS id,
+        pb.title AS title,
+        pb.tag AS tag,
+        pb.summary AS summary,
+        pb.type AS type,
+        pb.status AS status,
+        pb.create_date AS createDate,
+        ps.name AS userName,
+        pv.blog_pv AS blogPv
+        FROM
+        pb_blog pb
+        INNER JOIN pb_user ps ON pb.user_id = ps.id
+        INNER JOIN pb_blog_pv pv ON pb.id = pv.id
+        ORDER BY
+        pb.create_date DESC
+    </select>
+
+    <select id="showTagList" resultType="com.bbs.personalblog.dao.entity.Blog">
+        SELECT
+        b.b_show_label AS label ,
+        COUNT(*) AS "count"
+        FROM
+        blog_show_table b
+        GROUP BY
+        b.b_show_label
+    </select>
+
+    <select id="showBlogDetail" resultMap="BlogDetailResultMap">
+        SELECT
+	    b.b_show_id,
+	    b.b_show_title,
+        b.b_show_label,
+        b.b_show_time,
+        b.b_full_content,
+        b.b_pic_url,
+        b.b_author_id,
+        u.user_name,
+        p.p_show_count,
+        b.b_from_id
+        FROM
+            blog_show_table b
+        RIGHT JOIN user_table u ON b.b_author_id = u.user_id
+        RIGHT JOIN pv_show_table p ON b.b_show_id = p.b_show_id
+        WHERE
+            b.b_show_id = #{blogId,jdbcType=VARCHAR}
+    </select>
+
+    <update id="increaseBlogPv" parameterType="java.lang.String">
+        update pv_show_table
+        set p_show_count=p_show_count+1
+        where b_show_id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+
+</mapper>

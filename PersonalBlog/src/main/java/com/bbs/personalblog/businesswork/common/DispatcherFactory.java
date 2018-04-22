@@ -2,9 +2,6 @@ package com.bbs.personalblog.businesswork.common;
 
 import com.bbs.personalblog.base.BaseDispatcherFactory;
 import com.bbs.personalblog.base.BaseEvent;
-import com.bbs.personalblog.businesswork.event.PbBlogListEvent;
-import com.bbs.personalblog.businesswork.event.PbLoginEvent;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,7 +17,6 @@ public class DispatcherFactory extends BaseDispatcherFactory {
         BaseEvent baseEvent = null;
         switch (eventType) {
             case 0:
-                baseEvent = new PbBlogListEvent(request);
                 break;
             case 1:
                 break;

@@ -1,24 +1,18 @@
-package com.bbs.personalblog.dao.entity;
+package com.bbs.personalblog.businesswork.result;
 
 /**
- * Created by 大森 on 2017/11/13.
+ * User: baibisen
+ * Date: 2018/4/22
  */
-public class Blog {
+public class PbBlogDetailResult {
 
     private String id;
     private String title;
     private String tag;
-    private String summary;
     private String content;
-    private Integer type;
-    private Integer status;
-    private String ip;
     private String createDate;
-
-    private String userId;
     private String userName;
-    private Integer tagCount;//标签数
-    private Integer blogPv;//文章访问量
+    private Integer blogPv;
 
     public String getId() {
         return id;
@@ -44,14 +38,6 @@ public class Blog {
         this.tag = tag;
     }
 
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
     public String getContent() {
         return content;
     }
@@ -60,52 +46,12 @@ public class Blog {
         this.content = content;
     }
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
     public String getCreateDate() {
         return createDate;
     }
 
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public Integer getTagCount() {
-        return tagCount;
-    }
-
-    public void setTagCount(Integer tagCount) {
-        this.tagCount = tagCount;
     }
 
     public String getUserName() {

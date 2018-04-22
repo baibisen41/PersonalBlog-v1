@@ -7,5 +7,7 @@ package com.bbs.personalblog.businesswork.common;
  */
 public class ViewRegistration {
 
-    public final static String PB_LOGIN_VIEW = "login_view";
+    public final static String PB_HOME_BLOG_VIEW = "home";
+
+    public final static String PB_BLOG_DETAIL = "show_blog_detail";
 }

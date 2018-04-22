@@ -38,7 +38,7 @@ public class PbBlogController {
     @ResponseBody
     public ModelAndView showBlogList(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        String page = request.getParameter("pagenum");
+/*        String page = request.getParameter("pagenum");
         int nextPage, startPage, endPage;
 
         if (StringUtils.isEmpty(page)) {
@@ -76,38 +76,38 @@ public class PbBlogController {
         modelAndView.addObject("totalPages", pageInfo.getPages());
         modelAndView.addObject("nextPages", pageInfo.getPageNum());
 //        modelAndView.addObject("labelList", labelSet);
-        modelAndView.setViewName("show_blog_list");
+        modelAndView.setViewName("show_blog_list");*/
         return modelAndView;
     }
 
     //详情
-    @RequestMapping("/showBlogDetail.do")
-    public ModelAndView showBlogDetail(@RequestParam("id") String blogId) {
-        ModelAndView modelAndView = new ModelAndView();
-        logger.info("选择博客id:" + blogId);
-
-        //访问量 + 文章详情
-        Map<String, Object> map = iBlogCoreService.showBlogDetail(blogId);
-
-        List<ReplyDetail> replyDetailList = iBlogCoreService.showReplyDetail(blogId);
-        for (ReplyDetail replyDetail : replyDetailList) {
-            logger.info("回复信息：" + replyDetail.getReplyAuthorName() + ";内容：" + replyDetail.getReplyContent());
-        }
-
-//        modelAndView.addObject("blogDetailPv", map.get("pvCount"));
-        modelAndView.addObject("blogDetail", map.get("blogDetail"));
-        modelAndView.addObject("blogDetailFlag", Common.blogDetailFlag);
-        modelAndView.addObject("replyDetail", replyDetailList);
-        modelAndView.setViewName("show_blog_detail");
-        return modelAndView;
-    }
+//    @RequestMapping("/showBlogDetail.do")
+//    public ModelAndView showBlogDetail(@RequestParam("id") String blogId) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        logger.info("选择博客id:" + blogId);
+//
+//        //访问量 + 文章详情
+//        Map<String, Object> map = iBlogCoreService.showBlogDetail(blogId);
+//
+//        List<ReplyDetail> replyDetailList = iBlogCoreService.showReplyDetail(blogId);
+//        for (ReplyDetail replyDetail : replyDetailList) {
+//            logger.info("回复信息：" + replyDetail.getReplyAuthorName() + ";内容：" + replyDetail.getReplyContent());
+//        }
+//
+////        modelAndView.addObject("blogDetailPv", map.get("pvCount"));
+//        modelAndView.addObject("blogDetail", map.get("blogDetail"));
+//        modelAndView.addObject("blogDetailFlag", Common.blogDetailFlag);
+//        modelAndView.addObject("replyDetail", replyDetailList);
+//        modelAndView.setViewName("show_blog_detail");
+//        return modelAndView;
+//    }
 
     //编辑
     @RequestMapping(value = "/editBlogDetails.do", method = RequestMethod.POST)
     @ResponseBody
     public Map editBlogDetail(HttpServletRequest request, HttpServletResponse response) {
         Map map = new HashMap();
-        Blog blog = new Blog();
+/*        Blog blog = new Blog();
         PV pv = new PV();
         String strTitle = request.getParameter("blog_title_text");
         String strLabel = request.getParameter("blog_label_hidden");
@@ -147,7 +147,7 @@ public class PbBlogController {
                 map.put("respStatus", "200");
                 map.put("resultView", "home.jsp");
             }
-        }
+        }*/
         return map;
     }
 

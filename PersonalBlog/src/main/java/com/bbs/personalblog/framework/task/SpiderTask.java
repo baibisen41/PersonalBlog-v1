@@ -7,7 +7,6 @@ import com.bbs.personalblog.framework.utils.DateTimeUtil;
 import com.bbs.personalblog.framework.utils.JedisUtil;
 import com.bbs.personalblog.framework.utils.KeyIdUtil;
 import com.bbs.personalblog.framework.utils.SpecialWordUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -268,24 +267,25 @@ public class SpiderTask {
      */
     private synchronized int saveContentHandler(int from, Map<String, List<News>> newsMap) {
         int saveResultCode = 200;
-        try {
-            logger.error("本次处理来自：" + from + " 的请求");
-            ObjectMapper objectMapper = new ObjectMapper();
-            JedisUtil jedisUtil = JedisUtil.getInstance();
-
-            if (from == 0) {
-
-                int result = iNewsCoreService.insertNewNewsList(newsMap.get("newNewsMapKey"));
-                logger.info("SpiderTask插入最新资讯结果：" + result);
-            } else {
-
-                int result = iNewsCoreService.insertHotNewsList(newsMap.get("hotNewsMapKey"));
-                logger.info("SpiderTask插入最新资讯结果：" + result);
-            }
-        } catch (Throwable e) {
-            e.printStackTrace();
-            saveResultCode = 500;
-        }
+        //暂时先屏蔽 等项目重构完再重新打开2018.4.22
+//        try {
+//            logger.error("本次处理来自：" + from + " 的请求");
+//            ObjectMapper objectMapper = new ObjectMapper();
+//            JedisUtil jedisUtil = JedisUtil.getInstance();
+//
+//            if (from == 0) {
+//
+//                int result = iNewsCoreService.insertNewNewsList(newsMap.get("newNewsMapKey"));
+//                logger.info("SpiderTask插入最新资讯结果：" + result);
+//            } else {
+//
+//                int result = iNewsCoreService.insertHotNewsList(newsMap.get("hotNewsMapKey"));
+//                logger.info("SpiderTask插入最新资讯结果：" + result);
+//            }
+//        } catch (Throwable e) {
+//            e.printStackTrace();
+//            saveResultCode = 500;
+//        }
         return saveResultCode;
     }
 

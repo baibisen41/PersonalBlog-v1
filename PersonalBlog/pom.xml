@@ -7,31 +7,48 @@
     <version>1.0-SNAPSHOT</version>
     <name>SchoolServer Maven Webapp</name>
     <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.version>4.1.4.RELEASE</spring.version>
+        <fastjson.version>1.2.46</fastjson.version>
+        <!--<netty.version>4.0.24.Final</netty.version>-->
+        <!--<jedis.version>2.9.0</jedis.version>-->
+        <!--<disruptor.version>3.3.0</disruptor.version>-->
+        <!--<mysql.connector.version>5.1.32</mysql.connector.version>-->
+        <!--<slf4j.version>1.7.25</slf4j.version>-->
+        <!--<logback.version>1.2.3</logback.version>-->
+        <!--<dubbo.version>2.6.1</dubbo.version>-->
+        <!--<druid.version>1.1.6</druid.version>-->
+        <!--<common.lang3.version>3.3.2</common.lang3.version>-->
+        <!--<metrics.version>4.0.2</metrics.version>-->
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>4.1.4.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <!-- http://mvnrepository.com/artifact/org.springframework/spring-web -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>4.1.4.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <!-- http://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>4.1.4.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>4.1.4.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
@@ -141,16 +158,22 @@
         </dependency>
 
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>2.6.3</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.6.3</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+        <!--<artifactId>jackson-core</artifactId>-->
+        <!--<version>2.6.3</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+        <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+        <!--<artifactId>jackson-databind</artifactId>-->
+        <!--<version>2.6.3</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>junit</groupId>

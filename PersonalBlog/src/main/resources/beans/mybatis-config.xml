@@ -11,8 +11,8 @@
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <array>
-                <value>classpath:props/jdbc.properties</value>
-                <value>classpath:props/redis.properties</value>
+                <value>classpath*:props/jdbc.properties</value>
+                <value>classpath*:props/redis.properties</value>
             </array>
         </property>
     </bean>
@@ -41,7 +41,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <!-- 自动扫描mapping.xml文件 -->
-        <property name="mapperLocations" value="classpath*:com/bbs/personalblog/dao/mapper/NewsCoreMapper.xml"></property>
+        <property name="mapperLocations" value="classpath*:com/bbs/personalblog/dao/mapper/*.xml"></property>
         <!--设置pageHelper-->
         <property name="configLocation" value="classpath:props/pagehelper-config.xml"></property>
     </bean>
