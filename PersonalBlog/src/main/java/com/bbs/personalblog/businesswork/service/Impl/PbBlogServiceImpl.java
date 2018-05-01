@@ -3,8 +3,6 @@ package com.bbs.personalblog.businesswork.service.Impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.bbs.personalblog.base.BaseServiceImpl;
-import com.bbs.personalblog.businesswork.common.Common;
 import com.bbs.personalblog.businesswork.result.PbBlogDetailResult;
 import com.bbs.personalblog.businesswork.service.PbBlogService;
 import com.bbs.personalblog.dao.dao.PbBlogDao;
@@ -19,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -52,7 +49,7 @@ public class PbBlogServiceImpl extends BaseServiceImpl implements PbBlogService 
             pageNum = Integer.parseInt(map.get("pageNum"));
         }
         PageHelper.startPage(pageNum, 10);
-        PageInfo<Blog> blogPageInfo = new PageInfo<>(pbBlogDao.selectAllBlogByDate(pageNum, blogType));
+        PageInfo<Blog> blogPageInfo = new PageInfo<>(pbBlogDao.selectBlogByType(blogType));
         if (blogPageInfo.getPageSize() <= 6) {
             pageStart = 1;
             pageEnd = 6;
@@ -74,11 +71,24 @@ public class PbBlogServiceImpl extends BaseServiceImpl implements PbBlogService 
         return resultMap;
     }
 
+    /**
+     * 标签列表
+     *
+     * @return
+     * @throws Exception
+     */
     @Override
     public JSONArray getTagList() throws Exception {
         return JSONArray.parseArray(JSON.toJSONString(pbBlogDao.selectTagCount()));
     }
 
+    /**
+     * 文章详情
+     *
+     * @param map
+     * @return
+     * @throws Exception
+     */
     @Override
     public ModelAndView getBlogDetail(Map<String, Object> map) throws Exception {
         final String blogId = String.valueOf(map.get("blogId"));
@@ -92,5 +102,17 @@ public class PbBlogServiceImpl extends BaseServiceImpl implements PbBlogService 
         result.setBlogPv(blog.getBlogPv());
         result.setCreateDate(blog.getCreateDate());
         return new ModelAndView().addObject("blogDetail", result);
+    }
+
+    /**
+     * 文章排行榜
+     *
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public JSONArray getBlogRank(Map<String, Object> map) throws Exception {
+        final Integer blogCount = Integer.parseInt(map.get("blogCount").toString());
+        return JSONArray.parseArray(JSONObject.toJSONString(pbBlogDao.selectBlogByCount(blogCount)));
     }
 }

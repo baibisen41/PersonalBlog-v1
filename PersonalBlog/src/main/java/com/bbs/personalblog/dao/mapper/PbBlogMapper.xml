@@ -30,61 +30,59 @@
 		#{blogFromId,jdbcType=INTEGER})
     </insert>
 
-    <select id="selectAllBlogByDate" resultType="com.bbs.personalblog.dao.entity.Blog">
+    <select id="selectBlogByType" parameterType="Integer" resultType="com.bbs.personalblog.dao.entity.Blog">
         SELECT
-        pb.id AS id,
-        pb.title AS title,
-        pb.tag AS tag,
-        pb.summary AS summary,
-        pb.type AS type,
-        pb.status AS status,
-        pb.create_date AS createDate,
-        ps.name AS userName,
-        pv.blog_pv AS blogPv
+            pb.id AS id,
+            pb.title AS title,
+            pb.tag AS tag,
+            pb.summary AS summary,
+            pb.type AS type,
+            pb. STATUS AS STATUS,
+            pb.create_date AS createDate,
+            ps. NAME AS userName,
+            pv.blog_pv AS blogPv
         FROM
-        pb_blog pb
+            pb_blog pb
         INNER JOIN pb_user ps ON pb.user_id = ps.id
         INNER JOIN pb_blog_pv pv ON pb.id = pv.id
-        ORDER BY
-        pb.create_date DESC
-    </select>
-
-    <select id="showTagList" resultType="com.bbs.personalblog.dao.entity.Blog">
-        SELECT
-        b.b_show_label AS label ,
-        COUNT(*) AS "count"
-        FROM
-        blog_show_table b
-        GROUP BY
-        b.b_show_label
-    </select>
-
-    <select id="showBlogDetail" resultMap="BlogDetailResultMap">
-        SELECT
-	    b.b_show_id,
-	    b.b_show_title,
-        b.b_show_label,
-        b.b_show_time,
-        b.b_full_content,
-        b.b_pic_url,
-        b.b_author_id,
-        u.user_name,
-        p.p_show_count,
-        b.b_from_id
-        FROM
-            blog_show_table b
-        RIGHT JOIN user_table u ON b.b_author_id = u.user_id
-        RIGHT JOIN pv_show_table p ON b.b_show_id = p.b_show_id
         WHERE
-            b.b_show_id = #{blogId,jdbcType=VARCHAR}
+            pb.type = #{blogType}
+        ORDER BY
+            pb.create_date DESC
+    </select>
+
+    <select id="selectTagCount" resultType="com.bbs.personalblog.dao.entity.Tag">
+        SELECT
+            b.tag AS label,
+            COUNT(*) AS count
+        FROM
+            pb_blog b
+        GROUP BY
+            b.tag
+    </select>
+
+    <select id="selectBlogById" parameterType="String" resultMap="com.bbs.personalblog.dao.entity.Blog">
+        SELECT
+            p.id AS id,
+            p.title AS title,
+            p.create_date AS createDate,
+            p.content AS content,
+            p.tag AS tag,
+            pu.name AS userName,
+            pv.blog_pv AS blogPv
+        FROM
+            pb_blog p
+        RIGHT JOIN pb_user pu ON p.user_id = pu.id
+        RIGHT JOIN pb_blog_pv pv ON pv.id = p.id
+        WHERE
+            p.id = #{id}
     </select>
 
     <update id="increaseBlogPv" parameterType="java.lang.String">
-        update pv_show_table
-        set p_show_count=p_show_count+1
-        where b_show_id = #{id,jdbcType=VARCHAR}
+        update pb_blog_pv
+        set blog_pv=blog_pv+1
+        where id = #{id,jdbcType=VARCHAR}
     </update>
-
 
 
 </mapper>

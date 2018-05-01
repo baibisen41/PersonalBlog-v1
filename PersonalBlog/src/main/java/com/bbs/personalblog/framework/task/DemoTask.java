@@ -1,7 +1,6 @@
 package com.bbs.personalblog.framework.task;
 
 import com.bbs.personalblog.businesswork.common.Common;
-import com.bbs.personalblog.dao.entity.News;
 import com.bbs.personalblog.framework.utils.DateTimeUtil;
 import com.bbs.personalblog.framework.utils.SpecialWordUtil;
 import org.jsoup.nodes.Document;
@@ -24,7 +23,7 @@ public class DemoTask {
 //    @Autowired
 //    public INewsCoreService iNewsCoreService;
 
-    private static Logger logger = LoggerFactory.getLogger(DemoTask.class);
+/*    private static Logger logger = LoggerFactory.getLogger(DemoTask.class);
 
     public void testHandler() {
         logger.error("测试！");
@@ -65,10 +64,10 @@ public class DemoTask {
                 String contentUrl = elementsContent.get(j).getElementsByTag("a").attr("href");
                 Document docContent = new SpiderTask().getDocument(Common.newsUrl + contentUrl);
 
-/*                logger.info((j + 1) + "标题：" + elementsTitle.get(j).text());
+*//*                logger.info((j + 1) + "标题：" + elementsTitle.get(j).text());
                 logger.info((j + 1) + "时间：" + elementsTime.get(j).select("span.gray").text());
                 logger.info((j + 1) + "描述：" + elementsSummary.get(j).text());
-                logger.info((j + 1) + "内容：" + docContent.select("#news_body").select("p").text() + "\n");*/
+                logger.info((j + 1) + "内容：" + docContent.select("#news_body").select("p").text() + "\n");*//*
 
                 news.setNewsTitle(elementsTitle.get(j).text());
                 news.setNewsTime(elementsTime.get(j).select("span.gray").text());
@@ -109,5 +108,5 @@ public class DemoTask {
         demoTask.spiderDemoHandler();
         //       int i = demoTask.saveSpiderHandler(demoTask.spiderDemoHandler());
 //        logger.info("save result:" + i);
-    }
+    }*/
 }

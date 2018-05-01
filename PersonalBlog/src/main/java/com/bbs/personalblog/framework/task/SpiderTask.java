@@ -1,8 +1,6 @@
 package com.bbs.personalblog.framework.task;
 
 import com.bbs.personalblog.businesswork.common.Common;
-import com.bbs.personalblog.dao.entity.News;
-import com.bbs.personalblog.businesswork.service.INewsCoreService;
 import com.bbs.personalblog.framework.utils.DateTimeUtil;
 import com.bbs.personalblog.framework.utils.JedisUtil;
 import com.bbs.personalblog.framework.utils.KeyIdUtil;
@@ -27,7 +25,7 @@ import java.util.*;
 @Component
 public class SpiderTask {
 
-    private static Logger logger = LoggerFactory.getLogger(SpiderTask.class);
+ /*   private static Logger logger = LoggerFactory.getLogger(SpiderTask.class);
 
     private static volatile boolean isFinish = false;
 
@@ -51,14 +49,14 @@ public class SpiderTask {
             e.printStackTrace();
         }
         return document;
-    }
+    }*/
 
     public void startFake() {
-        logger.info("假定时任务");
+//        logger.info("假定时任务");
     }
 
     //由于现在数据量不大，可以每两个小时重新抓取一次，并存储，如果后期爬取数据量大的网站再进行优化
-    public void startSpiderHandler() {
+/*    public void startSpiderHandler() {
         List<News> newsList = new ArrayList<>();
 
         //临时改成同步
@@ -70,7 +68,7 @@ public class SpiderTask {
         logger.info("存储结果：" + j);
 
 
-/*        new Thread(new Runnable() {
+*//*        new Thread(new Runnable() {
             @Override
             public void run() {
                 saveContentHandler(0, spiderNewHandler());
@@ -82,7 +80,7 @@ public class SpiderTask {
             public void run() {
                 saveContentHandler(1, spiderHotHandler());
             }
-        }).start();*/
+        }).start();*//*
     }
 
     private boolean isNeedStop(int from, String getTime) {
@@ -174,10 +172,10 @@ public class SpiderTask {
                 String contentUrl = elementsContent.get(j).getElementsByTag("a").attr("href");
                 Document docContent = getDocument(Common.newsUrl + contentUrl);
 
-/*                logger.info((j + 1) + "标题：" + elementsTitle.get(j).text());
+*//*                logger.info((j + 1) + "标题：" + elementsTitle.get(j).text());
                 logger.info((j + 1) + "时间：" + elementsTime.get(j).select("span.gray").text());
                 logger.info((j + 1) + "描述：" + elementsSummary.get(j).text());
-                logger.info((j + 1) + "内容：" + docContent.select("#news_body").select("p").text() + "\n");*/
+                logger.info((j + 1) + "内容：" + docContent.select("#news_body").select("p").text() + "\n");*//*
 
                 news.setNewsId(KeyIdUtil.getId());
                 news.setNewsTitle(elementsTitle.get(j).text());
@@ -236,10 +234,10 @@ public class SpiderTask {
 //                if (isNeedStop(Common.newsHot, time))
 //                    break ok;
 
-/*                logger.info((j + 1) + "标题：" + elementsTitle.get(j).text());
+*//*                logger.info((j + 1) + "标题：" + elementsTitle.get(j).text());
                 logger.info((j + 1) + "时间：" + elementsTime.get(j).select("span.gray").text());
                 logger.info((j + 1) + "描述：" + elementsSummary.get(j).text());
-                logger.info((j + 1) + "内容：" + docContent.select("#news_body").select("p").text() + "\n");*/
+                logger.info((j + 1) + "内容：" + docContent.select("#news_body").select("p").text() + "\n");*//*
 //                String time = elementsTime.get(j).select("span.gray").text();
 
                 news.setNewsId(KeyIdUtil.getId());
@@ -258,13 +256,13 @@ public class SpiderTask {
         return map;
     }
 
-    /**
+    *//**
      * 后期加入时间标识，防止存入重复的数据
      *
      * @param from
      * @param newsMap
      * @return
-     */
+     *//*
     private synchronized int saveContentHandler(int from, Map<String, List<News>> newsMap) {
         int saveResultCode = 200;
         //暂时先屏蔽 等项目重构完再重新打开2018.4.22
@@ -291,6 +289,6 @@ public class SpiderTask {
 
     public static void main(String[] args) {
         new SpiderTask().startSpiderHandler();
-    }
+    }*/
 
 }
