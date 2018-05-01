@@ -1,10 +1,10 @@
 项目重构后的业务流程
-主要分为base基类，businesswork业务层，framework辅助层，dao数据访问层
+主要分为businesswork业务层，framework辅助层，dao数据访问层
 
-Controller 主要前端控制器 主要用来传递Request  
-Event 主要业务接口 主要用来解析request以及与Service交互，返回ModelAndView  
-DispatcherFactory 主要是Event工厂，创建Event接口  
-MainTask 主要连接Controller和Event的桥梁，并控制Event业务执行  
-EventRegistration Event接口的注册中心  
+Controller 主要前端控制器 每个方法都是一个接口  
+主要分为三部分：用户中心PbUserController;博客中心PbBlogController;购物中心PbMallController  
 ViewRegistration  View页面的注册中心  
-AppContext 手动获取bean
+AppContext 手动获取bean  
+result 用来承接service返回的结果集  
+  
+framework层主要提供非业务方法，提供拦截器，过滤器等
