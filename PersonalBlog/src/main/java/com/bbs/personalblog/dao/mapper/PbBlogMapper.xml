@@ -32,24 +32,26 @@
 
     <select id="selectBlogByType" parameterType="java.lang.Integer" resultType="Blog">
         SELECT
-            pb.id AS id,
-            pb.title AS title,
-            pb.tag AS tag,
-            pb.thumb_pic AS thumbPic,
-            pb.summary AS summary,
-            pb.type AS type,
-            pb.`status` AS status,
-            pb.create_date AS createDate,
-            ps. NAME AS userName,
-            pv.blog_pv AS blogPv
+        pb.id AS id,
+        pb.title AS title,
+        pb.tag AS tag,
+        pb.thumb_pic AS thumbPic,
+        pb.summary AS summary,
+        pb.type AS type,
+        pb.`status` AS status,
+        pb.create_date AS createDate,
+        ps.`name` AS userName,
+        pv.blog_pv AS blogPv
         FROM
-            pb_blog pb
+        pb_blog pb
         INNER JOIN pb_user ps ON pb.user_id = ps.id
         INNER JOIN pb_blog_pv pv ON pb.id = pv.id
-        WHERE
+        <if test="blogType != 0">
+            WHERE
             pb.type = #{blogType}
+        </if>
         ORDER BY
-            pb.create_date DESC
+        pb.create_date DESC
     </select>
 
     <select id="selectTagCount" resultType="com.bbs.personalblog.dao.entity.Tag">

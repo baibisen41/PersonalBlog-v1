@@ -32,6 +32,30 @@
               }
           }
       });
+      $.ajax({
+          url: "<%=request.getContextPath()%>/showBlogList.do?blogType=0",
+          type: "get",
+          dataType: "json",
+          success: function (data) {
+              var html = "";
+              var blogList = $('.blog-List');
+              for (var i = 0; i < data.blogList.length; i++) {
+                  html += "<div class=\"article-list\" style=\"padding-top:10px;\">\n" +
+                      "<figure><img lay-src=\"" + data.blogList[i].thumbPic + "\"></figure>\n" +
+                      "<ul><h3><a href=\"pb_blog_detail_page.jsp\">" + data.blogList[i].title + "</a></h3>\n" +
+                      "<p>" + data.blogList[i].summary + "</p>\n" +
+                      "<p class=\"autor\">\n" +
+                      "<span class=\"lm f_l\"><a href=\"#\">" + data.blogList[i].tag + "</a></span>\n" +
+                      "<span class=\"dtime f_l\">" + data.blogList[i].createDate + "</span>\n" +
+                      "<span class=\"viewnum f_r\">浏览（<a href=\"#\">" + data.blogList[i].blogPv + "</a>）</span>\n" +
+                      "<span class=\"pingl f_r\">评论（<a href=\"#\">" + data[i] + "</a>）</span></p></ul></div>";
+              }
+              blogList.append(html);
+          },
+          error: function (e) {
+
+          }
+      });
   </script>
 
 </head>
@@ -105,24 +129,9 @@
       </div>
       <div class="article-main">
         <h2>最新文章</h2>
-        <div class="article-list">
-          <figure><img lay-src="<%=request.getContextPath()%>/static/images/05.jpg"></figure>
-          <ul>
-            <h3>
-              <a href="pb_blog_detail_page.jsp">住在手机里的朋友</a>
-            </h3>
-            <p>通信时代，无论是初次相见还是老友重逢，交换联系方式，常常是
-              彼此交换名片，然后郑重或是出于礼貌用手机记的过客，
-              通信时代，无论是初次相见还是老友重逢，交换联系方式，常常是彼此交换名片，然后
-              郑重或是出于礼貌用手机记的过客，这种快餐式的通信时代，无论是初次相见还是老友
-              重逢，通信时代，无论是初次相见还是老友重种快餐式的这种快餐式的友谊 ...</p>
-            <p class="autor">
-              <span class="lm f_l"><a href="#">个人博客</a></span>
-              <span class="dtime f_l">2014-02-19</span>
-              <span class="viewnum f_r">浏览（<a href="#">459</a>）</span>
-              <span class="pingl f_r">评论（<a href="#">30</a>）</span></p>
-          </ul>
-        </div>
+
+        <ul class="blog-List"></ul>
+
       </div>
       <!--分页-->
       <div id="page"></div>
