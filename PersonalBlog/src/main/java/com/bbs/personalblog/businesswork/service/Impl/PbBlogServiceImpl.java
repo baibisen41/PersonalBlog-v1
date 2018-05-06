@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -31,7 +32,7 @@ public class PbBlogServiceImpl extends BaseServiceImpl implements PbBlogService 
     @Autowired
     private PbBlogDao pbBlogDao;
 
-    private final static Logger logger = LoggerFactory.getLogger(PbBlogServiceImpl.class);
+    private final static Logger LOG = LoggerFactory.getLogger(PbBlogServiceImpl.class);
 
     /**
      * 拉取博客列表 暂时都按时间排序
@@ -41,8 +42,9 @@ public class PbBlogServiceImpl extends BaseServiceImpl implements PbBlogService 
      * @throws Exception
      */
     @Override
-    public ModelAndView getBlogList(Map<String, String> map) throws Exception {
+    public String getBlogList(Map<String, String> map) throws Exception {
         final Integer blogType = Integer.parseInt(map.get("blogType"));
+        LOG.info("blogServiceImpl:{}", blogType);
         Integer pageNum = 1;
         Integer pageStart, pageEnd;
         if (!StringUtils.isEmpty(map.get("pageNum"))) {
@@ -50,6 +52,7 @@ public class PbBlogServiceImpl extends BaseServiceImpl implements PbBlogService 
         }
         PageHelper.startPage(pageNum, 10);
         PageInfo<Blog> blogPageInfo = new PageInfo<>(pbBlogDao.selectBlogByType(blogType));
+        LOG.info("blogDao:{}", JSONArray.parse(JSON.toJSONString(pbBlogDao.selectBlogByType(blogType))));
         if (blogPageInfo.getPageSize() <= 6) {
             pageStart = 1;
             pageEnd = 6;
@@ -62,13 +65,14 @@ public class PbBlogServiceImpl extends BaseServiceImpl implements PbBlogService 
                 pageEnd = 6;
             }
         }
-        ModelAndView resultMap = new ModelAndView();
-        resultMap.addObject("pageNum", pageNum);
-        resultMap.addObject("pageStart", pageStart);
-        resultMap.addObject("pageEnd", pageEnd);
-        resultMap.addObject("pageSize", blogPageInfo.getPageSize());
-        resultMap.addObject("blogList", blogPageInfo.getList());
-        return resultMap;
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("pageNum", pageNum);
+        resultMap.put("pageStart", pageStart);
+        resultMap.put("pageEnd", pageEnd);
+        resultMap.put("pageSize", blogPageInfo.getPageSize());
+        resultMap.put("blogList", blogPageInfo.getList());
+        LOG.info("blogList:{}", JSON.toJSONString(resultMap));
+        return JSON.toJSONString(resultMap);
     }
 
     /**

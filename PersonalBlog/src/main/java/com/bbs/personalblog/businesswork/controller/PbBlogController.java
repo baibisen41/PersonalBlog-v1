@@ -1,5 +1,7 @@
 package com.bbs.personalblog.businesswork.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.bbs.personalblog.businesswork.common.*;
 import com.bbs.personalblog.businesswork.service.PbBlogService;
 import org.slf4j.Logger;
@@ -37,24 +39,25 @@ public class PbBlogController extends BaseController {
      * @throws Exception
      */
     @RequestMapping("/showBlogList")
-    public ModelAndView showBlogList(HttpServletRequest request) throws Exception {
+    public void showBlogList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 1.获取参数
         final String pageNum = getRequestParams(request, "pageNum");
         final String blogType = getRequestParams(request, "blogType");
+        logger.info("blogType:{}", blogType);
         // 2.执行service
         Map<String, String> map = new HashMap<>();
         map.put("pageNum", pageNum);
         map.put("blogType", blogType);
-        ModelAndView modelAndView = pbBlogService.getBlogList(map);
+        // ModelAndView modelAndView = pbBlogService.getBlogList(map);
         // 3.返回值
-        modelAndView.setViewName(ViewRegistration.PB_HOME_BLOG_VIEW);
-        return modelAndView;
+        // modelAndView.setViewName(ViewRegistration.PB_HOME_BLOG_VIEW);
+        response.getWriter().write(pbBlogService.getBlogList(map));
     }
 
     @RequestMapping("/showBlogDetail")
     public ModelAndView showBlogDetail(HttpServletRequest request) throws Exception {
         final String blogId = getRequestParams(request, "id");
-        logger.info("选择博客id:" + blogId);
+        logger.info("选择博客id:{}", blogId);
 
         Map<String, Object> map = new HashMap<>();
         map.put("blogId", blogId);

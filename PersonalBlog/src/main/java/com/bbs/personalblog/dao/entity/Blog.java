@@ -8,6 +8,7 @@ public class Blog {
     private String id;
     private String title;
     private String tag;
+    private String thumbPic;
     private String summary;
     private String content;
     private Integer type;
@@ -42,6 +43,14 @@ public class Blog {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getThumbPic() {
+        return thumbPic;
+    }
+
+    public void setThumbPic(String thumbPic) {
+        this.thumbPic = thumbPic;
     }
 
     public String getSummary() {

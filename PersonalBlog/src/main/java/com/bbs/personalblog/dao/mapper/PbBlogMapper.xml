@@ -30,14 +30,15 @@
 		#{blogFromId,jdbcType=INTEGER})
     </insert>
 
-    <select id="selectBlogByType" parameterType="Integer" resultType="com.bbs.personalblog.dao.entity.Blog">
+    <select id="selectBlogByType" parameterType="java.lang.Integer" resultType="Blog">
         SELECT
             pb.id AS id,
             pb.title AS title,
             pb.tag AS tag,
+            pb.thumb_pic AS thumbPic,
             pb.summary AS summary,
             pb.type AS type,
-            pb. STATUS AS STATUS,
+            pb.`status` AS status,
             pb.create_date AS createDate,
             ps. NAME AS userName,
             pv.blog_pv AS blogPv
@@ -61,7 +62,7 @@
             b.tag
     </select>
 
-    <select id="selectBlogById" parameterType="String" resultMap="com.bbs.personalblog.dao.entity.Blog">
+    <select id="selectBlogById" parameterType="String" resultType="com.bbs.personalblog.dao.entity.Blog">
         SELECT
             p.id AS id,
             p.title AS title,

@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public interface PbBlogService {
 
-    ModelAndView getBlogList(Map<String, String> map) throws Exception;
+    String getBlogList(Map<String, String> map) throws Exception;
 
     JSONArray getTagList() throws Exception;
 

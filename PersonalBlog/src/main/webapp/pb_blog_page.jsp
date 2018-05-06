@@ -4,101 +4,112 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="renderer" content="webkit">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>list</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/nprogress.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-<link rel="apple-touch-icon-precomposed" href="images/icon.png">
-<link rel="shortcut icon" href="images/favicon.ico">
-<script src="js/jquery-2.1.4.min.js"></script>
-<script src="js/nprogress.js"></script>
-<script src="js/jquery.lazyload.min.js"></script>
-<!--[if gte IE 9]>
-<script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
-<script src="js/html5shiv.min.js" type="text/javascript"></script>
-<script src="js/respond.min.js" type="text/javascript"></script>
-<script src="js/selectivizr-min.js" type="text/javascript"></script>
-<![endif]-->
-<!--[if lt IE 9]>
-<script>window.location.href='upgrade-browser.html';</script>
-<![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>技术随笔</title>
+    <meta name="keywords" content="PersonalBlog">
+    <meta name="description" content="baibisen personalBlog">
+    <script src="static/js/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <script src="static/layui/layui.js" type="text/javascript"></script>
+    <script src="static/js/index/index.js" type="text/javascript"></script>
+    <script src="static/js/index/freezeheader.js" type="text/javascript"></script>
+    <script src="static/layui/lay/modules/layer.js" type="text/javascript"></script>
+    <script src="static/js/index/sliders.js" type="text/javascript"></script>
+    <script src="static/js/index/html5.js" type="text/javascript"></script>
+    <script src="static/js/index/article.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="static/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="static/layui/css/modules/layer/default/layer.css"/>
+    <link rel="stylesheet" href="static/css/global.css"/>
+
+    <script type="text/javascript">
+        $.ajax({
+            url: "<%=request.getContextPath()%>/showBlogList.do?blogType=1",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                var html = "";
+                var blogList = $('.blog-List');
+                for (var i = 0; i < data.blogList.length; i++) {
+                    html += "<div class=\"article-list\" style=\"padding-top:10px;\">\n" +
+                        "<figure><img lay-src=\"" + data.blogList[i].thumbPic + "\"></figure>\n" +
+                        "<ul><h3><a href=\"pb_blog_detail_page.jsp\">" + data.blogList[i].title + "</a></h3>\n" +
+                        "<p>" + data.blogList[i].summary + "</p>\n" +
+                        "<p class=\"autor\">\n" +
+                        "<span class=\"lm f_l\"><a href=\"#\">" + data.blogList[i].tag + "</a></span>\n" +
+                        "<span class=\"dtime f_l\">" + data.blogList[i].createDate + "</span>\n" +
+                        "<span class=\"viewnum f_r\">浏览（<a href=\"#\">" + data.blogList[i].blogPv + "</a>）</span>\n" +
+                        "<span class=\"pingl f_r\">评论（<a href=\"#\">" + data[i] + "</a>）</span></p></ul></div>";
+                }
+                blogList.append(html);
+            },
+            error: function (e) {
+
+            }
+        });
+    </script>
 </head>
-<body class="user-select">
-<c:import url="header_bar.jsp"/>
-<section class="container">
-<div class="content-wrap">
-<div class="content">
-  <div class="title">
-	<h3 style="line-height: 1.3">MZ-NetBlog主题</h3>
-  </div>
-  <article class="excerpt excerpt-1"><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" ><img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: inline;"></a>
-	<header><a class="cat" href="#" title="MZ-NetBlog主题" >MZ-NetBlog主题<i></i></a>
-	  <h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" >用DTcms做一个独立博客网站（响应式模板）</a></h2>
-	</header>
-	<p class="meta">
-	  <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
-	  <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 217</span> <a class="comment" href="##comment" title="评论" target="_blank" ><i class="glyphicon glyphicon-comment"></i> 4</a></p>
-	<p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
-  </article>
-  <article class="excerpt excerpt-2"><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" ><img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: inline;"></a>
-	<header><a class="cat" href="#" title="MZ-NetBlog主题" >MZ-NetBlog主题<i></i></a>
-	  <h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" >用DTcms做一个独立博客网站（响应式模板）</a></h2>
-	</header>
-	<p class="meta">
-	  <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
-	  <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 217</span> <a class="comment" href="##comment" title="评论" target="_blank" ><i class="glyphicon glyphicon-comment"></i> 4</a></p>
-	<p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
-  </article>
-  <article class="excerpt excerpt-3"><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" ><img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: inline;"></a>
-	<header><a class="cat" href="#" title="MZ-NetBlog主题" >MZ-NetBlog主题<i></i></a>
-	  <h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" >用DTcms做一个独立博客网站（响应式模板）</a></h2>
-	</header>
-	<p class="meta">
-	  <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
-	  <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 217</span> <a class="comment" href="##comment" title="评论" target="_blank" ><i class="glyphicon glyphicon-comment"></i> 4</a></p>
-	<p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
-  </article>
-  <article class="excerpt excerpt-4"><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" ><img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: inline;"></a>
-	<header><a class="cat" href="#" title="MZ-NetBlog主题" >MZ-NetBlog主题<i></i></a>
-	  <h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" >用DTcms做一个独立博客网站（响应式模板）</a></h2>
-	</header>
-	<p class="meta">
-	  <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
-	  <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 217</span> <a class="comment" href="##comment" title="评论" target="_blank" ><i class="glyphicon glyphicon-comment"></i> 4</a></p>
-	<p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
-  </article>
-  <article class="excerpt excerpt-5"><a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" ><img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: inline;"></a>
-	<header><a class="cat" href="#" title="MZ-NetBlog主题" >MZ-NetBlog主题<i></i></a>
-	  <h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" >用DTcms做一个独立博客网站（响应式模板）</a></h2>
-	</header>
-	<p class="meta">
-	  <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
-	  <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 217</span> <a class="comment" href="##comment" title="评论" target="_blank" ><i class="glyphicon glyphicon-comment"></i> 4</a></p>
-	<p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
-  </article>
-  <nav class="pagination" style="display: none;">
-	<ul>
-	  <li class="prev-page"></li>
-	  <li class="active"><span>1</span></li>
-	  <li><a href="?page=2">2</a></li>
-	  <li class="next-page"><a href="?page=2">下一页</a></li>
-	  <li><span>共 2 页</span></li>
-	</ul>
-  </nav>
+<body>
+<div class="layui-header header">
+    <div class="main">
+        <ul class="layui-nav layui-nav-left" lay-filter="filter">
+            <a class="logo" href="index.html" title="Fly">Fly</a>
+            <li class="layui-nav-item nav-left">
+                <a href="index.jsp">首页</a>
+            </li>
+            <li class="layui-nav-item layui-this">
+                <a href="pb_blog_page.jsp">技术随笔</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="pb_life_page.jsp">生活记录</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="pb_news_page.jsp">资讯头条</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="pb_mall_page.jsp">资源商城</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="pb_comment_page.jsp">留言板</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="pb_about_page.jsp">关于</a>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right layui-nav-right" lay-filter="filter">
+
+            <li class="layui-nav-item">
+                <a href="pb_me_page.jsp">我的主页<span class="layui-badge-dot"></span></a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;"><img src="<%=request.getContextPath()%>/static/images/head.jpg" class="layui-nav-img">我</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">修改信息</a></dd>
+                    <dd><a href="javascript:;">安全管理</a></dd>
+                    <dd><a href="javascript:;">退了</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
 </div>
+<%--内容--%>
+<div class="layui-container container">
+
+    <div class="layui-row layui-col-space20">
+        <div class="layui-col-md8">
+            <div>
+              <span class="layui-breadcrumb">
+          <a href="index.jsp">首页</a>
+          <a><cite>技术随笔</cite></a></span>
+                <hr class="layui-bg-red">
+
+                <ul class="blog-List"></ul>
+
+            </div>
+            <!--分页-->
+            <div id="page"></div>
+        </div>
+        <c:import url="pb_sider_bar.jsp"/>
+    </div>
 </div>
-<c:import url="sider_bar.jsp"/>
-</section>
-<c:import url="footer_bar.jsp"/>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.ias.js"></script>
-<script src="js/scripts.js"></script>
+<c:import url="pb_footer_bar.jsp"/>
 </body>
 </html>
