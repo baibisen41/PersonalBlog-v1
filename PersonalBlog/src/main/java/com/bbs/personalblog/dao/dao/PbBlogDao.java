@@ -21,5 +21,5 @@ public interface PbBlogDao {
 
     Blog selectBlogById(String id) throws Exception;
 
-    List<Blog> selectBlogByCount(Integer blogCount) throws Exception;
+    List<Blog> selectBlogByCount() throws Exception;
 }

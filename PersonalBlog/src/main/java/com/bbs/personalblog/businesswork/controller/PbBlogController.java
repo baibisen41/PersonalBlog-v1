@@ -90,13 +90,8 @@ public class PbBlogController extends BaseController {
      */
     @RequestMapping("/showBlogRank")
     public void showBlogRank(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Integer showBlogCount = Integer.parseInt(getRequestParams(request, "count"));
-        if (StringUtils.isEmpty(showBlogCount)) {
-            showBlogCount = 5;
-        }
-        Map<String, Object> map = new HashMap<>();
-        map.put("blogCount", showBlogCount);
-        response.getWriter().write(pbBlogService.getBlogRank(map).toString());
+        logger.info(pbBlogService.getBlogRank().toString());
+        response.getWriter().write(pbBlogService.getBlogRank().toString());
     }
 
     // 拉取评论列表

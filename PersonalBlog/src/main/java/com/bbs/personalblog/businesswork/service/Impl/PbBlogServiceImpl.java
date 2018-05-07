@@ -115,8 +115,7 @@ public class PbBlogServiceImpl extends BaseServiceImpl implements PbBlogService 
      * @throws Exception
      */
     @Override
-    public JSONArray getBlogRank(Map<String, Object> map) throws Exception {
-        final Integer blogCount = Integer.parseInt(map.get("blogCount").toString());
-        return JSONArray.parseArray(JSONObject.toJSONString(pbBlogDao.selectBlogByCount(blogCount)));
+    public JSONArray getBlogRank() throws Exception {
+        return JSONArray.parseArray(JSONObject.toJSONString(pbBlogDao.selectBlogByCount()));
     }
 }

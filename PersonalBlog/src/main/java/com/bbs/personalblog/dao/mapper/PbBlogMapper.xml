@@ -81,6 +81,22 @@
             p.id = #{id}
     </select>
 
+    <select id="selectBlogByCount" resultType="Blog">
+        SELECT
+            pg.id AS id,
+            pg.title AS title,
+            pg.tag AS tag,
+            pg.thumb_pic AS thumbPic,
+            pg.create_date AS createDate,
+            pv.blog_pv AS blogPv
+        FROM
+            pb_blog pg
+        INNER JOIN pb_blog_pv pv ON pg.id = pv.id
+        ORDER BY
+            pv.blog_pv DESC
+        LIMIT 5
+    </select>
+
     <update id="increaseBlogPv" parameterType="java.lang.String">
         update pb_blog_pv
         set blog_pv=blog_pv+1

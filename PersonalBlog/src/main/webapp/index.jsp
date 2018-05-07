@@ -41,7 +41,7 @@
               var blogList = $('.blog-List');
               for (var i = 0; i < data.blogList.length; i++) {
                   html += "<div class=\"article-list\" style=\"padding-top:10px;\">\n" +
-                      "<figure><img lay-src=\"" + data.blogList[i].thumbPic + "\"></figure>\n" +
+                      "<figure><img src=\"" + data.blogList[i].thumbPic + "\"></figure>\n" +
                       "<ul><h3><a href=\"pb_blog_detail_page.jsp\">" + data.blogList[i].title + "</a></h3>\n" +
                       "<p>" + data.blogList[i].summary + "</p>\n" +
                       "<p class=\"autor\">\n" +

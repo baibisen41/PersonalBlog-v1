@@ -20,7 +20,30 @@
     <link rel="stylesheet" href="static/layui/css/modules/layer/default/layer.css"/>
     <link rel="stylesheet" href="static/css/global.css"/>
     <script type="text/javascript">
+        $.ajax({
+            url: "<%=request.getContextPath()%>/showBlogList.do?blogType=2",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                var html = "";
+                var blogList = $('.blog-List');
+                for (var i = 0; i < data.blogList.length; i++) {
+                    html += "<div class=\"article-list\" style=\"padding-top:10px;\">\n" +
+                        "<figure><img src=\"" + data.blogList[i].thumbPic + "\"></figure>\n" +
+                        "<ul><h3><a href=\"pb_blog_detail_page.jsp\">" + data.blogList[i].title + "</a></h3>\n" +
+                        "<p>" + data.blogList[i].summary + "</p>\n" +
+                        "<p class=\"autor\">\n" +
+                        "<span class=\"lm f_l\"><a href=\"#\">" + data.blogList[i].tag + "</a></span>\n" +
+                        "<span class=\"dtime f_l\">" + data.blogList[i].createDate + "</span>\n" +
+                        "<span class=\"viewnum f_r\">浏览（<a href=\"#\">" + data.blogList[i].blogPv + "</a>）</span>\n" +
+                        "<span class=\"pingl f_r\">评论（<a href=\"#\">" + data[i] + "</a>）</span></p></ul></div>";
+                }
+                blogList.append(html);
+            },
+            error: function (e) {
 
+            }
+        });
     </script>
 </head>
 <body>
@@ -76,23 +99,8 @@
           <a><cite>生活记录</cite></a>
         </span>
                 <hr class="layui-bg-red">
-                <div class="article-list" style="padding-top:10px;">
-                    <figure><img lay-src="<%=request.getContextPath()%>/static/images/01.jpg"></figure>
-                    <ul>
-                        <h3>
-                            <a href="pb_blog_detail_page.jsp">住在手机里的朋友</a>
-                        </h3>
-
-                        <p>现在跨界联姻，时尚、汽车以及运动品牌联合手机制造商联合发布手机产品在行业里已经不再新鲜，上周我们给大家报道过著名手表制造商瑞士泰格·豪雅（Tag Heuer）
-                            联合法国的手机制造商Modelabs发布的一款奢华手机的部分谍照，而近日该手机终于被正式发布了...</p>
-
-                        <p class="autor">
-                            <span class="lm f_l"><a href="#">个人博客</a></span>
-                            <span class="dtime f_l">2014-02-19</span>
-                            <span class="viewnum f_r">浏览（<a href="#">459</a>）</span>
-                            <span class="pingl f_r">评论（<a href="#">30</a>）</span></p>
-                    </ul>
-                </div>
+                <%--文章列表--%>
+                <ul class="blog-List"></ul>
 
             </div>
             <!--分页-->

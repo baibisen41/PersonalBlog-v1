@@ -18,5 +18,5 @@ public interface PbBlogService {
 
     ModelAndView getBlogDetail(Map<String, Object> map) throws Exception;
 
-    JSONArray getBlogRank(Map<String, Object> map) throws Exception;
+    JSONArray getBlogRank() throws Exception;
 }

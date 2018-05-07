@@ -1,6 +1,41 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
+<script type="text/javascript">
+    $.ajax({
+        url: "<%=request.getContextPath()%>/showTagList.do",
+        type: "get",
+        dataType: "json",
+        success: function (data) {
+            var html = "";
+            var blogList = $('.tag-cloud');
+            for (var i = 0; i < data.length; i++) {
+                html += "<li><a href=\"#\">" + data[i].label + "(" + data[i].count + ")</a></li>";
+            }
+            blogList.append(html);
+        },
+        error: function (e) {
+
+        }
+    });
+    $.ajax({
+        url: "<%=request.getContextPath()%>/showBlogRank.do",
+        type: "get",
+        dataType: "json",
+        success: function (data) {
+            var html = "";
+            var blogList = $('.blog-hot');
+            for (var i = 0; i < data.length; i++) {
+                html += "<li><a href=\"#\"><img src=\""+ data[i].thumbPic +"\"><b>"+ data[i].title +"</b></a>\n"+
+                        "<p><span class=\"tulanmu\"><a href=\"#\">"+ data[i].tag +"</a></span><span class=\"tutime\">"+ data[i].createDate +"</span></p></li>";
+            }
+            blogList.append(html);
+        },
+        error: function (e) {
+
+        }
+    });
+</script>
 <div class="layui-col-md4">
     <form class="layui-form" method="post" action="pb_me_message_page.jsp">
         <div class="layui-form-item">
@@ -64,8 +99,8 @@
     </div>
     <div class="cloud">
         <h3>标签云</h3>
-        <ul>
-            <li><a href="#">个人博客</a></li>
+        <ul class="tag-cloud">
+<%--            <li><a href="#">个人博客(1)</a></li>
             <li><a href="#">web开发</a></li>
             <li><a href="#">前端设计</a></li>
             <li><a href="#">Html</a></li>
@@ -78,13 +113,13 @@
             <li><a href="#">Html</a></li>
             <li><a href="#">CSS3</a></li>
             <li><a href="#">Html5+css3</a></li>
-            <li><a href="#">百度</a></li>
+            <li><a href="#">百度</a></li>--%>
         </ul>
     </div>
     <div class="tuwen">
         <h3>图文推荐</h3>
-        <ul>
-            <li><a href="#"><img src="<%=request.getContextPath()%>/static/images/01.jpg"><b>住在手机里的朋友</b></a>
+        <ul class="blog-hot">
+<%--            <li><a href="#"><img src="<%=request.getContextPath()%>/static/images/01.jpg"><b>住在手机里的朋友</b></a>
                 <p><span class="tulanmu"><a href="#">手机配件</a></span><span class="tutime">2015-02-15</span></p>
             </li>
             <li><a href="#"><img src="<%=request.getContextPath()%>/static/images/02.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
@@ -98,7 +133,7 @@
             </li>
             <li><a href="#"><img src="<%=request.getContextPath()%>/static/images/04.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
                 <p><span class="tulanmu"><a href="#">手机配件</a></span><span class="tutime">2015-02-15</span></p>
-            </li>
+            </li>--%>
         </ul>
     </div>
     <div class="article-fenlei">
