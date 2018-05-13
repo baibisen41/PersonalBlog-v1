@@ -51,6 +51,7 @@
                       "<span class=\"pingl f_r\">评论（<a href=\"#\">" + data[i] + "</a>）</span></p></ul></div>";
               }
               blogList.append(html);
+              pageLimit(data);
           },
           error: function (e) {
 

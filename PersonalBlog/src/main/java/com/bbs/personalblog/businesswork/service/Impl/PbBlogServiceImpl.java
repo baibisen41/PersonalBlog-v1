@@ -7,8 +7,6 @@ import com.bbs.personalblog.businesswork.result.PbBlogDetailResult;
 import com.bbs.personalblog.businesswork.service.PbBlogService;
 import com.bbs.personalblog.dao.dao.PbBlogDao;
 import com.bbs.personalblog.dao.entity.Blog;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -50,14 +50,14 @@ public class PbBlogServiceImpl extends BaseServiceImpl implements PbBlogService 
         if (!StringUtils.isEmpty(map.get("pageNum"))) {
             pageNum = Integer.parseInt(map.get("pageNum"));
         }
-        PageHelper.startPage(pageNum, 10);
-        PageInfo<Blog> blogPageInfo = new PageInfo<>(pbBlogDao.selectBlogByType(blogType));
-        LOG.info("blogDao:{}", JSONArray.parse(JSON.toJSONString(pbBlogDao.selectBlogByType(blogType))));
-        if (blogPageInfo.getPageSize() <= 6) {
+        LOG.info("blogServiceImpl pageNum:{}", pageNum);
+        List<Blog> blogList = pbBlogDao.selectBlogByType(blogType, (pageNum - 1) * 10);
+        LOG.info("blog size:{}", blogList.size());
+        if (blogList.size() <= 6) {
             pageStart = 1;
-            pageEnd = 6;
+            pageEnd = blogList.size();
         } else {
-            if (blogPageInfo.getPageNum() > 3) {
+            if (pageNum > 3) {
                 pageStart = pageNum - 2;
                 pageEnd = pageNum + 2;
             } else {
@@ -69,8 +69,8 @@ public class PbBlogServiceImpl extends BaseServiceImpl implements PbBlogService 
         resultMap.put("pageNum", pageNum);
         resultMap.put("pageStart", pageStart);
         resultMap.put("pageEnd", pageEnd);
-        resultMap.put("pageSize", blogPageInfo.getPageSize());
-        resultMap.put("blogList", blogPageInfo.getList());
+        resultMap.put("totalPages", blogList.size());
+        resultMap.put("blogList", blogList);
         LOG.info("blogList:{}", JSON.toJSONString(resultMap));
         return JSON.toJSONString(resultMap);
     }
@@ -117,5 +117,14 @@ public class PbBlogServiceImpl extends BaseServiceImpl implements PbBlogService 
     @Override
     public JSONArray getBlogRank() throws Exception {
         return JSONArray.parseArray(JSONObject.toJSONString(pbBlogDao.selectBlogByCount()));
+    }
+
+    @Override
+    public JSONArray getTypeList() throws Exception {
+        List<String> resultList = new ArrayList<>();
+        resultList.add("专业技术");
+        resultList.add("生活感悟");
+        resultList.add("资讯头条");
+        return JSONArray.parseArray(JSONObject.toJSONString(resultList));
     }
 }

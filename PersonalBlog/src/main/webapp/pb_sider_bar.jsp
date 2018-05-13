@@ -49,7 +49,7 @@
     <div class="ms-top">
         <ul class="hd" id="tab">
             <li class="cur"><a>点击排行</a></li>
-            <li><a>最新文章</a></li>
+            <li><a>最新资讯</a></li>
             <li><a>站长推荐</a></li>
             <li><a>最新评论</a></li>
         </ul>
@@ -138,14 +138,14 @@
     </div>
     <div class="article-fenlei">
         <h3>文章分类</h3>
-        <button class="layui-btn layui-btn-warm">个人博客</button>
-        <button class="layui-btn layui-btn-primary">HTML</button>
-        <button class="layui-btn layui-btn-danger">JAVA</button>
+        <button class="layui-btn layui-btn-warm">专业技术</button>
+        <button class="layui-btn layui-btn-primary">生活感悟</button>
+        <button class="layui-btn layui-btn-danger">资讯头条</button>
         <br/>
-        <br/>
+<%--        <br/>
         <button class="layui-btn layui-btn-primary">javascript</button>
         <button class="layui-btn layui-btn-normal">SQL</button>
-        <button class="layui-btn layui-btn-primary">其他</button>
+        <button class="layui-btn layui-btn-primary">其他</button>--%>
     </div>
     <div class="links">
         <h3><span>[<a href="#">申请友情链接</a>]</span>友情链接</h3>

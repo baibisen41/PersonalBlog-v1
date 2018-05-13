@@ -47,11 +47,11 @@ public class PbBlogEditTest extends BaseTest {
     private String getBlogSql() {
         String id = UUID.randomUUID().toString().replace("-", "");
         String userId = "e7d29c4eb93042f394194cb17498a785";
-        String title = "浅谈HashMap与Hashtable";
-        String tag = "java";
-        String summary = " HashMap和Hashtable都实现了Map接口，但决定用哪一个之前先要弄清楚它们之间的分别。";
-        String content = "HashMap和Hashtable的比较是Java面试中的常见问题，用来考验程序员是否能够正确使用集合类以及是否可以随机应变使用多种思路解决问题。HashMap的工作原理、ArrayList与Vector的比较以及这个问题是有关Java 集合框架的最经典的问题。Hashtable是个过时的集合类，存在于Java API中很久了。在Java 4中被重写了，实现了Map接口，所以自此以后也成了Java集合框架中的一部分。Hashtable和HashMap在Java面试中相当容易被问到，甚至成为了集合框架面试题中最常被考的问题，所以在参加任何Java面试之前，都不要忘了准备这一题。";
-        String type = "1";
+        String title = "比特币一季度价格腰斩过半，加密货币市场已死？";
+        String tag = "资讯";
+        String summary = "据CoinMarketCap数据显示，自年初以来，比特币价格已经从高点17533美元一度暴跌至6121美元，跌幅超过65%，其蒸发的市值几乎是特斯拉市值的三倍，约为Twitter市值的5.5倍。与此同时，看比特币脸色行事的其他加密货币日子也不好过，市场总市值已经蒸发近5000亿美元。";
+        String content = "在市场自然调整的基础上，种种利空消息的轮番轰炸进一步加剧了下跌力度。但就目前而言，加密货币投资者更关注的是，本轮“熊市”何时见底？对于那些赌上全部资产的投机者而言，这个问题尤为重要，币价的涨跌决定着他们的所有情绪。但我们也知道，市场发展取决于多种因素，没有人能够做到百分百精准的预测。“熊市”的到来，是一次去除浮躁，让价值、理性回归的过程。对于坚持价值投资的人来说，在长远的趋势面前，短期的价格波动并不算什么。更重要的是，在泡沫破灭的同时，能够发现那些真正有价值的项目。";
+        String type = "3";
         String status = "1";
         String sql = "INSERT INTO pb_blog (id,user_id,title,tag,thumb_pic,summary,content,type,status,create_date) VALUES (\"" + id + "\",\"" + userId + "\",\"" + title + "\",\"" + tag + "\",\"\",\"" + summary + "\",\"" + content + "\",\"" + type + "\",\"" + status + "\",CURRENT_TIMESTAMP)";
         LOG.info(sql);

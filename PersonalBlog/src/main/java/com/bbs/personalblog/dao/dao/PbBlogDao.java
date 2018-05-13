@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface PbBlogDao {
 
-    List<Blog> selectBlogByType(@Param(value = "blogType") Integer blogType) throws Exception;
+    List<Blog> selectBlogByType(@Param(value = "blogType") Integer blogType, @Param(value = "pageNum") Integer pageNum) throws Exception;
 
     List<Tag> selectTagCount() throws Exception;
 

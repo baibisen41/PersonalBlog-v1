@@ -52,6 +52,7 @@
         </if>
         ORDER BY
         pb.create_date DESC
+        LIMIT #{pageNum},10
     </select>
 
     <select id="selectTagCount" resultType="com.bbs.personalblog.dao.entity.Tag">
